@@ -34,8 +34,8 @@ public class Bell extends Items{
 		return this.NAME;
 	}
 	
-	/*public Items generateItems(int x, int y){
+	public Items generateItems(int x, int y){
 		Bell b = new Bell(x,y);
 		return b;
-	}*/
+	}
 }
