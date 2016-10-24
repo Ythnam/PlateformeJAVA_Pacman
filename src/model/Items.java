@@ -7,7 +7,7 @@ import java.util.List;
 
 public abstract class Items {
 	
-	/*protected int x, y;
+	protected int x, y;
 	protected boolean isTaken = false; //permet de savoir si le PACMAN l'a mangé ou non
 
 	public void setXY(int x, int y){
@@ -21,8 +21,10 @@ public abstract class Items {
 	
 	public int getY(){
 		return this.y;
-	}*/
+	}
 	
 	public abstract String getName();
+	public abstract int getScore();
+	public abstract List<Integer> getLevel();
 	//public abstract Items generateItems();
 }

@@ -15,16 +15,17 @@ public class Orange extends Items{
 	private static final int SCORE = 500;
 	private static List<Integer> level = Arrays.asList(3,4);
 	public static BufferedImage img;
-	private int x, y;
-	private boolean isTaken = false; //permet de savoir si le PACMAN l'a mangé ou non
+	//private int x, y;
+	//private boolean isTaken = false; //permet de savoir si le PACMAN l'a mangé ou non
 	
+	/* Ici on a le static en commentaire car je test sur Orange et que je n'ai pas encore mis d'image à Orange
 	static{
 		try{
 			img = ImageIO.read(new File("path"));
 		} catch (IOException e){
 			e.printStackTrace();
 		}
-	}
+	}*/
 	
 	public Orange(int x, int y){
 		this.x = x;
@@ -35,9 +36,18 @@ public class Orange extends Items{
 		return this.NAME;
 	}
 	
+	public int getScore(){
+		return this.SCORE;
+	}
+	
+	public List<Integer> getLevel(){
+		return this.level;
+	}
+	
+	/*
 	public Items generateItems(int x, int y){
 		Orange o = new Orange(x,y);
 		return o;
-	}
+	}*/
 	
 }

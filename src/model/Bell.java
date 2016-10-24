@@ -14,8 +14,8 @@ public class Bell extends Items{
 	private static final int SCORE = 3000;
 	private static List<Integer> level = Arrays.asList(11,12);
 	public static BufferedImage img;
-	private int x, y;
-	private boolean isTaken = false; //permet de savoir si le PACMAN l'a mangé ou non
+	//private int x, y;
+	//private boolean isTaken = false; //permet de savoir si le PACMAN l'a mangé ou non
 	
 	static{
 		try{
@@ -34,8 +34,17 @@ public class Bell extends Items{
 		return this.NAME;
 	}
 	
+	public int getScore(){
+		return this.SCORE;
+	}
+	
+	public List<Integer> getLevel(){
+		return this.level;
+	}
+	
+	/*
 	public Items generateItems(int x, int y){
 		Bell b = new Bell(x,y);
 		return b;
-	}
+	}*/
 }

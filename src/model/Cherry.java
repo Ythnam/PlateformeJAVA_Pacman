@@ -15,8 +15,8 @@ public class Cherry extends Items{
 	private static final int SCORE = 100;
 	private static List<Integer> level = Arrays.asList(1);
 	public static BufferedImage img;
-	private int x, y;
-	private boolean isTaken = false; //permet de savoir si le PACMAN l'a mangé ou non
+	//private int x, y;
+	//private boolean isTaken = false; //permet de savoir si le PACMAN l'a mangé ou non
 	
 	static{
 		try{
@@ -35,8 +35,17 @@ public class Cherry extends Items{
 		return this.NAME;
 	}
 	
+	public int getScore(){
+		return this.SCORE;
+	}
+	
+	public List<Integer> getLevel(){
+		return this.level;
+	}
+	
+	/*
 	public Items generateItems(int x, int y){
 		Cherry c = new Cherry(x,y);
 		return c;
-	}
+	}*/
 }

@@ -14,8 +14,8 @@ public class Melon extends Items{
 	private static final int SCORE = 1000;
 	private static List<Integer> level = Arrays.asList(7,8);
 	public static BufferedImage img;
-	private int x, y;
-	private boolean isTaken = false; //permet de savoir si le PACMAN l'a mangé ou non
+	//private int x, y;
+	//private boolean isTaken = false; //permet de savoir si le PACMAN l'a mangé ou non
 	
 	static{
 		try{
@@ -34,8 +34,17 @@ public class Melon extends Items{
 		return this.NAME;
 	}
 	
+	public int getScore(){
+		return this.SCORE;
+	}
+	
+	public List<Integer> getLevel(){
+		return this.level;
+	}
+	
+	/*
 	public Items generateItems(int x, int y){
 		Melon m = new Melon(x,y);
 		return m;
-	}
+	}*/
 }
