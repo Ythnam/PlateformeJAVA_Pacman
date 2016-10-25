@@ -23,10 +23,10 @@ public class Ghost implements Runnable {
 	
 	static{
 		try{
-			ghostRED = ImageIO.read(new File(""));
-			ghostBLUE = ImageIO.read(new File(""));
-			ghostGREEN = ImageIO.read(new File(""));
-			ghostORANGE = ImageIO.read(new File(""));
+			ghostRED = ImageIO.read(new File("image/ghost_red.png"));
+			ghostBLUE = ImageIO.read(new File("image/ghost_blue.png"));
+			ghostGREEN = ImageIO.read(new File("image/ghost_green.png"));
+			ghostORANGE = ImageIO.read(new File("image/ghost_orange.png"));
 
 		} catch (IOException e){
 			e.printStackTrace();

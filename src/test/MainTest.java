@@ -1,12 +1,15 @@
 package test;
 
+import View.Field;
+import model.Ghost;
 import model.Model;
 import model.Orange;
 
 public class MainTest {
 
 	public static void main(String[] args) {
-		Orange o = new Orange(1,2);
+		Field field = new Field();
+		Orange o = new Orange(1,2, field);
 		Model model = new Model();
 		
 		model.addToAlItems(o);
@@ -18,6 +21,7 @@ public class MainTest {
 		System.out.println(model.getAlItems().get(0).getLevel().get(0));
 
 
+		Ghost g = new Ghost(1,1,field);
 
 
 	}
