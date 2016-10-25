@@ -21,14 +21,14 @@ import model.Strawberry;
 public class Field extends JPanel {
 
 	private Model model = new Model();
-	public int XMAX = 40;
-	public int YMAX = 40; // ici on a 10x10 cases soit 100 -> nombre à changer
-	public int step = 16; // celui-la devra être égal à la taille qu'on mettra pour une image -> ici : 64x64
+	public int XMAX = 30;
+	public int YMAX = 30; // ici on a 10x10 cases soit 100 -> nombre à changer
+	public int step = 20; // celui-la devra être égal à la taille qu'on mettra pour une image -> ici : 64x64
 	private Random random = new Random();
 
 	public Field(){
 		//generatePacmanRandomly();
-		generateGhostRandomly(1);
+		generateGhostRandomly(3);
 		//generateItemsRandomly(10, 5, 4, 3, 5, 1, 1, 1); // en test random pour les valeurs
 	}
 	
