@@ -1,5 +1,7 @@
 package View;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.Random;
 
 import javax.swing.JPanel;
@@ -25,9 +27,9 @@ public class Field extends JPanel {
 	private Random random = new Random();
 
 	public Field(){
-		generatePacmanRandomly();
-		generateGhostRandomly(3);
-		generateItemsRandomly(10, 5, 4, 3, 5, 1, 1, 1); // en test random pour les valeurs
+		//generatePacmanRandomly();
+		generateGhostRandomly(1);
+		//generateItemsRandomly(10, 5, 4, 3, 5, 1, 1, 1); // en test random pour les valeurs
 	}
 	
 	public Field(int n, int apple, int bell, int cherry, int galboss, int key, int melon, int orange, int stawberry){
@@ -126,6 +128,13 @@ public class Field extends JPanel {
 			Strawberry strawberry = new Strawberry(random.nextInt(XMAX), random.nextInt(YMAX), this);
 			model.addToAlItems(strawberry);
 		}
+	}
+	
+	public void paintComponent(Graphics g){
+		super.paintComponent(g);
+		Graphics2D g2 = (Graphics2D) g;
+		
+		g2.drawImage(Ghost.getGhostORANGE(), model.getAlGhost().get(0).getX()*step, model.getAlGhost().get(0).getY()*step, null);
 	}
 
 }
