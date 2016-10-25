@@ -21,13 +21,13 @@ import model.Strawberry;
 public class Field extends JPanel {
 
 	private Model model = new Model();
-	public int XMAX = 30;
-	public int YMAX = 30; // ici on a 10x10 cases soit 100 -> nombre à changer
-	public int step = 20; // celui-la devra être égal à la taille qu'on mettra pour une image -> ici : 64x64
+	private int XMAX = 30;
+	private int YMAX = 30; // ici on a 10x10 cases soit 100 -> nombre à changer
+	private int step = 20; // celui-la devra être égal à la taille qu'on mettra pour une image -> ici : 64x64
 	private Random random = new Random();
 
 	public Field(){
-		//generatePacmanRandomly();
+		generatePacmanRandomly();
 		generateGhostRandomly(3);
 		//generateItemsRandomly(10, 5, 4, 3, 5, 1, 1, 1); // en test random pour les valeurs
 	}
@@ -36,6 +36,30 @@ public class Field extends JPanel {
 		generatePacmanRandomly();
 		generateGhostRandomly(n);
 		generateItemsRandomly(apple, bell, cherry, galboss, key, melon, orange, stawberry);
+	}
+	
+	public int getYMAX() {
+		return this.YMAX;
+	}
+	
+	public int getXMAX() {
+		return this.XMAX;
+	}
+	
+	public int getStep() {
+		return this.step;
+	}
+	
+	public void setYMAX(int yMAX) {
+		this.YMAX = yMAX;
+	}
+	
+	public void setXMAX(int xMAX) {
+		this.XMAX = xMAX;
+	}
+	
+	public void setStep(int step) {
+		this.step = step;
 	}
 
 	/**
@@ -135,6 +159,10 @@ public class Field extends JPanel {
 		Graphics2D g2 = (Graphics2D) g;
 		
 		g2.drawImage(Ghost.getGhostORANGE(), model.getAlGhost().get(0).getX()*step, model.getAlGhost().get(0).getY()*step, null);
+		g2.drawImage(Ghost.getGhostRED(), model.getAlGhost().get(1).getX()*step, model.getAlGhost().get(1).getY()*step, null);
+		g2.drawImage(Ghost.getGhostGREEN(), model.getAlGhost().get(2).getX()*step, model.getAlGhost().get(2).getY()*step, null);
+		//g2.drawImage(Pacman.getImageIcon(), model.getPacman().getX(), model.getPacman().getY(), null);
+		model.getPacman().getImageIcon().paintIcon(this, g2, model.getPacman().getX()*step, model.getPacman().getY()*step);
 	}
 
 }

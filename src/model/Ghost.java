@@ -78,12 +78,29 @@ public class Ghost implements Runnable {
 			while(true){
 				Thread.sleep(500);
 				
-				// Entrer le code pendant le RUn 
+				tryToMove();
 				
 				field.repaint();
 			}
 		}  catch (InterruptedException e){
 			e.printStackTrace();
+		}
+	}
+	
+	private void tryToMove(){
+		int choice = rand.nextInt(4);
+		switch(choice){
+		case 0 : 
+			if(this.x+1 < this.field.getXMAX()) x++;
+			break;
+		case 1 :
+			if(this.y+1 < this.field.getYMAX()) y++;
+			break;
+		case 2 :
+			if(this.x > 0) x--;
+			break;
+		case 3 :
+			if(this.y > 0) y--;
 		}
 	}
 }
