@@ -9,6 +9,8 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
+import View.Field;
+
 public class Strawberry extends Items{
 
 	private static final String NAME = "strawberry";
@@ -26,9 +28,10 @@ public class Strawberry extends Items{
 		}
 	}
 	
-	public Strawberry(int x, int y){
-		this.x = x;
-		this.y = y;
+	public Strawberry(int x, int y, Field field){
+		super.x = x;
+		super.y = y;
+		super.field = field;
 	}
 	
 	public String getName(){

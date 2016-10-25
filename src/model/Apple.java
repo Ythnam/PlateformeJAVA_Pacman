@@ -8,6 +8,8 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
+import View.Field;
+
 public class Apple extends Items{
 
 	
@@ -26,9 +28,10 @@ public class Apple extends Items{
 		}
 	}
 	
-	public Apple(int x, int y){
-		this.x = x;
-		this.y = y;
+	public Apple(int x, int y, Field field){
+		super.x = x;
+		super.y = y;
+		super.field = field;
 	}
 	
 	public String getName(){

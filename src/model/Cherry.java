@@ -9,6 +9,8 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
+import View.Field;
+
 public class Cherry extends Items{
 
 	private static final String NAME = "cherry";
@@ -26,9 +28,10 @@ public class Cherry extends Items{
 		}
 	}
 	
-	public Cherry(int x, int y){
-		this.x = x;
-		this.y = y;
+	public Cherry(int x, int y, Field field){
+		super.x = x;
+		super.y = y;
+		super.field = field;
 	}
 	
 	public String getName(){

@@ -8,6 +8,8 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
+import View.Field;
+
 public class Key extends Items{
 
 	private static final String NAME = "key";
@@ -25,9 +27,10 @@ public class Key extends Items{
 		}
 	}
 	
-	public Key(int x, int y){
-		this.x = x;
-		this.y = y;
+	public Key(int x, int y, Field field){
+		super.x = x;
+		super.y = y;
+		super.field = field;
 	}
 	
 	public String getName(){

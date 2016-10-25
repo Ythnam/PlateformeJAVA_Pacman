@@ -8,6 +8,8 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
+import View.Field;
+
 public class Melon extends Items{
 
 	private static final String NAME = "melon";
@@ -25,9 +27,11 @@ public class Melon extends Items{
 		}
 	}
 	
-	public Melon(int x, int y){
-		this.x = x;
-		this.y = y;
+	public Melon(int x, int y, Field field){
+		super.x = x;
+		super.y = y;
+		super.field = field;
+		
 	}
 	
 	public String getName(){

@@ -8,6 +8,8 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
+import View.Field;
+
 public class Bell extends Items{
 
 	private static final String NAME = "bell";
@@ -25,9 +27,10 @@ public class Bell extends Items{
 		}
 	}
 	
-	public Bell(int x, int y){
-		this.x = x;
-		this.y = y;
+	public Bell(int x, int y, Field field){
+		super.x = x;
+		super.y = y;
+		super.field = field;
 	}
 	
 	public String getName(){
