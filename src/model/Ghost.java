@@ -16,7 +16,8 @@ public class Ghost implements Runnable {
 	public static BufferedImage ghostGREEN;
 	public static BufferedImage ghostORANGE;
 	private int x, y;
-	private double distance;
+	private double distance; // donnera sa distance par rapport au Pacman et permettra de le faire "chasser" à partir
+							// d'une certaine distance
 	private Field field;
 	private Random rand = new Random();
 	
@@ -69,7 +70,6 @@ public class Ghost implements Runnable {
 	public static BufferedImage getGhostRED() {
 		return ghostRED;
 	}
-	
 	
 	
 	@Override
