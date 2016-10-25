@@ -45,6 +45,13 @@ public class Pacman implements Runnable{
 	
 	// Ce code pour le singleton a été récupéré sur le site suivant :
 	//http://christophej.developpez.com/tutoriel/java/singleton/multithread/
+	/**
+	 * C'est une méthode nécessaire pour instancier un singleton
+	 * @param x la coordonnée x du pacman à l'instanciation
+	 * @param y la coordonnée y du pacman à l'instanciation
+	 * @param field le field sur lequel il agira
+	 * @return
+	 */
 	public static Pacman getInstance(int x, int y, Field field) {
         if (null == instance) { // Premier appel
             synchronized(Pacman.class) {
@@ -77,6 +84,9 @@ public class Pacman implements Runnable{
 		}
 	}
 	
+	/**
+	 * Cette méthode permet de faire avancer le pacman en aléatoire
+	 */
 	private void tryToMove(){
 		int choice = rand.nextInt(4);
 		switch(choice){

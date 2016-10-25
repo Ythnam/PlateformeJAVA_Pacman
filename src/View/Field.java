@@ -87,7 +87,18 @@ public class Field extends JPanel {
 	}
 
 
-	public void generateItemsRandomly(int apple, int bell, int cherry, int galboss, int key, int melon, int orange, int stawberry){
+	/**
+	 * Méthode permettant d'instancier tous les Items en même temps
+	 * @param apple : le nombre d'apple qu'il y aura
+	 * @param bell : le nombre de bell qu'il y aura
+	 * @param cherry : le nombre de cherry qu'il y aura
+	 * @param galboss : le nombre galboss qu'il y aura
+	 * @param key : le nombre de key qu'il y aura
+	 * @param melon : le nombre de melon qu'il y aura
+	 * @param orange : le nombre d'orange qu'il y aura
+	 * @param strawberry : le nombre de strawberry qu'il y aura
+	 */
+	public void generateItemsRandomly(int apple, int bell, int cherry, int galboss, int key, int melon, int orange, int strawberry){
 		generateAppleRandomly(apple);
 		generateBellRandomly(bell);
 		generateCherryRandomly(cherry);
@@ -95,9 +106,13 @@ public class Field extends JPanel {
 		generateKeyRandomly(key);
 		generateMelonRandomly(melon);
 		generateOrangeRandomly(orange);
-		generateStrawberryRandomly(stawberry);
+		generateStrawberryRandomly(strawberry);
 	}
 
+	/**
+	 * Méthode permettant d'instancier le nombre d'apple qu'on veut dans le niveau
+	 * @param n : le nombre d'apple voulu
+	 */
 	public void generateAppleRandomly(int n){
 		for(int i = 0; i < n; i++){
 			Apple apple = new Apple(random.nextInt(XMAX), random.nextInt(YMAX), this);
@@ -105,6 +120,10 @@ public class Field extends JPanel {
 		}
 	}
 
+	/**
+	 * Méthode permettant d'instancier le nombre de bell qu'on veut dans le niveau
+	 * @param n : le nombre de bell voulu
+	 */
 	public void generateBellRandomly(int n){
 		for(int i = 0; i < n; i++){
 			Bell bell = new Bell(random.nextInt(XMAX), random.nextInt(YMAX), this);
@@ -112,6 +131,11 @@ public class Field extends JPanel {
 		}
 	}
 
+	
+	/**
+	 * Méthode permettant d'instancier le nombre de cherry qu'on veut dans le niveau
+	 * @param n : le nombre de cherry voulu
+	 */
 	public void generateCherryRandomly(int n){
 		for(int i = 0; i < n; i++){
 			Cherry cherry = new Cherry(random.nextInt(XMAX), random.nextInt(YMAX), this);
@@ -119,6 +143,11 @@ public class Field extends JPanel {
 		}	
 	}
 
+	
+	/**
+	 * Méthode permettant d'instancier le nombre de galboss qu'on veut dans le niveau
+	 * @param n : le nombre de galboss voulu
+	 */
 	public void generateGalbossRandomly(int n){
 		for(int i = 0; i < n; i++){
 			Galboss galboss = new Galboss(random.nextInt(XMAX), random.nextInt(YMAX), this);
@@ -126,6 +155,10 @@ public class Field extends JPanel {
 		}
 	}
 
+	/**
+	 * Méthode permettant d'instancier le nombre de key qu'on veut dans le niveau
+	 * @param n : le nombre de key voulu
+	 */
 	public void generateKeyRandomly(int n){
 		for(int i = 0; i < n; i++){
 			Key key = new Key(random.nextInt(XMAX), random.nextInt(YMAX), this);
@@ -133,6 +166,11 @@ public class Field extends JPanel {
 		}
 	}
 
+	
+	/**
+	 * Méthode permettant d'instancier le nombre de melon qu'on veut dans le niveau
+	 * @param n : le nombre de melon voulu
+	 */
 	public void generateMelonRandomly(int n){
 		for(int i = 0; i < n; i++){
 			Melon melon = new Melon(random.nextInt(XMAX), random.nextInt(YMAX), this);
@@ -140,6 +178,11 @@ public class Field extends JPanel {
 		}
 	}
 
+	
+	/**
+	 * Méthode permettant d'instancier le nombre d'orange qu'on veut dans le niveau
+	 * @param n : le nombre d'orange voulu
+	 */
 	public void generateOrangeRandomly(int n){
 		for(int i = 0; i < n; i++){
 			Orange orange = new Orange(random.nextInt(XMAX), random.nextInt(YMAX), this);
@@ -147,6 +190,11 @@ public class Field extends JPanel {
 		}
 	}
 
+	
+	/**
+	 * Méthode permettant d'instancier le nombre de strawberry qu'on veut dans le niveau
+	 * @param n : le nombre de strawberry voulu
+	 */
 	public void generateStrawberryRandomly(int n){
 		for(int i = 0; i < n; i++){
 			Strawberry strawberry = new Strawberry(random.nextInt(XMAX), random.nextInt(YMAX), this);

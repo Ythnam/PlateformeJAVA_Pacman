@@ -87,6 +87,9 @@ public class Ghost implements Runnable {
 		}
 	}
 	
+	/**
+	 * Cette méthode permet de faire avancer les fantomes en aléatoire
+	 */
 	private void tryToMove(){
 		int choice = rand.nextInt(4);
 		switch(choice){
