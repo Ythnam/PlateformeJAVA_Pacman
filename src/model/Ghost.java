@@ -15,7 +15,6 @@ public class Ghost implements Runnable {
 	public static BufferedImage ghostBLUE;
 	public static BufferedImage ghostGREEN;
 	public static BufferedImage ghostORANGE;
-
 	private int x, y;
 	private double distance;
 	private Field field;
@@ -38,6 +37,40 @@ public class Ghost implements Runnable {
 		this.y = y;
 		this.field = field;
 	}
+	
+	public int getX() {
+		return x;
+	}
+	
+	public int getY() {
+		return y;
+	}
+	
+	public void setX(int x) {
+		this.x = x;
+	}
+	
+	public void setY(int y) {
+		this.y = y;
+	}
+	
+	public static BufferedImage getGhostBLUE() {
+		return ghostBLUE;
+	}
+	
+	public static BufferedImage getGhostGREEN() {
+		return ghostGREEN;
+	}
+	
+	public static BufferedImage getGhostORANGE() {
+		return ghostORANGE;
+	}
+	
+	public static BufferedImage getGhostRED() {
+		return ghostRED;
+	}
+	
+	
 	
 	@Override
 	public void run(){
