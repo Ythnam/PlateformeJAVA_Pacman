@@ -75,8 +75,8 @@ public class Pacman implements Runnable{
 			while(true){
 				Thread.sleep(500);
 				
-				tryToMove();
-				
+				//tryToMove();
+				goBot();
 				field.repaint();
 			}
 		}  catch (InterruptedException e){
@@ -102,6 +102,22 @@ public class Pacman implements Runnable{
 		case 3 :
 			if(this.y > 0) y--;
 		}
+	}
+	
+	private void goLeft(){
+		if(this.x+1 < this.field.getXMAX()) x++;
+	}
+	
+	private void goRight(){
+		if(this.x > 0) x--;
+	}
+	
+	private void goBot(){
+		if(this.y+1 < this.field.getYMAX()) y++;
+	}
+	
+	private void goTop(){
+		if(this.y > 0) y--;
 	}
 	
 }
