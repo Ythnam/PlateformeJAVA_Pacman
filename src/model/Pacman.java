@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
 
 import View.Field;
 
-public class Pacman implements Runnable{
+public class Pacman /*implements Runnable*/{
 
 	private static Pacman instance; // Pacman est un singleton
 	
@@ -68,7 +68,7 @@ public class Pacman implements Runnable{
 	}
 	
 	//Fin du code pour le singleton
-	
+	/*
 	@Override
 	public void run(){
 		try{
@@ -76,13 +76,13 @@ public class Pacman implements Runnable{
 				Thread.sleep(500);
 				
 				//tryToMove();
-				goBot();
+				//goBot();
 				field.repaint();
 			}
 		}  catch (InterruptedException e){
 			e.printStackTrace();
 		}
-	}
+	}*/
 	
 	/**
 	 * Cette méthode permet de faire avancer le pacman en aléatoire
@@ -104,20 +104,20 @@ public class Pacman implements Runnable{
 		}
 	}
 	
-	private void goLeft(){
-		if(this.x+1 < this.field.getXMAX()) x++;
+	public void goLeft(){
+		if(this.x+1 < this.field.getXMAX()) this.x++;
 	}
 	
-	private void goRight(){
-		if(this.x > 0) x--;
+	public void goRight(){
+		if(this.x > 0) this.x--;
 	}
 	
-	private void goBot(){
-		if(this.y+1 < this.field.getYMAX()) y++;
+	public void goBot(){
+		if(this.y+1 < this.field.getYMAX()) this.y++;
 	}
 	
-	private void goTop(){
-		if(this.y > 0) y--;
+	public void goTop(){
+		if(this.y > 0) this.y--;
 	}
 	
 }

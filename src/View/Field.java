@@ -6,6 +6,7 @@ import java.util.Random;
 
 import javax.swing.JPanel;
 
+import controller.Controller;
 import model.Apple;
 import model.Bell;
 import model.Cherry;
@@ -21,22 +22,29 @@ import model.Strawberry;
 public class Field extends JPanel {
 
 	private Model model = new Model();
+	private Controller controller;
 	private int XMAX = 30;
 	private int YMAX = 30; // ici on a 10x10 cases soit 100 -> nombre à changer
 	private int step = 20; // celui-la devra être égal à la taille qu'on mettra pour une image -> ici : 64x64
 	private Random random = new Random();
 
 	public Field(){
+		System.out.println("Enter Field constructor");
 		generatePacmanRandomly();
 		generateGhostRandomly(3);
 		//generateItemsRandomly(10, 5, 4, 3, 5, 1, 1, 1); // en test random pour les valeurs
+		this.controller = defautController(this.model);
+		this.controller.setView(this);
+		this.addKeyListener(this.controller);
+		System.out.println(this.controller.getModel().getPacman().getX());
+		System.out.println("End Field constructor");
 	}
 	
-	public Field(int n, int apple, int bell, int cherry, int galboss, int key, int melon, int orange, int stawberry){
+	/*public Field(int n, int apple, int bell, int cherry, int galboss, int key, int melon, int orange, int stawberry){
 		generatePacmanRandomly();
 		generateGhostRandomly(n);
 		generateItemsRandomly(apple, bell, cherry, galboss, key, melon, orange, stawberry);
-	}
+	}*/
 	
 	public int getYMAX() {
 		return this.YMAX;
@@ -70,7 +78,7 @@ public class Field extends JPanel {
 	public void generateGhostRandomly(int n){
 		for(int i = 0; i < n; i++){
 			Ghost ghost = new Ghost(random.nextInt(XMAX), random.nextInt(YMAX), this );
-			model.addToAlGhost(ghost);
+			this.model.addToAlGhost(ghost);
 			new Thread(ghost).start();
 		}
 	}
@@ -82,8 +90,8 @@ public class Field extends JPanel {
 	 */
 	public void generatePacmanRandomly(){
 		Pacman pacman = Pacman.getInstance(random.nextInt(XMAX), random.nextInt(YMAX), this);
-		model.setPacman(pacman);
-		new Thread(pacman).start();		
+		this.model.setPacman(pacman);
+		//new Thread(pacman).start();		
 	}
 
 
@@ -202,6 +210,15 @@ public class Field extends JPanel {
 		}
 	}
 	
+	public Controller defautController(Model model){
+		return new Controller(model);
+	}
+	
+	public void setModel(Model model) {
+		this.model = model;
+		this.controller.setModel(model);
+		
+	}
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
@@ -212,5 +229,7 @@ public class Field extends JPanel {
 		//g2.drawImage(Pacman.getImageIcon(), model.getPacman().getX(), model.getPacman().getY(), null);
 		model.getPacman().getImageIcon().paintIcon(this, g2, model.getPacman().getX()*step, model.getPacman().getY()*step);
 	}
+
+	
 
 }
