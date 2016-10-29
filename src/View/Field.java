@@ -2,6 +2,8 @@ package View;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Random;
 
 import javax.swing.JPanel;
@@ -19,7 +21,7 @@ import model.Orange;
 import model.Pacman;
 import model.Strawberry;
 
-public class Field extends JPanel {
+public class Field extends JPanel{
 
 	private Model model = new Model();
 	private Controller controller;
@@ -27,9 +29,11 @@ public class Field extends JPanel {
 	private int YMAX = 30; // ici on a 10x10 cases soit 100 -> nombre à changer
 	private int step = 20; // celui-la devra être égal à la taille qu'on mettra pour une image -> ici : 64x64
 	private Random random = new Random();
+	
 
 	public Field(){
 		System.out.println("Enter Field constructor");
+		//addKeyListener(this);
 		generatePacmanRandomly();
 		generateGhostRandomly(3);
 		//generateItemsRandomly(10, 5, 4, 3, 5, 1, 1, 1); // en test random pour les valeurs
@@ -38,7 +42,12 @@ public class Field extends JPanel {
 		this.addKeyListener(this.controller);
 		System.out.println(this.controller.getModel().getPacman().getX());
 		System.out.println("End Field constructor");
+		//addKeyListener(this);
 	}
+    public void addNotify() {
+        super.addNotify();
+        requestFocus();
+    }
 	
 	/*public Field(int n, int apple, int bell, int cherry, int galboss, int key, int melon, int orange, int stawberry){
 		generatePacmanRandomly();
@@ -230,6 +239,7 @@ public class Field extends JPanel {
 		model.getPacman().getImageIcon().paintIcon(this, g2, model.getPacman().getX()*step, model.getPacman().getY()*step);
 	}
 
+	
 	
 
 }
