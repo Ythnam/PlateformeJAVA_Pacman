@@ -32,16 +32,12 @@ public class Field extends JPanel{
 	
 
 	public Field(){
-		System.out.println("Enter Field constructor");
-		//addKeyListener(this);
 		generatePacmanRandomly();
 		generateGhostRandomly(3);
 		//generateItemsRandomly(10, 5, 4, 3, 5, 1, 1, 1); // en test random pour les valeurs
 		this.controller = defautController(this.model);
 		this.controller.setView(this);
 		this.addKeyListener(this.controller);
-		System.out.println(this.controller.getModel().getPacman().getX());
-		System.out.println("End Field constructor");
 		//addKeyListener(this);
 	}
     public void addNotify() {

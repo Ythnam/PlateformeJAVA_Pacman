@@ -35,7 +35,6 @@ public class Controller implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int source = e.getKeyCode();
-		System.out.println("KeyPressed");
 		if(source==KeyEvent.VK_UP)
 			this.model.getPacman().goTop();
 		else if(source==KeyEvent.VK_DOWN)
@@ -52,9 +51,7 @@ public class Controller implements KeyListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		System.out.println("released");
-		
+		// TODO Auto-generated method stub		
 	}
 
 	@Override
