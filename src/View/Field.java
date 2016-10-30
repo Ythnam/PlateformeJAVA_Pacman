@@ -4,11 +4,18 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import controller.Controller;
+import main.Main;
 import model.Apple;
 import model.Bell;
 import model.Cherry;
@@ -25,8 +32,8 @@ public class Field extends JPanel{
 
 	private Model model = new Model();
 	private Controller controller;
-	private int XMAX = 30;
-	private int YMAX = 30; // ici on a 10x10 cases soit 100 -> nombre à changer
+	private int XMAX = Main.longueur;
+	private int YMAX = Main.hauteur+1; // ici on a 10x10 cases soit 100 -> nombre à changer
 	private int step = 20; // celui-la devra être égal à la taille qu'on mettra pour une image -> ici : 64x64
 	private Random random = new Random();
 	
@@ -38,7 +45,8 @@ public class Field extends JPanel{
 		this.controller = defautController(this.model);
 		this.controller.setView(this);
 		this.addKeyListener(this.controller);
-		//addKeyListener(this);
+		
+
 	}
     public void addNotify() {
         super.addNotify();
@@ -82,9 +90,16 @@ public class Field extends JPanel{
 	 */
 	public void generateGhostRandomly(int n){
 		for(int i = 0; i < n; i++){
-			Ghost ghost = new Ghost(random.nextInt(XMAX), random.nextInt(YMAX), this );
+			int a=random.nextInt(XMAX);
+			int b=random.nextInt(YMAX);
+			
+			if(b>0){
+				Ghost ghost = new Ghost(a, b, this );
+			
 			this.model.addToAlGhost(ghost);
 			new Thread(ghost).start();
+			}
+			else i--;
 		}
 	}
 
@@ -94,7 +109,13 @@ public class Field extends JPanel{
 	 * @param n est le nombre de Ghost qu'on veut dans le model
 	 */
 	public void generatePacmanRandomly(){
-		Pacman pacman = Pacman.getInstance(random.nextInt(XMAX), random.nextInt(YMAX), this);
+		boolean bool = true;
+		int b = 0;
+		while (bool){
+			b=random.nextInt(YMAX);
+			if(b>0) bool = false;
+		}
+		Pacman pacman = Pacman.getInstance(random.nextInt(XMAX), b, this);
 		this.model.setPacman(pacman);
 		//new Thread(pacman).start();		
 	}
@@ -228,14 +249,38 @@ public class Field extends JPanel{
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 		
+		// creation du niveau 
+				BufferedImage wall= null;
+				BufferedImage other= null;
+				 try {
+					wall = ImageIO.read(new File("image/brique.png"));
+					other = ImageIO.read(new File("image/map.png"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				for (int k=0;k<Main.hauteur;k++){
+					for (int l=0;l<Main.longueur;l++){
+						if (Main.tab[k][l]=='0'){
+							g2.drawImage(other,l*step,(k+1)*step,null);
+						}
+						else {
+							g2.drawImage(wall,l*step,(k+1)*step,null);
+						}
+					}
+				}
+		
+		
 		g2.drawImage(Ghost.getGhostORANGE(), model.getAlGhost().get(0).getX()*step, model.getAlGhost().get(0).getY()*step, null);
 		g2.drawImage(Ghost.getGhostRED(), model.getAlGhost().get(1).getX()*step, model.getAlGhost().get(1).getY()*step, null);
 		g2.drawImage(Ghost.getGhostGREEN(), model.getAlGhost().get(2).getX()*step, model.getAlGhost().get(2).getY()*step, null);
 		//g2.drawImage(Pacman.getImageIcon(), model.getPacman().getX(), model.getPacman().getY(), null);
 		model.getPacman().getImageIcon().paintIcon(this, g2, model.getPacman().getX()*step, model.getPacman().getY()*step);
+		
+		
 	}
-
 	
+
 	
 
 }
