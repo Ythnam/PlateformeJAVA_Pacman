@@ -251,10 +251,12 @@ public class Field extends JPanel{
 		
 		// creation du niveau 
 				BufferedImage wall= null;
-				BufferedImage other= null;
+				BufferedImage full= null;
+				BufferedImage empty= null;
 				 try {
 					wall = ImageIO.read(new File("image/brique.png"));
-					other = ImageIO.read(new File("image/map.png"));
+					full = ImageIO.read(new File("image/mapFull.png"));
+					empty = ImageIO.read(new File("image/map.png"));
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -262,7 +264,12 @@ public class Field extends JPanel{
 				for (int k=0;k<Main.hauteur;k++){
 					for (int l=0;l<Main.longueur;l++){
 						if (Main.tab[k][l]=='0'){
-							g2.drawImage(other,l*step,(k+1)*step,null);
+							if(Main.bol[k][l]==true){
+							g2.drawImage(full,l*step,(k+1)*step,null);
+							}
+							else{
+								g2.drawImage(empty,l*step,(k+1)*step,null);
+							}
 						}
 						else {
 							g2.drawImage(wall,l*step,(k+1)*step,null);

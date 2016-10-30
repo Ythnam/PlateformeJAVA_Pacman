@@ -20,11 +20,15 @@ public class Main {
 public static int longueur = 0;
 public static int hauteur = 0;
 public static char[][] tab;
+public static boolean[][] bol;
+public static int counter;
 
 
 public static void createstring () {
 	String fichier="image/lvl1.txt";
 	tab = new char[hauteur][longueur];
+	bol = new boolean[hauteur][longueur];
+	counter = 0 ;
 	int i =0;
 	int j = 0 ;
 			try{
@@ -37,6 +41,13 @@ public static void createstring () {
 				while (sc.hasNextLine()) {
 					for (char c : sc.next().toCharArray()) {
 						tab[i][j] = c;
+						if(c=='0'){
+							counter++;
+							bol[i][j] = true;
+						}
+						else {
+							bol[i][j] = false;
+						}
 						j++;
 					}
 					i++;

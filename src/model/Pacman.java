@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import main.Main;
 import View.Field;
 
 public class Pacman {
@@ -94,32 +95,74 @@ public class Pacman {
 	
 
 
+
 	public void goLeft(){
-		System.out.println("start"+this.x);
-		if(this.x>0){this.x--;}
+		if(this.x>0){
+			if(Main.tab[y-1][x-1]=='0'){
+				Main.bol[y-1][x]=false;
+				Main.bol[y-1][x-1]=false;
+				this.x--;
+			}
+			
+		}
 		else {
-			this.x = this.field.getXMAX();
+			if(Main.tab[y-1][this.field.getXMAX()-1]=='0'){
+				Main.bol[y-1][x]=false;
+				Main.bol[y-1][this.field.getXMAX()-1]=false;
+				this.x = this.field.getXMAX()-1;
+			}
 		}
 	}
 	
 	public void goRight(){
-		if(this.x<this.field.getXMAX()) {this.x++;}
-		else{
-			this.x=0;
+		if(this.x<this.field.getXMAX()-1){
+			
+			if(Main.tab[y-1][x+1]=='0'){
+				Main.bol[y-1][x]=false;
+				Main.bol[y-1][x+1]=false;
+				this.x++;
+			}
+		}
+		else {
+			if(Main.tab[y-1][0]=='0'){
+				Main.bol[y-1][x]=false;
+				Main.bol[y-1][0]=false;
+				this.x=0;
+			}
 		}
 	}
 	
 	public void goBot(){
-		if(this.y+1 < this.field.getYMAX()){ this.y++;System.out.println("bot");}
+		if(this.y+1 < this.field.getYMAX()){
+			if(Main.tab[y][x]=='0'){
+				Main.bol[y][x]= false;
+				Main.bol[y-1][x]= false;
+				this.y++;
+			}
+		}
 		else {
-			this.y=1;
+			if(Main.tab[0][x]=='0'){
+				Main.bol[y-1][x]=false;
+				Main.bol[0][x]=false;
+				this.y=1;
+			}
 		}
 	}
 	
 	public void goTop(){
-		if(this.y-1> 0) this.y--;
+		if(this.y-1> 0){
+			if(Main.tab[y-2][x]=='0'){
+				Main.bol[y-1][x]=false;
+				Main.bol[y-2][x]=false;
+				this.y--;
+			}
+		}
 		else {
+			if(Main.tab[(this.field.getYMAX())-2][x]=='0'){
+				Main.bol[1][x]=false;
+				Main.bol[this.field.getYMAX()-2][x]=false;
 			this.y = this.field.getYMAX()-1;
+			}
 		}
 	}
 	

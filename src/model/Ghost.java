@@ -7,6 +7,7 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
+import main.Main;
 import View.Field;
 
 public class Ghost implements Runnable {
@@ -94,16 +95,48 @@ public class Ghost implements Runnable {
 		int choice = rand.nextInt(4);
 		switch(choice){
 		case 0 : 
-			if(this.x+1 < this.field.getXMAX()) x++;
+			if(this.x<this.field.getXMAX()-1){
+				
+				if(Main.tab[y-1][x+1]=='0'){this.x++;}
+			}
+			else {
+				if(Main.tab[y-1][0]=='0'){
+					this.x=0;
+				}
+			}
 			break;
 		case 1 :
-			if(this.y+1 < this.field.getYMAX()) y++;
+			if(this.x>0){
+				if(Main.tab[y-1][x-1]=='0'){this.x--;}
+			}
+			else {
+				if(Main.tab[y-1][this.field.getXMAX()-1]=='0'){
+					this.x = this.field.getXMAX()-1;
+				}
+			}
 			break;
 		case 2 :
-			if(this.x > 0) x--;
+			if(this.y+1 < this.field.getYMAX()){
+				if(Main.tab[y][x]=='0'){
+					this.y++;
+				}
+			}
+			else {
+				if(Main.tab[0][x]=='0'){
+					this.y=1;
+				}
+			}
 			break;
 		case 3 :
-			if(this.y-1 > 0) y--;
+			if(this.y-1> 0){
+				if(Main.tab[y-2][x]=='0') this.y--;
+			}
+			else {
+				if(Main.tab[(this.field.getYMAX())-2][x]=='0'){
+				this.y = this.field.getYMAX()-1;
+				}
+			}
+			break;
 		}
 	}
 }
