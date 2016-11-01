@@ -3,6 +3,8 @@ package controller;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.JOptionPane;
+
 import View.Field;
 import main.Main;
 import model.Model;
@@ -41,17 +43,27 @@ public class Controller implements KeyListener {
 		int source = e.getKeyCode();
 		if(source==KeyEvent.VK_UP){
 			this.model.getPacman().goTop();
-			
-			
+			if(Main.counter == 0){
+				JOptionPane.showMessageDialog(view, "Vous avez fini la partie en " + this.model.getPacman().getChrono() + " avec " + this.model.getPacman().getPacmanScore() + " points");
+			}
 		}
-		else if(source==KeyEvent.VK_DOWN)
+		else if(source==KeyEvent.VK_DOWN){
 			this.model.getPacman().goBot();
-		else if(source==KeyEvent.VK_RIGHT)
+			if(Main.counter == 0){
+				JOptionPane.showMessageDialog(view, "Vous avez fini la partie en " + this.model.getPacman().getChrono() + " avec " + this.model.getPacman().getPacmanScore() + " points");
+				
+			}
+		}else if(source==KeyEvent.VK_RIGHT){
 			this.model.getPacman().goRight();
-		else if(source==KeyEvent.VK_LEFT)
+			if(Main.counter == 0){
+				JOptionPane.showMessageDialog(view, "Vous avez fini la partie en " + this.model.getPacman().getChrono() + " avec " + this.model.getPacman().getPacmanScore() + " points");
+			}
+		}else if(source==KeyEvent.VK_LEFT){
 			this.model.getPacman().goLeft();
-		
-		
+			if(Main.counter == 0){
+				JOptionPane.showMessageDialog(view, "Vous avez fini la partie en " + this.model.getPacman().getChrono() + " avec " + this.model.getPacman().getPacmanScore() + " points");
+			}
+		}
 		this.getView().setModel(this.getModel());
 		this.getView().repaint();
 

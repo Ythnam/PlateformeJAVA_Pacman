@@ -29,7 +29,7 @@ public static void createstring () {
 	String fichier="image/lvl1.txt";
 	tab = new char[hauteur][longueur];
 	bol = new boolean[hauteur][longueur];
-	counter = 0 ;
+	int count = 0 ;
 	int i =0;
 	int j = 0 ;
 			try{
@@ -43,7 +43,7 @@ public static void createstring () {
 					for (char c : sc.next().toCharArray()) {
 						tab[i][j] = c;
 						if(c=='0'){
-							counter++;
+							count++;
 							bol[i][j] = true;
 						}
 						else {
@@ -62,7 +62,7 @@ public static void createstring () {
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
 			}
-}
+counter = count;}
 
 
 

@@ -29,7 +29,7 @@ public class Pacman implements ActionListener {
 	private boolean isPowerUp = false; // booleen pour le faire entrer ne état ou il bas les fantomes
 	private Random rand = new Random(); // Sert juste pour les test tant qu'on n'a pas le clavier
 	public static ImageIcon imageIcon = new ImageIcon("image/pacman-haut.gif");
-	double chrono = 0;
+	private double chrono = 0;
 	Chrono chron = new Chrono();
 	private final JLabel scoreLabel; 
 	private JLabel timeLabel; 
@@ -95,7 +95,7 @@ public class Pacman implements ActionListener {
 		livesLabel.setBackground(Color.BLACK);
 		this.field.add(livesLabel);
 		
-		timeLabel = new JLabel("Timer: " + chrono);
+		timeLabel = new JLabel("Timer: " + getChrono());
 		Dimension d = new Dimension(85,15);
 		timeLabel.setPreferredSize(d);
 		timeLabel.setFont(new Font("Serif", Font.PLAIN, 10));
@@ -117,7 +117,7 @@ public class Pacman implements ActionListener {
 		updatetimer();
 		if(this.x>0){
 			if(Main.tab[y-1][x-1]=='0'){
-				if(Main.bol[y-1][x-1] == true){ pacmanScore+=100 ;updateScoreAndLife();}
+				if(Main.bol[y-1][x-1] == true){ pacmanScore+=100 ;updateScoreAndLife();Main.counter--;}
 				Main.bol[y-1][x-1]=false;
 				this.x--;
 			}
@@ -125,38 +125,38 @@ public class Pacman implements ActionListener {
 		}
 		else {
 			if(Main.tab[y-1][this.field.getXMAX()-1]=='0'){
-				if(Main.bol[y-1][this.field.getXMAX()-1] == true){ pacmanScore+=100 ;updateScoreAndLife();}
+				if(Main.bol[y-1][this.field.getXMAX()-1] == true){ pacmanScore+=100 ;updateScoreAndLife();Main.counter--;}
 				Main.bol[y-1][this.field.getXMAX()-1]=false;
 				this.x = this.field.getXMAX()-1;
 			}
 		}
 	}
 	public void actionPerformed (ActionEvent e){
+		if(Main.counter!=0){
 		chron.pause();
-		chrono = chron.getDureeSec(); // affichage en secondes
+		setChrono(chron.getDureeSec()); // affichage en secondes
 		chron.resume();
 		updatetimer();
+		}
 	}
 
 	
 	private void updatetimer() {
-		
-		System.out.println(chrono);
-		timeLabel.setText("Time: " + chrono);
+		timeLabel.setText("Time: " + getChrono());
 	}
 
 	public void goRight(){
 		if(this.x<this.field.getXMAX()-1){
 			
 			if(Main.tab[y-1][x+1]=='0'){
-				if(Main.bol[y-1][x+1] == true){ pacmanScore+=100 ;updateScoreAndLife();}
+				if(Main.bol[y-1][x+1] == true){ pacmanScore+=100 ;updateScoreAndLife();Main.counter--;}
 				Main.bol[y-1][x+1]=false;
 				this.x++;
 			}
 		}
 		else {
 			if(Main.tab[y-1][0]=='0'){
-				if(Main.bol[y-1][0] == true){ pacmanScore+=100 ;updateScoreAndLife();}
+				if(Main.bol[y-1][0] == true){ pacmanScore+=100 ;updateScoreAndLife();Main.counter--;}
 				Main.bol[y-1][0]=false;
 				this.x=0;
 			}
@@ -166,7 +166,7 @@ public class Pacman implements ActionListener {
 	public void goBot(){
 		if(this.y+1 < this.field.getYMAX()){
 			if(Main.tab[y][x]=='0'){
-				if(Main.bol[y][x] == true) { pacmanScore+=100 ;updateScoreAndLife();}
+				if(Main.bol[y][x] == true) { pacmanScore+=100 ;updateScoreAndLife();Main.counter--;}
 				Main.bol[y][x]= false;
 				
 				this.y++;
@@ -174,7 +174,7 @@ public class Pacman implements ActionListener {
 		}
 		else {
 			if(Main.tab[0][x]=='0'){
-				if(Main.bol[0][x] == true) { pacmanScore+=100 ;updateScoreAndLife();}
+				if(Main.bol[0][x] == true) { pacmanScore+=100 ;updateScoreAndLife();Main.counter--;}
 				Main.bol[0][x]=false;
 				this.y=1;
 			}
@@ -184,14 +184,14 @@ public class Pacman implements ActionListener {
 	public void goTop(){
 		if(this.y-1> 0){
 			if(Main.tab[y-2][x]=='0'){
-				if(Main.bol[y-2][x] == true){ pacmanScore+=100 ;updateScoreAndLife();}
+				if(Main.bol[y-2][x] == true){ pacmanScore+=100 ;updateScoreAndLife();Main.counter--;}
 				Main.bol[y-2][x]=false;
 				this.y--;
 			}
 		}
 		else {
 			if(Main.tab[(this.field.getYMAX())-2][x]=='0'){
-				if(Main.bol[this.field.getYMAX()-2][x] == true) { pacmanScore+=100 ;updateScoreAndLife();}
+				if(Main.bol[this.field.getYMAX()-2][x] == true) { pacmanScore+=100 ;updateScoreAndLife();Main.counter--;}
 				Main.bol[this.field.getYMAX()-2][x]=false;
 			this.y = this.field.getYMAX()-1;
 			}
@@ -209,6 +209,14 @@ public class Pacman implements ActionListener {
 
 	public void setPacmanScore(long pacmanScore) {
 		this.pacmanScore = pacmanScore;
+	}
+
+	public double getChrono() {
+		return chrono;
+	}
+
+	public void setChrono(double chrono) {
+		this.chrono = chrono;
 	}
 
 

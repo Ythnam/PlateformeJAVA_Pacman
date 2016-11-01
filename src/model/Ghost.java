@@ -82,6 +82,9 @@ public class Ghost implements Runnable {
 				tryToMove();
 				
 				field.repaint();
+				if(Main.counter==0){
+					Thread.sleep(1000000);
+				}
 			}
 		}  catch (InterruptedException e){
 			e.printStackTrace();
