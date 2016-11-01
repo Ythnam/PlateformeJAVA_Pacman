@@ -22,6 +22,7 @@ public static int hauteur = 0;
 public static char[][] tab;
 public static boolean[][] bol;
 public static int counter;
+public static long now = 0;
 
 
 public static void createstring () {
@@ -110,7 +111,7 @@ public static void lecture () {
 		frame.setContentPane(field);
 		frame.setVisible(true);
 		
-		
+		 
 		
 	}
 	
