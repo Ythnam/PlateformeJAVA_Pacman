@@ -104,6 +104,7 @@ public class Pacman implements ActionListener {
 		timeLabel.setOpaque(true);
 		this.field.add(timeLabel);
 		
+		
 		timer = new Timer(1, this);
 		timer.start();
 		chron.start();
