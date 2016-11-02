@@ -34,6 +34,43 @@ public class Ghost implements Runnable {
 		}
 	}
 	
+	//test pour l'IA des ghost   
+	private int cache;
+	private int aroundGhost[] = new int[4];
+	
+	public int getCache() {
+		return cache;
+	}
+	
+	public void setCache(int cache) {
+		this.cache = cache;
+	}      
+	
+	public void setAroundGhost(){
+		this.aroundGhost[0] = x++;
+		this.aroundGhost[1] = x--;
+		this.aroundGhost[2] = y++;
+		this.aroundGhost[3] = y--;
+	}
+	
+	public void ghostIA(){
+		int choice = rand.nextInt(4);
+		while(this.cache == choice){
+			choice = rand.nextInt(4);
+			// Permet d'éviter au fantome de se retourner
+		}
+		boolean[][] cacheWallMap = this.field.getModel().getMap().getBol();
+		for(int i : aroundGhost){
+			if(cacheWallMap[aroundGhost[i]][y]){
+				//a faire
+				
+			}
+		}
+		
+	}
+	
+	// Fin test IA
+	
 	public Ghost(int x, int y, Field field){
 		this.x = x;
 		this.y = y;
