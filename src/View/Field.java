@@ -100,11 +100,7 @@ public class Field extends JPanel implements ActionListener{
  	   livesLabel.setText(" " + "Lives: " + this.model.getPacman().getPacmanLives() );
  	}
 	
-	/*public Field(int n, int apple, int bell, int cherry, int galboss, int key, int melon, int orange, int stawberry){
-		generatePacmanRandomly();
-		generateGhostRandomly(n);
-		generateItemsRandomly(apple, bell, cherry, galboss, key, melon, orange, stawberry);
-	}*/
+
 	
 	public int getYMAX() {
 		return this.YMAX;
