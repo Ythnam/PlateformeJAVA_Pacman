@@ -50,6 +50,7 @@ public class Controller implements KeyListener {
 		int source = e.getKeyCode();
 		if(source==KeyEvent.VK_UP){
 			this.model.getPacman().goTop();
+			this.model.getPacman().setImageIcon(this.model.getPacman().getImageIconTop());
 			if(Wall.counter == 0){
 				try {
 					name = JOptionPane.showInputDialog(view,"Entrez votre pseudo", null);
@@ -63,6 +64,7 @@ public class Controller implements KeyListener {
 		}
 		else if(source==KeyEvent.VK_DOWN){
 			this.model.getPacman().goBot();
+			this.model.getPacman().setImageIcon(this.model.getPacman().getImageIconBot());
 			if(Wall.counter == 0){
 				try {
 					name = JOptionPane.showInputDialog(view,"Entrez votre pseudo", null);					
@@ -75,6 +77,7 @@ public class Controller implements KeyListener {
 			}
 		}else if(source==KeyEvent.VK_RIGHT){
 			this.model.getPacman().goRight();
+			this.model.getPacman().setImageIcon(this.model.getPacman().getImageIconRight());
 			if(Wall.counter == 0){
 				try {
 					name = JOptionPane.showInputDialog(view,"Entrez votre pseudo", null);
@@ -87,6 +90,7 @@ public class Controller implements KeyListener {
 			}
 		}else if(source==KeyEvent.VK_LEFT){
 			this.model.getPacman().goLeft();
+			this.model.getPacman().setImageIcon(this.model.getPacman().getImageIconLeft());
 			if(Wall.counter == 0){
 				try {
 					name = JOptionPane.showInputDialog(view,"Entrez votre pseudo", null);

@@ -28,14 +28,37 @@ public class Pacman {
 	private Field field;
 	private boolean isPowerUp = false; // booleen pour le faire entrer ne état ou il bas les fantomes
 	private Random rand = new Random(); // Sert juste pour les test tant qu'on n'a pas le clavier
-	public static ImageIcon imageIcon = new ImageIcon("image/pacman-haut.gif");
+	private ImageIcon imageIcon;
+	private static ImageIcon imageIconTop = new ImageIcon("image/pacman-haut.gif");
+	private static ImageIcon imageIconBot = new ImageIcon("image/pacman_bas.gif");
+	private static ImageIcon imageIconLeft = new ImageIcon("image/pacman_gauche.gif");
+	private static ImageIcon imageIconRight = new ImageIcon("image/pacman_droit.gif");
+
 	 private long pacmanScore = 0;
 	 private int pacmanLives = 3;
 
-
+	 public void setImageIcon(ImageIcon imageIcon){
+		 this.imageIcon = imageIcon;
+	 }
 	
-	public static ImageIcon getImageIcon() {
+	public ImageIcon getImageIcon() {
 		return imageIcon;
+	}
+	
+	public static ImageIcon getImageIconTop() {
+		return imageIconTop;
+	}
+	
+	public static ImageIcon getImageIconBot() {
+		return imageIconBot;
+	}
+	
+	public static ImageIcon getImageIconLeft() {
+		return imageIconLeft;
+	}
+	
+	public static ImageIcon getImageIconRight() {
+		return imageIconRight;
 	}
 	
 	public int getX() {
@@ -71,6 +94,7 @@ public class Pacman {
 		this.x = x;
 		this.y = y;
 		this.field = field;
+		this.imageIcon = getImageIconTop(); 
 	}
 	
 
