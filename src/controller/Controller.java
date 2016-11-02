@@ -87,6 +87,7 @@ public class Controller implements KeyListener {
 			}
 		}else if(source==KeyEvent.VK_LEFT){
 			this.model.getPacman().goLeft();
+			System.out.println("left");
 			if(Wall.counter == 0){
 				try {
 					name = JOptionPane.showInputDialog(view,"Entrez votre pseudo", null);
@@ -106,7 +107,7 @@ public class Controller implements KeyListener {
 	public void savescore() throws IOException{
 		data = new long[11];
 		names = new String[11];
-		File f = new File ("image/temperatures.txt");
+		File f = new File ("texte/classement.txt");
 		if(f.exists()){
 		
 		try {
@@ -119,18 +120,14 @@ public class Controller implements KeyListener {
            while (line != null) {
                 String[] decompose = line.split(";");
              //    
-// tu stock dans tes variables
+
            String bla = decompose[0];
            String[] mots = bla.split (" " );
-// si tu veux un entier
            data[i]= Integer.parseInt(mots[1]);
-           //System.out.println(mots[0]);
-           names[i]= "user";
+           System.out.println(mots[0]);
+           names[i]= mots[0];
            i++;
- 
-//et après tu les stocks où tu veux
- 
- 
+
            line = r.readLine();
             }
  
@@ -152,19 +149,21 @@ public class Controller implements KeyListener {
 		{
 		    FileWriter fw = new FileWriter (f);
 		    boolean bool = true;
-		 
-		    for (double d : data)
+		    int l =0;
+		    for (int i=0;i<11;i++)
 		    {
-		    	if(this.model.getPacman().getPacmanScore()>d && bool){
-		    		 fw.write (name+" " + this.model.getPacman().getPacmanScore());
+		    	
+		    	if(this.model.getPacman().getPacmanScore()>data[l] && bool){
+		    		 fw.write ("user"+" " + this.model.getPacman().getPacmanScore());
 		    		 fw.write ("\r\n");
 		    		 bool = false;
-				        
 		    	}
-		    	if(d!=0.0){
-		    		fw.write (String.valueOf (d));
+		    	if(data[l]!=0.0 ){
+		    		fw.write (String.valueOf(names[l]) + String.valueOf (data[l]));
 		    		fw.write ("\r\n");
 		    	}
+
+		    	l++;
 		    }
 		 
 		    fw.close();

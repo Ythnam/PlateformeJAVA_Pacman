@@ -16,7 +16,7 @@ public class Wall {
 
 
 public static void createstring () {
-	String fichier="image/lvl1.txt";
+	String fichier="texte/lvl1.txt";
 	tab = new char[hauteur][longueur];
 	bol = new boolean[hauteur][longueur];
 	int count = 0 ;
@@ -59,7 +59,7 @@ counter = count;
 public static void lecture () {
 	int longueur1 = 0;
     int hauteur1 = 0;
-	String fichier="image/lvl1.txt";
+	String fichier="texte/lvl1.txt";
 			try{
 				File ips = new File(fichier);
 				FileReader ipsr = new FileReader(ips);
