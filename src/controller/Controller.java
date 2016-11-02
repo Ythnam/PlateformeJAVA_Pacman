@@ -53,7 +53,7 @@ public class Controller implements KeyListener {
 			if(Wall.counter == 0){
 				try {
 					name = JOptionPane.showInputDialog(view,"Entrez votre pseudo", null);
-					JOptionPane.showMessageDialog(view, "Felicitations " + name+ ", vous avez fini la partie en " + this.model.getPacman().getChrono() + " avec " + this.model.getPacman().getPacmanScore() + " points");
+					JOptionPane.showMessageDialog(view, "Felicitations " + name+ ", vous avez fini la partie en " + this.view.getChrono() + " avec " + this.model.getPacman().getPacmanScore() + " points");
 					savescore();
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
@@ -66,7 +66,7 @@ public class Controller implements KeyListener {
 			if(Wall.counter == 0){
 				try {
 					name = JOptionPane.showInputDialog(view,"Entrez votre pseudo", null);
-					JOptionPane.showMessageDialog(view, "Felicitations " + name+ ", vous avez fini la partie en " + this.model.getPacman().getChrono() + " avec " + this.model.getPacman().getPacmanScore() + " points");
+					JOptionPane.showMessageDialog(view, "Felicitations " + name+ ", vous avez fini la partie en " + this.view.getChrono() + " avec " + this.model.getPacman().getPacmanScore() + " points");
 					savescore();
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
@@ -78,7 +78,7 @@ public class Controller implements KeyListener {
 			if(Wall.counter == 0){
 				try {
 					name = JOptionPane.showInputDialog(view,"Entrez votre pseudo", null);
-					JOptionPane.showMessageDialog(view, "Felicitations " + name+ ", vous avez fini la partie en " + this.model.getPacman().getChrono() + " avec " + this.model.getPacman().getPacmanScore() + " points");
+					JOptionPane.showMessageDialog(view, "Felicitations " + name+ ", vous avez fini la partie en " + this.view.getChrono() + " avec " + this.model.getPacman().getPacmanScore() + " points");
 					savescore();
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
@@ -90,7 +90,7 @@ public class Controller implements KeyListener {
 			if(Wall.counter == 0){
 				try {
 					name = JOptionPane.showInputDialog(view,"Entrez votre pseudo", null);
-					JOptionPane.showMessageDialog(view, "Felicitations " + name+ ", vous avez fini la partie en " + this.model.getPacman().getChrono() + " avec " + this.model.getPacman().getPacmanScore() + " points");
+					JOptionPane.showMessageDialog(view, "Felicitations " + name+ ", vous avez fini la partie en " + this.view.getChrono() + " avec " + this.model.getPacman().getPacmanScore() + " points");
 					savescore();
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block

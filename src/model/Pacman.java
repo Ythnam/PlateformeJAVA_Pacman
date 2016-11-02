@@ -19,7 +19,7 @@ import javax.swing.Timer;
 import main.Main;
 import View.Field;
 
-public class Pacman implements ActionListener {
+public class Pacman {
 
 	private static Pacman instance; // Pacman est un singleton
 	
@@ -29,14 +29,9 @@ public class Pacman implements ActionListener {
 	private boolean isPowerUp = false; // booleen pour le faire entrer ne état ou il bas les fantomes
 	private Random rand = new Random(); // Sert juste pour les test tant qu'on n'a pas le clavier
 	public static ImageIcon imageIcon = new ImageIcon("image/pacman-haut.gif");
-	private double chrono = 0;
-	Chrono chron = new Chrono();
-	private final JLabel scoreLabel; 
-	private JLabel timeLabel; 
-	 private final JLabel livesLabel;
-	 private long pacmanScore;
-	 private int pacmanLives;
-	 protected Timer timer;
+	 private long pacmanScore = 0;
+	 private int pacmanLives = 3;
+
 
 	
 	public static ImageIcon getImageIcon() {
@@ -65,59 +60,26 @@ public class Pacman implements ActionListener {
 	public static Pacman getInstance(int x, int y, Field field) {
         if (null == instance) { // Premier appel
             synchronized(Pacman.class) {
-                    instance = new Pacman(x, y, field,0,3);
+                    instance = new Pacman(x, y, field);
             }
         }
         return instance;
     }
 	
-	private Pacman(int x, int y, Field field,long score,int lives){
+	private Pacman(int x, int y, Field field){
 		
 		this.x = x;
 		this.y = y;
 		this.field = field;
-
-		this.setPacmanScore(score);
-		this.pacmanLives =lives;
-		
-		
-		scoreLabel = new JLabel("Score: " + getPacmanScore());
-		scoreLabel.setFont(new Font("Serif", Font.PLAIN, 10));
-		scoreLabel.setForeground(Color.white);
-		scoreLabel.setBackground(Color.BLACK);
-		scoreLabel.setOpaque(true);
-		this.field.add(scoreLabel);
-		
-		livesLabel = new JLabel(" " + "Lives: " + pacmanLives);
-		livesLabel.setFont(new Font("Serif", Font.PLAIN, 10));
-		livesLabel.setForeground(Color.white);
-		livesLabel.setOpaque(true);
-		livesLabel.setBackground(Color.BLACK);
-		this.field.add(livesLabel);
-		
-		timeLabel = new JLabel("Timer: " + getChrono());
-		Dimension d = new Dimension(85,15);
-		timeLabel.setPreferredSize(d);
-		timeLabel.setFont(new Font("Serif", Font.PLAIN, 10));
-		timeLabel.setForeground(Color.white);
-		timeLabel.setBackground(Color.BLACK);
-		timeLabel.setOpaque(true);
-		this.field.add(timeLabel);
-		
-		
-		timer = new Timer(1, this);
-		timer.start();
-		chron.start();
 	}
 	
 
 
 
 	public void goLeft(){
-		updatetimer();
 		if(this.x>0){
 			if(Wall.tab[y-1][x-1]=='0'){
-				if(Wall.bol[y-1][x-1] == true){ pacmanScore+=100 ;updateScoreAndLife();Wall.counter--;}
+				if(Wall.bol[y-1][x-1] == true){ pacmanScore+=100 ;this.field.updateScoreAndLife();Wall.counter--;}
 				Wall.bol[y-1][x-1]=false;
 				this.x--;
 			}
@@ -125,38 +87,26 @@ public class Pacman implements ActionListener {
 		}
 		else {
 			if(Wall.tab[y-1][this.field.getXMAX()-1]=='0'){
-				if(Wall.bol[y-1][this.field.getXMAX()-1] == true){ pacmanScore+=100 ;updateScoreAndLife();Wall.counter--;}
+				if(Wall.bol[y-1][this.field.getXMAX()-1] == true){ pacmanScore+=100 ;this.field.updateScoreAndLife();Wall.counter--;}
 				Wall.bol[y-1][this.field.getXMAX()-1]=false;
 				this.x = this.field.getXMAX()-1;
 			}
 		}
 	}
-	public void actionPerformed (ActionEvent e){
-		if(Wall.counter!=0){
-		chron.pause();
-		setChrono(chron.getDureeSec()); // affichage en secondes
-		chron.resume();
-		updatetimer();
-		}
-	}
-
 	
-	private void updatetimer() {
-		timeLabel.setText("Time: " + getChrono());
-	}
 
 	public void goRight(){
 		if(this.x<this.field.getXMAX()-1){
 			
 			if(Wall.tab[y-1][x+1]=='0'){
-				if(Wall.bol[y-1][x+1] == true){ pacmanScore+=100 ;updateScoreAndLife();Wall.counter--;}
+				if(Wall.bol[y-1][x+1] == true){ pacmanScore+=100 ;this.field.updateScoreAndLife();Wall.counter--;}
 				Wall.bol[y-1][x+1]=false;
 				this.x++;
 			}
 		}
 		else {
 			if(Wall.tab[y-1][0]=='0'){
-				if(Wall.bol[y-1][0] == true){ pacmanScore+=100 ;updateScoreAndLife();Wall.counter--;}
+				if(Wall.bol[y-1][0] == true){ pacmanScore+=100 ;this.field.updateScoreAndLife();Wall.counter--;}
 				Wall.bol[y-1][0]=false;
 				this.x=0;
 			}
@@ -166,7 +116,7 @@ public class Pacman implements ActionListener {
 	public void goBot(){
 		if(this.y+1 < this.field.getYMAX()){
 			if(Wall.tab[y][x]=='0'){
-				if(Wall.bol[y][x] == true) { pacmanScore+=100 ;updateScoreAndLife();Wall.counter--;}
+				if(Wall.bol[y][x] == true) { pacmanScore+=100 ;this.field.updateScoreAndLife();Wall.counter--;}
 				Wall.bol[y][x]= false;
 				
 				this.y++;
@@ -174,7 +124,7 @@ public class Pacman implements ActionListener {
 		}
 		else {
 			if(Wall.tab[0][x]=='0'){
-				if(Wall.bol[0][x] == true) { pacmanScore+=100 ;updateScoreAndLife();Wall.counter--;}
+				if(Wall.bol[0][x] == true) { pacmanScore+=100 ;this.field.updateScoreAndLife();Wall.counter--;}
 				Wall.bol[0][x]=false;
 				this.y=1;
 			}
@@ -184,39 +134,38 @@ public class Pacman implements ActionListener {
 	public void goTop(){
 		if(this.y-1> 0){
 			if(Wall.tab[y-2][x]=='0'){
-				if(Wall.bol[y-2][x] == true){ pacmanScore+=100 ;updateScoreAndLife();Wall.counter--;}
+				if(Wall.bol[y-2][x] == true){ pacmanScore+=100 ;this.field.updateScoreAndLife();Wall.counter--;}
 				Wall.bol[y-2][x]=false;
 				this.y--;
 			}
 		}
 		else {
 			if(Wall.tab[(this.field.getYMAX())-2][x]=='0'){
-				if(Wall.bol[this.field.getYMAX()-2][x] == true) { pacmanScore+=100 ;updateScoreAndLife();Wall.counter--;}
+				if(Wall.bol[this.field.getYMAX()-2][x] == true) { pacmanScore+=100 ;this.field.updateScoreAndLife();Wall.counter--;}
 				Wall.bol[this.field.getYMAX()-2][x]=false;
 			this.y = this.field.getYMAX()-1;
 			}
 		}
 	}
 	
-	public void updateScoreAndLife() {
-	   scoreLabel.setText("Score: " + getPacmanScore());
-	   livesLabel.setText(" " + "Lives: " + pacmanLives );
-	}
+	
 
 	public long getPacmanScore() {
 		return pacmanScore;
-	}
+}
 
 	public void setPacmanScore(long pacmanScore) {
 		this.pacmanScore = pacmanScore;
 	}
 
-	public double getChrono() {
-		return chrono;
+	
+
+	public int getPacmanLives() {
+		return pacmanLives;
 	}
 
-	public void setChrono(double chrono) {
-		this.chrono = chrono;
+	public void setPacmanLives(int pacmanLives) {
+		this.pacmanLives = pacmanLives;
 	}
 
 

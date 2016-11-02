@@ -70,7 +70,6 @@ public static void lecture () {
 				while (sc.hasNextLine()) {
 					for (char c : sc.next().toCharArray()) {
 						longueur1 += 1;
-						System.out.println(c);
 					}
 					hauteur1 += 1 ;
 				}

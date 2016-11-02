@@ -1,7 +1,12 @@
 package View;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
@@ -13,12 +18,14 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 import controller.Controller;
 import main.Main;
 import model.Apple;
 import model.Bell;
 import model.Cherry;
+import model.Chrono;
 import model.Galboss;
 import model.Ghost;
 import model.Key;
@@ -29,14 +36,21 @@ import model.Pacman;
 import model.Strawberry;
 import model.Wall;
 
-public class Field extends JPanel{
 
+public class Field extends JPanel implements ActionListener{
+
+	private double chrono = 0;
+	Chrono chron = new Chrono();
 	private Model model = new Model();
 	private Controller controller;
 	private int XMAX = Wall.longueur;
 	private int YMAX = Wall.hauteur+1; // ici on a 10x10 cases soit 100 -> nombre à changer
 	private int step = 20; // celui-la devra être égal à la taille qu'on mettra pour une image -> ici : 64x64
 	private Random random = new Random();
+	private JLabel scoreLabel;
+	private JLabel livesLabel;
+	private JLabel timeLabel;
+	private Timer timer;
 	
 
 	public Field(){
@@ -47,12 +61,44 @@ public class Field extends JPanel{
 		this.controller.setView(this);
 		this.addKeyListener(this.controller);
 		
+		
+		scoreLabel = new JLabel("Score: " + this.model.getPacman().getPacmanScore());
+		scoreLabel.setFont(new Font("Serif", Font.PLAIN, 10));
+		scoreLabel.setForeground(Color.white);
+		scoreLabel.setBackground(Color.BLACK);
+		scoreLabel.setOpaque(true);
+		add(scoreLabel);
+		
+		livesLabel = new JLabel(" " + "Lives: " + this.model.getPacman().getPacmanLives());
+		livesLabel.setFont(new Font("Serif", Font.PLAIN, 10));
+		livesLabel.setForeground(Color.white);
+		livesLabel.setOpaque(true);
+		livesLabel.setBackground(Color.BLACK);
+		add(livesLabel);
+		
+		timeLabel = new JLabel("Timer: " + getChrono());
+		Dimension d = new Dimension(85,15);
+		timeLabel.setPreferredSize(d);
+		timeLabel.setFont(new Font("Serif", Font.PLAIN, 10));
+		timeLabel.setForeground(Color.white);
+		timeLabel.setBackground(Color.BLACK);
+		timeLabel.setOpaque(true);
+		add(timeLabel);
+		
+		timer = new Timer(1, this);
+		timer.start();
+		chron.start();
 
 	}
     public void addNotify() {
         super.addNotify();
         requestFocus();
     }
+    
+    public void updateScoreAndLife() {
+ 	   scoreLabel.setText("Score: " + this.model.getPacman().getPacmanScore());
+ 	   livesLabel.setText(" " + "Lives: " + this.model.getPacman().getPacmanLives() );
+ 	}
 	
 	/*public Field(int n, int apple, int bell, int cherry, int galboss, int key, int melon, int orange, int stawberry){
 		generatePacmanRandomly();
@@ -286,8 +332,27 @@ public class Field extends JPanel{
 		
 		
 	}
-	
+	@Override
+	public void actionPerformed (ActionEvent e){
+		if(Wall.counter!=0){
+		chron.pause();
+		setChrono(chron.getDureeSec()); // affichage en secondes
+		chron.resume();
+		updatetimer();
+		}
+	}
 
 	
+	private void updatetimer() {
+		timeLabel.setText("Time: " + getChrono());
+	}
+
+	public double getChrono() {
+		return chrono;
+	}
+
+	public void setChrono(double chrono) {
+		this.chrono = chrono;
+	}
 
 }
