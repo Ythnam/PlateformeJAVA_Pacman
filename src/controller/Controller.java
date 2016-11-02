@@ -65,7 +65,7 @@ public class Controller implements KeyListener {
 			this.model.getPacman().goBot();
 			if(Wall.counter == 0){
 				try {
-					name = JOptionPane.showInputDialog(view,"Entrez votre pseudo", null);
+					name = JOptionPane.showInputDialog(view,"Entrez votre pseudo", null);					
 					JOptionPane.showMessageDialog(view, "Felicitations " + name+ ", vous avez fini la partie en " + this.view.getChrono() + " avec " + this.model.getPacman().getPacmanScore() + " points");
 					savescore();
 				} catch (IOException e1) {
@@ -87,7 +87,6 @@ public class Controller implements KeyListener {
 			}
 		}else if(source==KeyEvent.VK_LEFT){
 			this.model.getPacman().goLeft();
-			System.out.println("left");
 			if(Wall.counter == 0){
 				try {
 					name = JOptionPane.showInputDialog(view,"Entrez votre pseudo", null);
@@ -105,6 +104,8 @@ public class Controller implements KeyListener {
 	}
 
 	public void savescore() throws IOException{
+		int z =0;
+		String classement ="";
 		data = new long[11];
 		names = new String[11];
 		File f = new File ("texte/classement.txt");
@@ -154,12 +155,16 @@ public class Controller implements KeyListener {
 		    {
 		    	
 		    	if(this.model.getPacman().getPacmanScore()>data[l] && bool){
-		    		 fw.write ("user"+" " + this.model.getPacman().getPacmanScore());
+		    		 fw.write (name+" " + this.model.getPacman().getPacmanScore());
+		    		 classement+=z + " - "+ name+" " + this.model.getPacman().getPacmanScore() + "\n";
+		    		 z++;
 		    		 fw.write ("\r\n");
 		    		 bool = false;
 		    	}
 		    	if(data[l]!=0.0 ){
-		    		fw.write (String.valueOf(names[l]) + String.valueOf (data[l]));
+		    		fw.write (String.valueOf(names[l]) +"" +  String.valueOf (data[l]));
+		    		classement+=z + " - "+ names[l] + " : " + data[l] + "\n";
+		    		z++;
 		    		fw.write ("\r\n");
 		    	}
 
@@ -173,11 +178,28 @@ public class Controller implements KeyListener {
 		    System.out.println ("Erreur lors de la lecture : " + exception.getMessage());
 		}
 		
-		String classement ="";
-		for(int k =0; k<11;k++){
-			if(data[k]!=0.0)
-			classement+=k + " - "+ names[k] + " : " + data[k] + "\n";
+		/*if(f.exists()){	
+		try {
+            FileReader c1 = new FileReader(f); 
+            BufferedReader r1 = new BufferedReader(c1);
+ 
+            String line = r1.readLine();
+
+           while (line != null) {
+        	   line = r1.readLine(); 
+           }
+           r1.close();
+		}catch (IOException exception)
+		{
+		    System.out.println ("Erreur lors de l'affichage : " + exception.getMessage());
 		}
+		}
+		*/
+		
+		//for(int k =0; k<11;k++){
+			//if(data[k]!=0.0)
+		//	classement+=k + " - "+ names[k] + " : " + data[k] + "\n";
+		//}
 		JOptionPane.showMessageDialog(view,classement);
 		
 		
