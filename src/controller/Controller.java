@@ -130,7 +130,6 @@ public class Controller implements KeyListener {
            String bla = decompose[0];
            String[] mots = bla.split (" " );
            data[i]= Integer.parseInt(mots[1]);
-           System.out.println(mots[0]);
            names[i]= mots[0];
            i++;
 
