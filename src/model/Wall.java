@@ -72,6 +72,7 @@ public static void lecture () {
 				while (sc.hasNextLine()) {
 					for (char c : sc.next().toCharArray()) {
 						longueur1 += 1;
+						System.out.println(c);
 					}
 					hauteur1 += 1 ;
 				}
@@ -85,10 +86,8 @@ public static void lecture () {
 			}
 			
 			longueur1 = longueur1/hauteur1;
-			//System.out.println(hauteur1); 
-			hauteur = hauteur1;
-			//System.out.println(longueur1);
-longueur = longueur1;
+			System.out.println(hauteur1); hauteur = hauteur1;
+			System.out.println(longueur1); longueur = longueur1;
 			
 			
 }

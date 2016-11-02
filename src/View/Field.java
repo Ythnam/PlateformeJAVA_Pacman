@@ -5,23 +5,23 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import controller.Controller;
-import main.Main;
 import model.Apple;
 import model.Bell;
 import model.Cherry;
@@ -51,9 +51,11 @@ public class Field extends JPanel implements ActionListener{
 	private JLabel livesLabel;
 	private JLabel timeLabel;
 	private Timer timer;
+	private JLabel label;
 	
 
 	public Field(){
+		
 		generatePacmanRandomly();
 		generateGhostRandomly(3);
 		//generateItemsRandomly(10, 5, 4, 3, 5, 1, 1, 1); // en test random pour les valeurs
@@ -132,17 +134,14 @@ public class Field extends JPanel implements ActionListener{
 	 * @param n est le nombre de Ghost qu'on veut dans le model
 	 */
 	public void generateGhostRandomly(int n){
-		for(int i = 0; i < n; i++){
-			int a=random.nextInt(XMAX);
-			int b=random.nextInt(YMAX);
-			
-			if(b>0){
-				Ghost ghost = new Ghost(a, b, this );
+		for(int i = 0; i < n; i++){		
+			Point p = generate();
+				 
+			Ghost ghost = new Ghost(p.x, p.y, this );
 			
 			this.model.addToAlGhost(ghost);
 			new Thread(ghost).start();
-			}
-			else i--;
+			
 		}
 	}
 
@@ -153,16 +152,34 @@ public class Field extends JPanel implements ActionListener{
 	 */
 	public void generatePacmanRandomly(){
 		boolean bool = true;
-		int b = 0;
-		while (bool){
-			b=random.nextInt(YMAX);
-			if(b>0) bool = false;
-		}
-		Pacman pacman = Pacman.getInstance(random.nextInt(XMAX), b, this);
-		this.model.setPacman(pacman);
+		boolean b2 = true;
+		Point p = generate();
+		
+			Pacman pacman = Pacman.getInstance(p.x, p.y, this);
+			this.model.setPacman(pacman);
 		//new Thread(pacman).start();		
 	}
 
+	public Point generate(){
+		boolean bo= true;
+		int a = 0;
+		int b = 0;
+		while(bo){
+			
+				b=random.nextInt(YMAX-1)+1;
+				a = random.nextInt(XMAX-1);
+				if(canSpawn(a, b)) bo = false;
+		}
+		Point p = new Point(a,b);
+		return p;
+	}
+	public boolean canSpawn(int x, int y){
+		if(Wall.bol[y-1][x]==true)
+			return true;
+		
+		return false;
+		
+	}
 
 	/**
 	 * Méthode permettant d'instancier tous les Items en même temps
@@ -338,6 +355,49 @@ public class Field extends JPanel implements ActionListener{
 		}
 	}
 
+	public void pop(){
+		JFrame frame = new JFrame();
+		frame.setSize(300,300);
+		frame.setResizable(true);
+		frame.setLocation(300, 300);
+		frame.setVisible(true);
+		
+		
+		label = new JLabel("lkhjklnlknkln");
+		label.setFont(new Font("Serif", Font.PLAIN, 24));
+		label.setForeground(Color.white);
+		label.setBackground(Color.BLACK);
+		label.setOpaque(true);
+		JPanel b2 = new JPanel();
+		
+		//frame.add(label);
+		JPanel b3 = new JPanel();
+		b3.add(label);
+	    //Idem pour cette ligne
+	    b3.setLayout(new BoxLayout(b3, BoxLayout.LINE_AXIS));
+	    b3.add(new JButton("Bouton 4"));
+	    b3.add(new JButton("Bouton 5"));
+	    b3.add(new JButton("Bouton 6"));
+
+	    //JPanel b4 = new JPanel();
+	    //On positionne maintenant ces trois lignes en colonne
+	    //b4.setLayout(new BoxLayout(b4, BoxLayout.LINE_AXIS));
+	    //b4.add(b3);
+	    //b4.add(label);
+	    //b4.setLocation(0, 0);
+		//frame.add(b2);
+	    frame.add(b3);
+
+		// ok = new JButton("ok",BorderLayout.SOUTH);
+		//ok.setText("ok");
+		//ok.setBounds(100, 100, 100, 100);
+		//JButton recommencer = new JButton();
+		//JButton suivant = new JButton();
+		
+		//frame.add(ok);
+		//frame.add(recommencer);
+		//frame.add(suivant);
+	}
 	
 	private void updatetimer() {
 		timeLabel.setText("Time: " + getChrono());
