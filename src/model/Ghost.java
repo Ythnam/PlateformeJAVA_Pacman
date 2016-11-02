@@ -64,6 +64,7 @@ public class Ghost implements Runnable {
 			if(cacheWallMap[aroundGhost[i]][y]){
 				//a faire
 				
+				
 			}
 		}
 		
