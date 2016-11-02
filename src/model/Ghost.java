@@ -82,7 +82,7 @@ public class Ghost implements Runnable {
 				tryToMove();
 				
 				field.repaint();
-				if(Main.counter==0){
+				if(Wall.counter==0){
 					Thread.sleep(1000000);
 				}
 			}
@@ -100,42 +100,42 @@ public class Ghost implements Runnable {
 		case 0 : 
 			if(this.x<this.field.getXMAX()-1){
 				
-				if(Main.tab[y-1][x+1]=='0'){this.x++;}
+				if(Wall.tab[y-1][x+1]=='0'){this.x++;}
 			}
 			else {
-				if(Main.tab[y-1][0]=='0'){
+				if(Wall.tab[y-1][0]=='0'){
 					this.x=0;
 				}
 			}
 			break;
 		case 1 :
 			if(this.x>0){
-				if(Main.tab[y-1][x-1]=='0'){this.x--;}
+				if(Wall.tab[y-1][x-1]=='0'){this.x--;}
 			}
 			else {
-				if(Main.tab[y-1][this.field.getXMAX()-1]=='0'){
+				if(Wall.tab[y-1][this.field.getXMAX()-1]=='0'){
 					this.x = this.field.getXMAX()-1;
 				}
 			}
 			break;
 		case 2 :
 			if(this.y+1 < this.field.getYMAX()){
-				if(Main.tab[y][x]=='0'){
+				if(Wall.tab[y][x]=='0'){
 					this.y++;
 				}
 			}
 			else {
-				if(Main.tab[0][x]=='0'){
+				if(Wall.tab[0][x]=='0'){
 					this.y=1;
 				}
 			}
 			break;
 		case 3 :
 			if(this.y-1> 0){
-				if(Main.tab[y-2][x]=='0') this.y--;
+				if(Wall.tab[y-2][x]=='0') this.y--;
 			}
 			else {
-				if(Main.tab[(this.field.getYMAX())-2][x]=='0'){
+				if(Wall.tab[(this.field.getYMAX())-2][x]=='0'){
 				this.y = this.field.getYMAX()-1;
 				}
 			}

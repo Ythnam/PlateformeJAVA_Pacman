@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import View.Field;
 import main.Main;
 import model.Model;
+import model.Wall;
 
 public class Controller implements KeyListener {
 
@@ -49,7 +50,7 @@ public class Controller implements KeyListener {
 		int source = e.getKeyCode();
 		if(source==KeyEvent.VK_UP){
 			this.model.getPacman().goTop();
-			if(Main.counter == 0){
+			if(Wall.counter == 0){
 				try {
 					name = JOptionPane.showInputDialog(view,"Entrez votre pseudo", null);
 					JOptionPane.showMessageDialog(view, "Felicitations " + name+ ", vous avez fini la partie en " + this.model.getPacman().getChrono() + " avec " + this.model.getPacman().getPacmanScore() + " points");
@@ -62,7 +63,7 @@ public class Controller implements KeyListener {
 		}
 		else if(source==KeyEvent.VK_DOWN){
 			this.model.getPacman().goBot();
-			if(Main.counter == 0){
+			if(Wall.counter == 0){
 				try {
 					name = JOptionPane.showInputDialog(view,"Entrez votre pseudo", null);
 					JOptionPane.showMessageDialog(view, "Felicitations " + name+ ", vous avez fini la partie en " + this.model.getPacman().getChrono() + " avec " + this.model.getPacman().getPacmanScore() + " points");
@@ -74,7 +75,7 @@ public class Controller implements KeyListener {
 			}
 		}else if(source==KeyEvent.VK_RIGHT){
 			this.model.getPacman().goRight();
-			if(Main.counter == 0){
+			if(Wall.counter == 0){
 				try {
 					name = JOptionPane.showInputDialog(view,"Entrez votre pseudo", null);
 					JOptionPane.showMessageDialog(view, "Felicitations " + name+ ", vous avez fini la partie en " + this.model.getPacman().getChrono() + " avec " + this.model.getPacman().getPacmanScore() + " points");
@@ -86,7 +87,7 @@ public class Controller implements KeyListener {
 			}
 		}else if(source==KeyEvent.VK_LEFT){
 			this.model.getPacman().goLeft();
-			if(Main.counter == 0){
+			if(Wall.counter == 0){
 				try {
 					name = JOptionPane.showInputDialog(view,"Entrez votre pseudo", null);
 					JOptionPane.showMessageDialog(view, "Felicitations " + name+ ", vous avez fini la partie en " + this.model.getPacman().getChrono() + " avec " + this.model.getPacman().getPacmanScore() + " points");

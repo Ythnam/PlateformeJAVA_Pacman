@@ -27,13 +27,14 @@ import model.Model;
 import model.Orange;
 import model.Pacman;
 import model.Strawberry;
+import model.Wall;
 
 public class Field extends JPanel{
 
 	private Model model = new Model();
 	private Controller controller;
-	private int XMAX = Main.longueur;
-	private int YMAX = Main.hauteur+1; // ici on a 10x10 cases soit 100 -> nombre à changer
+	private int XMAX = Wall.longueur;
+	private int YMAX = Wall.hauteur+1; // ici on a 10x10 cases soit 100 -> nombre à changer
 	private int step = 20; // celui-la devra être égal à la taille qu'on mettra pour une image -> ici : 64x64
 	private Random random = new Random();
 	
@@ -261,10 +262,10 @@ public class Field extends JPanel{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				for (int k=0;k<Main.hauteur;k++){
-					for (int l=0;l<Main.longueur;l++){
-						if (Main.tab[k][l]=='0'){
-							if(Main.bol[k][l]==true){
+				for (int k=0;k<Wall.hauteur;k++){
+					for (int l=0;l<Wall.longueur;l++){
+						if (Wall.tab[k][l]=='0'){
+							if(Wall.bol[k][l]==true){
 							g2.drawImage(full,l*step,(k+1)*step,null);
 							}
 							else{

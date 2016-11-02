@@ -116,23 +116,23 @@ public class Pacman implements ActionListener {
 	public void goLeft(){
 		updatetimer();
 		if(this.x>0){
-			if(Main.tab[y-1][x-1]=='0'){
-				if(Main.bol[y-1][x-1] == true){ pacmanScore+=100 ;updateScoreAndLife();Main.counter--;}
-				Main.bol[y-1][x-1]=false;
+			if(Wall.tab[y-1][x-1]=='0'){
+				if(Wall.bol[y-1][x-1] == true){ pacmanScore+=100 ;updateScoreAndLife();Wall.counter--;}
+				Wall.bol[y-1][x-1]=false;
 				this.x--;
 			}
 			
 		}
 		else {
-			if(Main.tab[y-1][this.field.getXMAX()-1]=='0'){
-				if(Main.bol[y-1][this.field.getXMAX()-1] == true){ pacmanScore+=100 ;updateScoreAndLife();Main.counter--;}
-				Main.bol[y-1][this.field.getXMAX()-1]=false;
+			if(Wall.tab[y-1][this.field.getXMAX()-1]=='0'){
+				if(Wall.bol[y-1][this.field.getXMAX()-1] == true){ pacmanScore+=100 ;updateScoreAndLife();Wall.counter--;}
+				Wall.bol[y-1][this.field.getXMAX()-1]=false;
 				this.x = this.field.getXMAX()-1;
 			}
 		}
 	}
 	public void actionPerformed (ActionEvent e){
-		if(Main.counter!=0){
+		if(Wall.counter!=0){
 		chron.pause();
 		setChrono(chron.getDureeSec()); // affichage en secondes
 		chron.resume();
@@ -148,16 +148,16 @@ public class Pacman implements ActionListener {
 	public void goRight(){
 		if(this.x<this.field.getXMAX()-1){
 			
-			if(Main.tab[y-1][x+1]=='0'){
-				if(Main.bol[y-1][x+1] == true){ pacmanScore+=100 ;updateScoreAndLife();Main.counter--;}
-				Main.bol[y-1][x+1]=false;
+			if(Wall.tab[y-1][x+1]=='0'){
+				if(Wall.bol[y-1][x+1] == true){ pacmanScore+=100 ;updateScoreAndLife();Wall.counter--;}
+				Wall.bol[y-1][x+1]=false;
 				this.x++;
 			}
 		}
 		else {
-			if(Main.tab[y-1][0]=='0'){
-				if(Main.bol[y-1][0] == true){ pacmanScore+=100 ;updateScoreAndLife();Main.counter--;}
-				Main.bol[y-1][0]=false;
+			if(Wall.tab[y-1][0]=='0'){
+				if(Wall.bol[y-1][0] == true){ pacmanScore+=100 ;updateScoreAndLife();Wall.counter--;}
+				Wall.bol[y-1][0]=false;
 				this.x=0;
 			}
 		}
@@ -165,17 +165,17 @@ public class Pacman implements ActionListener {
 	
 	public void goBot(){
 		if(this.y+1 < this.field.getYMAX()){
-			if(Main.tab[y][x]=='0'){
-				if(Main.bol[y][x] == true) { pacmanScore+=100 ;updateScoreAndLife();Main.counter--;}
-				Main.bol[y][x]= false;
+			if(Wall.tab[y][x]=='0'){
+				if(Wall.bol[y][x] == true) { pacmanScore+=100 ;updateScoreAndLife();Wall.counter--;}
+				Wall.bol[y][x]= false;
 				
 				this.y++;
 			}
 		}
 		else {
-			if(Main.tab[0][x]=='0'){
-				if(Main.bol[0][x] == true) { pacmanScore+=100 ;updateScoreAndLife();Main.counter--;}
-				Main.bol[0][x]=false;
+			if(Wall.tab[0][x]=='0'){
+				if(Wall.bol[0][x] == true) { pacmanScore+=100 ;updateScoreAndLife();Wall.counter--;}
+				Wall.bol[0][x]=false;
 				this.y=1;
 			}
 		}
@@ -183,16 +183,16 @@ public class Pacman implements ActionListener {
 	
 	public void goTop(){
 		if(this.y-1> 0){
-			if(Main.tab[y-2][x]=='0'){
-				if(Main.bol[y-2][x] == true){ pacmanScore+=100 ;updateScoreAndLife();Main.counter--;}
-				Main.bol[y-2][x]=false;
+			if(Wall.tab[y-2][x]=='0'){
+				if(Wall.bol[y-2][x] == true){ pacmanScore+=100 ;updateScoreAndLife();Wall.counter--;}
+				Wall.bol[y-2][x]=false;
 				this.y--;
 			}
 		}
 		else {
-			if(Main.tab[(this.field.getYMAX())-2][x]=='0'){
-				if(Main.bol[this.field.getYMAX()-2][x] == true) { pacmanScore+=100 ;updateScoreAndLife();Main.counter--;}
-				Main.bol[this.field.getYMAX()-2][x]=false;
+			if(Wall.tab[(this.field.getYMAX())-2][x]=='0'){
+				if(Wall.bol[this.field.getYMAX()-2][x] == true) { pacmanScore+=100 ;updateScoreAndLife();Wall.counter--;}
+				Wall.bol[this.field.getYMAX()-2][x]=false;
 			this.y = this.field.getYMAX()-1;
 			}
 		}
