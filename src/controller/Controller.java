@@ -124,7 +124,7 @@ public class Controller implements KeyListener {
 // si tu veux un entier
            data[i]= Integer.parseInt(mots[1]);
            //System.out.println(mots[0]);
-           names[i]= (String)mots[0];
+           names[i]= "user";
            i++;
  
 //et après tu les stocks où tu veux
