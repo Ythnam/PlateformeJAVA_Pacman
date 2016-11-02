@@ -80,6 +80,10 @@ public void createstring () {
 						else {
 							map.getBol()[i][j] = false;
 						}
+						
+						if(c=='2'){
+							
+						}
 						j++;
 					}
 					i++;

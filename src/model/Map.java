@@ -2,6 +2,8 @@
 
 package model;
 
+import java.awt.Point;
+
 
 public class Map {
 	private static  int longueur =10;
@@ -10,6 +12,7 @@ public class Map {
 	private static  boolean[][] bol;
 	private static  int counter;
 	private  long now = 0;
+	private Point spawn = new Point(0,0);
 	public static int getLongueur() {
 		return longueur;
 	}
