@@ -34,7 +34,7 @@ import model.Model;
 import model.Orange;
 import model.Pacman;
 import model.Strawberry;
-import model.Wall;
+import model.Map;
 
 
 public class Field extends JPanel implements ActionListener{
@@ -43,8 +43,8 @@ public class Field extends JPanel implements ActionListener{
 	Chrono chron = new Chrono();
 	private Model model = new Model();
 	private Controller controller;
-	private int XMAX = Wall.longueur;
-	private int YMAX = Wall.hauteur+1; // ici on a 10x10 cases soit 100 -> nombre à changer
+	private int XMAX = this.model.getMap().getLongueur();
+	private int YMAX = this.model.getMap().getHauteur()+1; // ici on a 10x10 cases soit 100 -> nombre à changer
 	private int step = 20; // celui-la devra être égal à la taille qu'on mettra pour une image -> ici : 64x64
 	private Random random = new Random();
 	private JLabel scoreLabel;
@@ -92,6 +92,11 @@ public class Field extends JPanel implements ActionListener{
 		chron.start();
 
 	}
+	
+	public  Model getModel() {
+		return model;
+	}
+
     public void addNotify() {
         super.addNotify();
         requestFocus();
@@ -174,7 +179,7 @@ public class Field extends JPanel implements ActionListener{
 		return p;
 	}
 	public boolean canSpawn(int x, int y){
-		if(Wall.bol[y-1][x]==true)
+		if(Map.getBol()[y-1][x]==true)
 			return true;
 		
 		return false;
@@ -321,10 +326,10 @@ public class Field extends JPanel implements ActionListener{
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				for (int k=0;k<Wall.hauteur;k++){
-					for (int l=0;l<Wall.longueur;l++){
-						if (Wall.tab[k][l]=='0'){
-							if(Wall.bol[k][l]==true){
+				for (int k=0;k<Map.getHauteur();k++){
+					for (int l=0;l<Map.getLongueur();l++){
+						if (Map.getTab()[k][l]=='0'){
+							if(Map.getBol()[k][l]==true){
 							g2.drawImage(full,l*step,(k+1)*step,null);
 							}
 							else{
@@ -347,7 +352,7 @@ public class Field extends JPanel implements ActionListener{
 	}
 	@Override
 	public void actionPerformed (ActionEvent e){
-		if(Wall.counter!=0){
+		if(this.model.getMap().getCounter()!=0){
 		chron.pause();
 		setChrono(chron.getDureeSec()); // affichage en secondes
 		chron.resume();

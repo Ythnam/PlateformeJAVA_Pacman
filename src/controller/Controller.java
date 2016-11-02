@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 import View.Field;
 import main.Main;
 import model.Model;
-import model.Wall;
+import model.Map;
 
 public class Controller implements KeyListener {
 
@@ -54,7 +54,7 @@ public class Controller implements KeyListener {
 			
 			this.model.getPacman().goTop();
 			this.model.getPacman().setImageIcon(this.model.getPacman().getImageIconTop());
-			if(Wall.counter == 0){
+			if(this.model.getMap().getCounter() == 0){
 				try {
 					name = JOptionPane.showInputDialog(view,"Entrez votre pseudo", null);
 					setClassement(getClassement() + "Fin du niveau en "+this.view.getChrono()+"s\nTotal "+this.model.getPacman().getPacmanScore()+"points\n\n\n\n");
@@ -71,7 +71,7 @@ public class Controller implements KeyListener {
 		else if(source==KeyEvent.VK_DOWN){
 			this.model.getPacman().goBot();
 			this.model.getPacman().setImageIcon(this.model.getPacman().getImageIconBot());
-			if(Wall.counter == 0){
+			if(this.model.getMap().getCounter() == 0){
 				try {
 					name = JOptionPane.showInputDialog(view,"Entrez votre pseudo", null);					
 					setClassement(getClassement() + "Fin du niveau en "+this.view.getChrono()+"s\nTotal "+this.model.getPacman().getPacmanScore()+" points\n\n\n\n");
@@ -88,7 +88,7 @@ public class Controller implements KeyListener {
 		}else if(source==KeyEvent.VK_RIGHT){
 			this.model.getPacman().goRight();
 			this.model.getPacman().setImageIcon(this.model.getPacman().getImageIconRight());
-			if(Wall.counter == 0){
+			if(this.model.getMap().getCounter() == 0){
 				try {
 					name = JOptionPane.showInputDialog(view,"Entrez votre pseudo", null);
 					setClassement(getClassement() + "Fin du niveau en "+this.view.getChrono()+"s\nTotal "+this.model.getPacman().getPacmanScore()+" points\n\n\n\n");
@@ -104,7 +104,7 @@ public class Controller implements KeyListener {
 		}else if(source==KeyEvent.VK_LEFT){
 			this.model.getPacman().goLeft();
 			this.model.getPacman().setImageIcon(this.model.getPacman().getImageIconLeft());
-			if(Wall.counter == 0){
+			if(this.model.getMap().getCounter() == 0){
 				try {
 					name = JOptionPane.showInputDialog(view,"Entrez votre pseudo", null);
 					setClassement(getClassement() + "Fin du niveau en "+this.view.getChrono()+"s\nTotal "+this.model.getPacman().getPacmanScore()+" points\n\n\n\n");
@@ -206,7 +206,7 @@ public class Controller implements KeyListener {
 	}
 	@Override
 	public void keyReleased(KeyEvent e) {
-		view.pop();
+		//view.pop();
 		// TODO Auto-generated method stub		
 	}
 
