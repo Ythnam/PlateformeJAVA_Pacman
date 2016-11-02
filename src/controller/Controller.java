@@ -49,6 +49,7 @@ public class Controller implements KeyListener {
 		
 		int source = e.getKeyCode();
 		if(source==KeyEvent.VK_UP){
+			
 			this.model.getPacman().goTop();
 			if(Wall.counter == 0){
 				try {
@@ -104,7 +105,7 @@ public class Controller implements KeyListener {
 	}
 
 	public void savescore() throws IOException{
-		int z =0;
+		int z =1;
 		String classement ="";
 		data = new long[11];
 		names = new String[11];
@@ -162,8 +163,8 @@ public class Controller implements KeyListener {
 		    		 bool = false;
 		    	}
 		    	if(data[l]!=0.0 ){
-		    		fw.write (String.valueOf(names[l]) +"" +  String.valueOf (data[l]));
-		    		classement+=z + " - "+ names[l] + " : " + data[l] + "\n";
+		    		fw.write (String.valueOf(names[l]) +" " +  String.valueOf (data[l]));
+		    		classement+=z + " - "+ String.valueOf(names[l]) + " " + String.valueOf(data[l]) + "\n";
 		    		z++;
 		    		fw.write ("\r\n");
 		    	}
@@ -177,29 +178,6 @@ public class Controller implements KeyListener {
 		{
 		    System.out.println ("Erreur lors de la lecture : " + exception.getMessage());
 		}
-		
-		/*if(f.exists()){	
-		try {
-            FileReader c1 = new FileReader(f); 
-            BufferedReader r1 = new BufferedReader(c1);
- 
-            String line = r1.readLine();
-
-           while (line != null) {
-        	   line = r1.readLine(); 
-           }
-           r1.close();
-		}catch (IOException exception)
-		{
-		    System.out.println ("Erreur lors de l'affichage : " + exception.getMessage());
-		}
-		}
-		*/
-		
-		//for(int k =0; k<11;k++){
-			//if(data[k]!=0.0)
-		//	classement+=k + " - "+ names[k] + " : " + data[k] + "\n";
-		//}
 		JOptionPane.showMessageDialog(view,classement);
 		
 		
