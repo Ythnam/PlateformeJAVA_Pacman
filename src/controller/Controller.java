@@ -22,7 +22,7 @@ public class Controller implements KeyListener {
 	public long[] data;
 	public String[] names;
 	String  name = "";
-	private static String classement ="";
+	//private static String classement ="";
 	private static String classementhtml ="";
 	
 	public Controller(Model newModel){
@@ -57,11 +57,9 @@ public class Controller implements KeyListener {
 			if(this.model.getMap().getCounter() == 0){
 				try {
 					name = JOptionPane.showInputDialog(view,"Entrez votre pseudo", null);
-					setClassement(getClassement() + "Fin du niveau en "+this.view.getChrono()+"s\nTotal "+this.model.getPacman().getPacmanScore()+"points\n\n\n\n");
+					//setClassement(getClassement() + "Fin du niveau en "+this.view.getChrono()+"s\nTotal "+this.model.getPacman().getPacmanScore()+"points\n\n\n\n");
 					setClassementhtml("<html>" + "Fin du niveau en "+this.view.getChrono()+"s<br>Total "+this.model.getPacman().getPacmanScore()+"<br><br><br><br>");
-					//JOptionPane.showMessageDialog(view, "Felicitations " + name+ ", vous avez fini la partie en " + this.view.getChrono() + " avec " + this.model.getPacman().getPacmanScore() + " points");
 					savescore();
-					view.pop();
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -74,12 +72,9 @@ public class Controller implements KeyListener {
 			if(this.model.getMap().getCounter() == 0){
 				try {
 					name = JOptionPane.showInputDialog(view,"Entrez votre pseudo", null);					
-					setClassement(getClassement() + "Fin du niveau en "+this.view.getChrono()+"s\nTotal "+this.model.getPacman().getPacmanScore()+" points\n\n\n\n");
+					//setClassement(getClassement() + "Fin du niveau en "+this.view.getChrono()+"s\nTotal "+this.model.getPacman().getPacmanScore()+" points\n\n\n\n");
 					setClassementhtml("<html>" + "Fin du niveau en "+this.view.getChrono()+"s<br>Total "+this.model.getPacman().getPacmanScore()+"<br><br><br><br>");
-					
-					//JOptionPane.showMessageDialog(view, "Felicitations " + name+ ", vous avez fini la partie en " + this.view.getChrono() + " avec " + this.model.getPacman().getPacmanScore() + " points");
 					savescore();
-					view.pop();
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -91,11 +86,9 @@ public class Controller implements KeyListener {
 			if(this.model.getMap().getCounter() == 0){
 				try {
 					name = JOptionPane.showInputDialog(view,"Entrez votre pseudo", null);
-					setClassement(getClassement() + "Fin du niveau en "+this.view.getChrono()+"s\nTotal "+this.model.getPacman().getPacmanScore()+" points\n\n\n\n");
+					//setClassement(getClassement() + "Fin du niveau en "+this.view.getChrono()+"s\nTotal "+this.model.getPacman().getPacmanScore()+" points\n\n\n\n");
 					setClassementhtml("<html>" + "Fin du niveau en "+this.view.getChrono()+"s<br>Total "+this.model.getPacman().getPacmanScore()+"<br><br><br><br>");
-					//				JOptionPane.showMessageDialog(view, "Felicitations " + name+ ", vous avez fini la partie en " + this.view.getChrono() + " avec " + this.model.getPacman().getPacmanScore() + " points");
 					savescore();
-					view.pop();
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -107,11 +100,9 @@ public class Controller implements KeyListener {
 			if(this.model.getMap().getCounter() == 0){
 				try {
 					name = JOptionPane.showInputDialog(view,"Entrez votre pseudo", null);
-					setClassement(getClassement() + "Fin du niveau en "+this.view.getChrono()+"s\nTotal "+this.model.getPacman().getPacmanScore()+" points\n\n\n\n");
+					//setClassement(getClassement() + "Fin du niveau en "+this.view.getChrono()+"s\nTotal "+this.model.getPacman().getPacmanScore()+" points\n\n\n\n");
 					setClassementhtml("<html>" + "Fin du niveau en "+this.view.getChrono()+"s<br>Total "+this.model.getPacman().getPacmanScore()+"<br><br><br><br>");
-					//JOptionPane.showMessageDialog(view, "Felicitations " + name+ ", vous avez fini la partie en " + this.view.getChrono() + " avec " + this.model.getPacman().getPacmanScore() + " points");
 					savescore();
-					view.pop();
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -175,7 +166,7 @@ public class Controller implements KeyListener {
 		    	
 		    	if(this.model.getPacman().getPacmanScore()>data[l] && bool){
 		    		 fw.write (name+" " + this.model.getPacman().getPacmanScore());
-		    		 setClassement(getClassement() + z + " - "+ name+" " + this.model.getPacman().getPacmanScore() + "\n");
+		    		// setClassement(getClassement() + z + " - "+ name+" " + this.model.getPacman().getPacmanScore() + "\n");
 		    		 setClassementhtml(getClassementhtml() + z + " - "+ name+" " + this.model.getPacman().getPacmanScore() + "<br>");
 						 z++;
 		    		 fw.write ("\r\n");
@@ -183,7 +174,7 @@ public class Controller implements KeyListener {
 		    	}
 		    	if(data[l]!=0.0 ){
 		    		fw.write (String.valueOf(names[l]) +" " +  String.valueOf (data[l]));
-		    		setClassement(getClassement() + z + " - "+ String.valueOf(names[l]) + " " + String.valueOf(data[l]) + "\n");
+		    		//setClassement(getClassement() + z + " - "+ String.valueOf(names[l]) + " " + String.valueOf(data[l]) + "\n");
 		    		setClassementhtml(getClassementhtml() + z + " - "+ String.valueOf(names[l]) + " " + String.valueOf(data[l]) + "<br>");
 		    		z++;
 		    		fw.write ("\r\n");
@@ -198,11 +189,7 @@ public class Controller implements KeyListener {
 		{
 		    System.out.println ("Erreur lors de la lecture : " + exception.getMessage());
 		}
-		JOptionPane.showMessageDialog(view,getClassement());
-		
-		
-		
-		
+		view.pop();	
 	}
 	@Override
 	public void keyReleased(KeyEvent e) {
@@ -216,14 +203,14 @@ public class Controller implements KeyListener {
 		
 	}
 
-	public static String getClassement() {
+	/*public static String getClassement() {
 		return classement;
 	}
 
 	public void setClassement(String classement) {
 		this.classement = classement;
 	}
-
+*/
 	public static String getClassementhtml() {
 		return classementhtml;
 	}

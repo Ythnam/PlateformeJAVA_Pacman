@@ -83,7 +83,7 @@ public class Ghost implements Runnable {
 				
 				field.repaint();
 				if(this.field.getModel().getMap().getCounter()==0){
-					Thread.sleep(1000000);
+					Thread.sleep(10);
 				}
 			}
 		}  catch (InterruptedException e){
