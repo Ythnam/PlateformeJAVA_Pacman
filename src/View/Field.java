@@ -1,10 +1,12 @@
 package View;
 
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,6 +21,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSplitPane;
 import javax.swing.Timer;
 
 import controller.Controller;
@@ -367,41 +370,28 @@ public class Field extends JPanel implements ActionListener{
 		frame.setLocation(300, 300);
 		frame.setVisible(true);
 		
+		Container contenu = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
 		
-		label = new JLabel("lkhjklnlknkln");
-		label.setFont(new Font("Serif", Font.PLAIN, 24));
-		label.setForeground(Color.white);
-		label.setBackground(Color.BLACK);
+		
+		label = new JLabel(controller.getClassementhtml());
+		label.setFont(new Font("Serif", Font.PLAIN, 18));
+		label.setForeground(Color.BLACK);
 		label.setOpaque(true);
-		JPanel b2 = new JPanel();
-		
-		//frame.add(label);
-		JPanel b3 = new JPanel();
-		b3.add(label);
-	    //Idem pour cette ligne
-	    b3.setLayout(new BoxLayout(b3, BoxLayout.LINE_AXIS));
-	    b3.add(new JButton("Bouton 4"));
-	    b3.add(new JButton("Bouton 5"));
-	    b3.add(new JButton("Bouton 6"));
+		JPanel textPanel = new JPanel();
+		frame.getContentPane().add(contenu);
 
-	    //JPanel b4 = new JPanel();
-	    //On positionne maintenant ces trois lignes en colonne
-	    //b4.setLayout(new BoxLayout(b4, BoxLayout.LINE_AXIS));
-	    //b4.add(b3);
-	    //b4.add(label);
-	    //b4.setLocation(0, 0);
-		//frame.add(b2);
-	    frame.add(b3);
+		JPanel buttonPanel = new JPanel();
+		textPanel.add(label);
+	    buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.LINE_AXIS));
+	    buttonPanel.add(new JButton("Terminer"));
+	    buttonPanel.add(new JButton("Recommencer"));
+	    buttonPanel.add(new JButton("Niveau Suivant"));
 
-		// ok = new JButton("ok",BorderLayout.SOUTH);
-		//ok.setText("ok");
-		//ok.setBounds(100, 100, 100, 100);
-		//JButton recommencer = new JButton();
-		//JButton suivant = new JButton();
-		
-		//frame.add(ok);
-		//frame.add(recommencer);
-		//frame.add(suivant);
+
+	    contenu.add(textPanel);
+	    contenu.add(buttonPanel);
+	    frame.pack();
+
 	}
 	
 	private void updatetimer() {
