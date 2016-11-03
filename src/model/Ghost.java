@@ -141,7 +141,6 @@ public class Ghost implements Runnable {
 		switch(choice){
 		case 0 : 
 			if(this.x<this.field.getXMAX()-1){
-				
 				if(Map.getTab()[y][x+1]!='1'){this.x++;}
 			}
 			else {
@@ -178,7 +177,7 @@ public class Ghost implements Runnable {
 			}
 			else {
 				if(Map.getTab()[(this.field.getYMAX()-1)][x]!='1'){
-				this.y = this.field.getYMAX();
+				this.y = this.field.getYMAX()-1;
 				}
 			}
 			break;

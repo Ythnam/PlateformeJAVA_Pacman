@@ -100,7 +100,6 @@ public class Field extends JPanel implements ActionListener{
 		
 
 		this.newPanel = new TestPanel();
-		//this.newPanel.repaint();
 		Dimension preferredSize = new Dimension(YMAX*step,XMAX*step);
 		newPanel.setPreferredSize(preferredSize );
 		conten.add(newPanel);
