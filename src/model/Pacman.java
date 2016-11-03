@@ -90,15 +90,15 @@ public class Pacman {
 	public void goLeft(){
 		if(!isOnPause()){
 		if(this.x>0){
-			if(Map.getTab()[y-1][x-1]=='0'){
-				if(Map.getBol()[y-1][x-1] == true){ pacmanScore+=100 ;this.field.updateScoreAndLife();this.field.getModel().getMap().setCounter(this.field.getModel().getMap().getCounter() - 1);}
-				Map.getBol()[y-1][x-1]=false;
+			if(Map.getTab()[y][x-1]!='1'){
+				if(Map.getBol()[y][x-1] == true){ pacmanScore+=100 ;this.field.updateScoreAndLife();this.field.getModel().getMap().setCounter(this.field.getModel().getMap().getCounter() - 1);}
+				Map.getBol()[y][x-1]=false;
 				this.x--;
 			}
 			
 		}
 		else {
-			if(Map.getTab()[y-1][this.field.getXMAX()-1]=='0'){
+			if(Map.getTab()[y-1][this.field.getXMAX()-1]!='1'){
 				if(Map.getBol()[y-1][this.field.getXMAX()-1] == true){ pacmanScore+=100 ;this.field.updateScoreAndLife();this.field.getModel().getMap().setCounter(this.field.getModel().getMap().getCounter() - 1);}
 				Map.getBol()[y-1][this.field.getXMAX()-1]=false;
 				this.x = this.field.getXMAX()-1;
@@ -112,16 +112,16 @@ public class Pacman {
 		if(!isOnPause()){
 		if(this.x<this.field.getXMAX()-1){
 			
-			if(Map.getTab()[y-1][x+1]=='0'){
-				if(Map.getBol()[y-1][x+1] == true){ pacmanScore+=100 ;this.field.updateScoreAndLife();this.field.getModel().getMap().setCounter(this.field.getModel().getMap().getCounter() - 1);}
-				Map.getBol()[y-1][x+1]=false;
+			if(Map.getTab()[y][x+1]!='1'){
+				if(Map.getBol()[y][x+1] == true){ pacmanScore+=100 ;this.field.updateScoreAndLife();this.field.getModel().getMap().setCounter(this.field.getModel().getMap().getCounter() - 1);}
+				Map.getBol()[y][x+1]=false;
 				this.x++;
 			}
 		}
 		else {
-			if(Map.getTab()[y-1][0]=='0'){
-				if(Map.getBol()[y-1][0] == true){ pacmanScore+=100 ;this.field.updateScoreAndLife();this.field.getModel().getMap().setCounter(this.field.getModel().getMap().getCounter() - 1);}
-				Map.getBol()[y-1][0]=false;
+			if(Map.getTab()[y][0]!='1'){
+				if(Map.getBol()[y][0] == true){ pacmanScore+=100 ;this.field.updateScoreAndLife();this.field.getModel().getMap().setCounter(this.field.getModel().getMap().getCounter() - 1);}
+				Map.getBol()[y][0]=false;
 				this.x=0;
 			}
 		}
@@ -130,19 +130,19 @@ public class Pacman {
 	
 	public void goBot(){
 		if(!isOnPause()){
-		if(this.y+1 < this.field.getYMAX()){
-			if(Map.getTab()[y][x]=='0'){
-				if(Map.getBol()[y][x] == true) { pacmanScore+=100 ;this.field.updateScoreAndLife();this.field.getModel().getMap().setCounter(this.field.getModel().getMap().getCounter() - 1);}
-				Map.getBol()[y][x]= false;
+		if(this.y < this.field.getYMAX()-1){
+			if(Map.getTab()[y+1][x]!='1'){
+				if(Map.getBol()[y+1][x] == true) { pacmanScore+=100 ;this.field.updateScoreAndLife();this.field.getModel().getMap().setCounter(this.field.getModel().getMap().getCounter() - 1);}
+				Map.getBol()[y+1][x]= false;
 				
 				this.y++;
 			}
 		}
 		else {
-			if(Map.getTab()[0][x]=='0'){
+			if(Map.getTab()[0][x]!='1'){
 				if(Map.getBol()[0][x] == true) { pacmanScore+=100 ;this.field.updateScoreAndLife();this.field.getModel().getMap().setCounter(this.field.getModel().getMap().getCounter() - 1);}
 				Map.getBol()[0][x]=false;
-				this.y=1;
+				this.y=0;
 			}
 		}
 		}
@@ -150,17 +150,17 @@ public class Pacman {
 	
 	public void goTop(){
 		if(!isOnPause()){
-		if(this.y-1> 0){
-			if(Map.getTab()[y-2][x]=='0'){
-				if(Map.getBol()[y-2][x] == true){ pacmanScore+=100 ;this.field.updateScoreAndLife();this.field.getModel().getMap().setCounter(this.field.getModel().getMap().getCounter() - 1);}
-				Map.getBol()[y-2][x]=false;
+		if(this.y> 0){
+			if(Map.getTab()[y-1][x]!='1'){
+				if(Map.getBol()[y-1][x] == true){ pacmanScore+=100 ;this.field.updateScoreAndLife();this.field.getModel().getMap().setCounter(this.field.getModel().getMap().getCounter() - 1);}
+				Map.getBol()[y-1][x]=false;
 				this.y--;
 			}
 		}
 		else {
-			if(Map.getTab()[(this.field.getYMAX())-2][x]=='0'){
-				if(Map.getBol()[this.field.getYMAX()-2][x] == true) { pacmanScore+=100 ;this.field.updateScoreAndLife();this.field.getModel().getMap().setCounter(this.field.getModel().getMap().getCounter() - 1);}
-				Map.getBol()[this.field.getYMAX()-2][x]=false;
+			if(Map.getTab()[(this.field.getYMAX())-1][x]!='1'){
+				if(Map.getBol()[this.field.getYMAX()-1][x] == true) { pacmanScore+=100 ;this.field.updateScoreAndLife();this.field.getModel().getMap().setCounter(this.field.getModel().getMap().getCounter() - 1);}
+				Map.getBol()[this.field.getYMAX()-1][x]=false;
 			this.y = this.field.getYMAX()-1;
 			}
 		}

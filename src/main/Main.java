@@ -7,10 +7,6 @@ import View.Field;
 public class Main {
 
 
-
-
-
-
 	public static void main(String[] args) {
 		Map wall = new Map();
 		JFrame frame = new JFrame();
@@ -23,7 +19,7 @@ public class Main {
 		
 		frame.setContentPane(field);
 		frame.setVisible(true);
-		
+		frame.pack();
 		
 		 
 		

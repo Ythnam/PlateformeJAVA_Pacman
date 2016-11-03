@@ -22,6 +22,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
+import javax.swing.RootPaneContainer;
 import javax.swing.Timer;
 
 import controller.Controller;
@@ -47,7 +48,7 @@ public class Field extends JPanel implements ActionListener{
 	private Model model = new Model();
 	private Controller controller;
 	private int XMAX = this.model.getMap().getLongueur();
-	private int YMAX = this.model.getMap().getHauteur()+1; // ici on a 10x10 cases soit 100 -> nombre à changer
+	private int YMAX = this.model.getMap().getHauteur(); // ici on a 10x10 cases soit 100 -> nombre à changer
 	private int step = 20; // celui-la devra être égal à la taille qu'on mettra pour une image -> ici : 64x64
 	private Random random = new Random();
 	private JLabel scoreLabel;
@@ -56,7 +57,8 @@ public class Field extends JPanel implements ActionListener{
 	private Timer timer;
 	private JLabel label;
 	private int delay = 0;
-	
+	public Container conten = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
+	TestPanel newPanel;
 
 	public Field(){
 		
@@ -68,33 +70,49 @@ public class Field extends JPanel implements ActionListener{
 		this.addKeyListener(this.controller);
 		
 		
+		JPanel Panel = new JPanel();
+		
+		
 		scoreLabel = new JLabel("Score: " + this.model.getPacman().getPacmanScore());
-		scoreLabel.setFont(new Font("Serif", Font.PLAIN, 10));
-		scoreLabel.setForeground(Color.white);
-		scoreLabel.setBackground(Color.BLACK);
+		scoreLabel.setFont(new Font("Serif", Font.PLAIN, 13));
+		scoreLabel.setForeground(Color.black);
+		//scoreLabel.setBackground(Color.BLACK);
 		scoreLabel.setOpaque(true);
-		add(scoreLabel);
+		Panel.add(scoreLabel);
 		
 		livesLabel = new JLabel(" " + "Lives: " + this.model.getPacman().getPacmanLives());
-		livesLabel.setFont(new Font("Serif", Font.PLAIN, 10));
-		livesLabel.setForeground(Color.white);
+		livesLabel.setFont(new Font("Serif", Font.PLAIN, 13));
+		livesLabel.setForeground(Color.black);
 		livesLabel.setOpaque(true);
-		livesLabel.setBackground(Color.BLACK);
-		add(livesLabel);
+		//livesLabel.setBackground(Color.BLACK);
+		Panel.add(livesLabel);
 		
 		timeLabel = new JLabel("Timer: " + getChrono());
-		Dimension d = new Dimension(85,15);
+		Dimension d = new Dimension(85,14);
 		timeLabel.setPreferredSize(d);
-		timeLabel.setFont(new Font("Serif", Font.PLAIN, 10));
-		timeLabel.setForeground(Color.white);
-		timeLabel.setBackground(Color.BLACK);
+		timeLabel.setFont(new Font("Serif", Font.PLAIN, 13));
+		timeLabel.setForeground(Color.black);
+	//	timeLabel.setBackground(Color.BLACK);
 		timeLabel.setOpaque(true);
-		add(timeLabel);
+		Panel.add(timeLabel);
+		
+		conten.add(Panel);
+		
+
+		this.newPanel = new TestPanel();
+		//this.newPanel.repaint();
+		Dimension preferredSize = new Dimension(YMAX*step,XMAX*step);
+		newPanel.setPreferredSize(preferredSize );
+		conten.add(newPanel);
+		
+		add(conten);
 		
 		timer = new Timer(1, this);
 		timer.start();
 		getChron().start();
-
+		
+		
+		//((RootPaneContainer)this).setContentPane(newPanel);
 	}
 	
 	public  Model getModel() {
@@ -146,7 +164,7 @@ public class Field extends JPanel implements ActionListener{
 		for(int i = 0; i < n; i++){		
 			
 				 
-			Ghost ghost = new Ghost(this.model.getMap().getSpawn().y, this.model.getMap().getSpawn().x+1, this );
+			Ghost ghost = new Ghost(this.model.getMap().getSpawn().y, this.model.getMap().getSpawn().x, this );
 			
 			this.model.addToAlGhost(ghost);
 			new Thread(ghost).start();
@@ -175,7 +193,7 @@ public class Field extends JPanel implements ActionListener{
 		int b = 0;
 		while(bo){
 			
-				b=random.nextInt(YMAX-1)+1;
+				b=random.nextInt(YMAX-1);
 				a = random.nextInt(XMAX-1);
 				if(canSpawn(a, b)) bo = false;
 		}
@@ -183,7 +201,7 @@ public class Field extends JPanel implements ActionListener{
 		return p;
 	}
 	public boolean canSpawn(int x, int y){
-		if(Map.getBol()[y-1][x]==true)
+		if(Map.getBol()[y][x]==true)
 			return true;
 		
 		return false;
@@ -314,46 +332,7 @@ public class Field extends JPanel implements ActionListener{
 		this.controller.setModel(model);
 		
 	}
-	public void paintComponent(Graphics g){
-		super.paintComponent(g);
-		Graphics2D g2 = (Graphics2D) g;
-		
-		// creation du niveau 
-				BufferedImage wall= null;
-				BufferedImage full= null;
-				BufferedImage empty= null;
-				 try {
-					wall = ImageIO.read(new File("image/brique.png"));
-					full = ImageIO.read(new File("image/mapFull.png"));
-					empty = ImageIO.read(new File("image/map.png"));
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				for (int k=0;k<Map.getHauteur();k++){
-					for (int l=0;l<Map.getLongueur();l++){
-						if (Map.getTab()[k][l]=='0'||Map.getTab()[k][l]=='2'){
-							if(Map.getBol()[k][l]==true){
-							g2.drawImage(full,l*step,(k+1)*step,null);
-							}
-							else{
-								g2.drawImage(empty,l*step,(k+1)*step,null);
-							}
-						}
-						else {
-							g2.drawImage(wall,l*step,(k+1)*step,null);
-						}
-					}
-				}
-		
-		
-		g2.drawImage(Ghost.getGhostORANGE(), model.getAlGhost().get(0).getX()*step, model.getAlGhost().get(0).getY()*step, null);
-		g2.drawImage(Ghost.getGhostRED(), model.getAlGhost().get(1).getX()*step, model.getAlGhost().get(1).getY()*step, null);
-		g2.drawImage(Ghost.getGhostGREEN(), model.getAlGhost().get(2).getX()*step, model.getAlGhost().get(2).getY()*step, null);
-		model.getPacman().getImageIcon().paintIcon(this, g2, model.getPacman().getX()*step, model.getPacman().getY()*step);
-		
-		
-	}
+	
 	@Override
 	public void actionPerformed (ActionEvent e){
 		boolean b = true;
@@ -436,4 +415,56 @@ public class Field extends JPanel implements ActionListener{
 		this.delay = delay;
 	}
 
+	
+	private class TestPanel extends JPanel {
+		
+		public TestPanel(){
+			
+		}
+		
+		public void paintComponent(Graphics g){
+			
+			
+			
+			Graphics2D g2 = (Graphics2D) g;
+			super.paintComponent(g2);
+			// creation du niveau 
+					BufferedImage wall= null;
+					BufferedImage full= null;
+					BufferedImage empty= null;
+					 try {
+						wall = ImageIO.read(new File("image/brique.png"));
+						full = ImageIO.read(new File("image/mapFull.png"));
+						empty = ImageIO.read(new File("image/map.png"));
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					for (int k=0;k<Map.getHauteur();k++){
+						for (int l=0;l<Map.getLongueur();l++){
+							if (Map.getTab()[k][l]=='0'||Map.getTab()[k][l]=='2'){
+								if(Map.getBol()[k][l]==true){
+								g2.drawImage(full,l*step,k*step,null);
+								}
+								else{
+									g2.drawImage(empty,l*step,k*step,null);
+								}
+							}
+							else {
+								g2.drawImage(wall,l*step,k*step,null);
+							}
+						}
+					}
+			
+			
+			g2.drawImage(Ghost.getGhostORANGE(), model.getAlGhost().get(0).getX()*step, model.getAlGhost().get(0).getY()*step, null);
+			g2.drawImage(Ghost.getGhostRED(), model.getAlGhost().get(1).getX()*step, model.getAlGhost().get(1).getY()*step, null);
+			g2.drawImage(Ghost.getGhostGREEN(), model.getAlGhost().get(2).getX()*step, model.getAlGhost().get(2).getY()*step, null);
+			model.getPacman().getImageIcon().paintIcon(newPanel, g2, model.getPacman().getX()*step, model.getPacman().getY()*step);
+			
+			
+		}
+	}
+	
+	
 }

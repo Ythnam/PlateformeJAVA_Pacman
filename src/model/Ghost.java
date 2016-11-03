@@ -142,43 +142,43 @@ public class Ghost implements Runnable {
 		case 0 : 
 			if(this.x<this.field.getXMAX()-1){
 				
-				if(Map.getTab()[y-1][x+1]=='0'){this.x++;}
+				if(Map.getTab()[y][x+1]!='1'){this.x++;}
 			}
 			else {
-				if(Map.getTab()[y-1][0]=='0'){
+				if(Map.getTab()[y][0]!='1'){
 					this.x=0;
 				}
 			}
 			break;
 		case 1 :
 			if(this.x>0){
-				if(Map.getTab()[y-1][x-1]=='0'){this.x--;}
+				if(Map.getTab()[y][x-1]!='1'){this.x--;}
 			}
 			else {
-				if(Map.getTab()[y-1][this.field.getXMAX()-1]=='0'){
+				if(Map.getTab()[y][this.field.getXMAX()-1]!='1'){
 					this.x = this.field.getXMAX()-1;
 				}
 			}
 			break;
 		case 2 :
-			if(this.y+1 < this.field.getYMAX()){
-				if(Map.getTab()[y][x]=='0'){
+			if(this.y < this.field.getYMAX()-1){
+				if(Map.getTab()[y+1][x]!='1'){
 					this.y++;
 				}
 			}
 			else {
-				if(Map.getTab()[0][x]=='0'){
-					this.y=1;
+				if(Map.getTab()[0][x]!='1'){
+					this.y=0;
 				}
 			}
 			break;
 		case 3 :
-			if(this.y-1> 0){
-				if(Map.getTab()[y-2][x]=='0') this.y--;
+			if(this.y> 0){
+				if(Map.getTab()[y-1][x]!='1') this.y--;
 			}
 			else {
-				if(Map.getTab()[(this.field.getYMAX())-2][x]=='0'){
-				this.y = this.field.getYMAX()-1;
+				if(Map.getTab()[(this.field.getYMAX()-1)][x]!='1'){
+				this.y = this.field.getYMAX();
 				}
 			}
 			break;
