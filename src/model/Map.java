@@ -55,6 +55,14 @@ public class Map {
 		this.now = now;
 	}
 
+	public Point getSpawn() {
+		return spawn;
+	}
+
+	public void setSpawn(Point spawn) {
+		this.spawn = spawn;
+	}
+
 
 	
 }

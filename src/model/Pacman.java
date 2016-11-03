@@ -1,22 +1,9 @@
 package model;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.Random;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.Timer;
-
-import main.Main;
 import View.Field;
 
 public class Pacman {
@@ -33,7 +20,7 @@ public class Pacman {
 	private static ImageIcon imageIconBot = new ImageIcon("image/pacman_bas.gif");
 	private static ImageIcon imageIconLeft = new ImageIcon("image/pacman_gauche.gif");
 	private static ImageIcon imageIconRight = new ImageIcon("image/pacman_droit.gif");
-
+	private boolean onPause = false;
 	 private long pacmanScore = 0;
 	 private int pacmanLives = 3;
 
@@ -101,6 +88,7 @@ public class Pacman {
 
 
 	public void goLeft(){
+		if(!isOnPause()){
 		if(this.x>0){
 			if(Map.getTab()[y-1][x-1]=='0'){
 				if(Map.getBol()[y-1][x-1] == true){ pacmanScore+=100 ;this.field.updateScoreAndLife();this.field.getModel().getMap().setCounter(this.field.getModel().getMap().getCounter() - 1);}
@@ -116,10 +104,12 @@ public class Pacman {
 				this.x = this.field.getXMAX()-1;
 			}
 		}
+		}
 	}
 	
 
 	public void goRight(){
+		if(!isOnPause()){
 		if(this.x<this.field.getXMAX()-1){
 			
 			if(Map.getTab()[y-1][x+1]=='0'){
@@ -135,9 +125,11 @@ public class Pacman {
 				this.x=0;
 			}
 		}
+		}
 	}
 	
 	public void goBot(){
+		if(!isOnPause()){
 		if(this.y+1 < this.field.getYMAX()){
 			if(Map.getTab()[y][x]=='0'){
 				if(Map.getBol()[y][x] == true) { pacmanScore+=100 ;this.field.updateScoreAndLife();this.field.getModel().getMap().setCounter(this.field.getModel().getMap().getCounter() - 1);}
@@ -153,9 +145,11 @@ public class Pacman {
 				this.y=1;
 			}
 		}
+		}
 	}
 	
 	public void goTop(){
+		if(!isOnPause()){
 		if(this.y-1> 0){
 			if(Map.getTab()[y-2][x]=='0'){
 				if(Map.getBol()[y-2][x] == true){ pacmanScore+=100 ;this.field.updateScoreAndLife();this.field.getModel().getMap().setCounter(this.field.getModel().getMap().getCounter() - 1);}
@@ -169,6 +163,7 @@ public class Pacman {
 				Map.getBol()[this.field.getYMAX()-2][x]=false;
 			this.y = this.field.getYMAX()-1;
 			}
+		}
 		}
 	}
 	
@@ -190,6 +185,14 @@ public class Pacman {
 
 	public void setPacmanLives(int pacmanLives) {
 		this.pacmanLives = pacmanLives;
+	}
+
+	public boolean isOnPause() {
+		return onPause;
+	}
+
+	public void setOnPause(boolean onPause) {
+		this.onPause = onPause;
 	}
 
 

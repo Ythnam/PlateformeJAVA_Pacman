@@ -43,7 +43,7 @@ import model.Map;
 public class Field extends JPanel implements ActionListener{
 
 	private double chrono = 0;
-	Chrono chron = new Chrono();
+	private Chrono chron = new Chrono();
 	private Model model = new Model();
 	private Controller controller;
 	private int XMAX = this.model.getMap().getLongueur();
@@ -55,6 +55,7 @@ public class Field extends JPanel implements ActionListener{
 	private JLabel timeLabel;
 	private Timer timer;
 	private JLabel label;
+	private int delay = 0;
 	
 
 	public Field(){
@@ -92,7 +93,7 @@ public class Field extends JPanel implements ActionListener{
 		
 		timer = new Timer(1, this);
 		timer.start();
-		chron.start();
+		getChron().start();
 
 	}
 	
@@ -143,9 +144,9 @@ public class Field extends JPanel implements ActionListener{
 	 */
 	public void generateGhostRandomly(int n){
 		for(int i = 0; i < n; i++){		
-			Point p = generate();
+			
 				 
-			Ghost ghost = new Ghost(p.x, p.y, this );
+			Ghost ghost = new Ghost(this.model.getMap().getSpawn().y, this.model.getMap().getSpawn().x+1, this );
 			
 			this.model.addToAlGhost(ghost);
 			new Thread(ghost).start();
@@ -331,7 +332,7 @@ public class Field extends JPanel implements ActionListener{
 				}
 				for (int k=0;k<Map.getHauteur();k++){
 					for (int l=0;l<Map.getLongueur();l++){
-						if (Map.getTab()[k][l]=='0'){
+						if (Map.getTab()[k][l]=='0'||Map.getTab()[k][l]=='2'){
 							if(Map.getBol()[k][l]==true){
 							g2.drawImage(full,l*step,(k+1)*step,null);
 							}
@@ -355,11 +356,24 @@ public class Field extends JPanel implements ActionListener{
 	}
 	@Override
 	public void actionPerformed (ActionEvent e){
-		if(this.model.getMap().getCounter()!=0){
-		chron.pause();
-		setChrono(chron.getDureeSec()); // affichage en secondes
-		chron.resume();
-		updatetimer();
+		boolean b = true;
+		if(!getChron().isOnPause()){
+			if(this.model.getMap().getCounter()!=0){
+				//if(getDelay()!=0){
+				getChron().pause();
+				//}
+				setChrono(getChron().getDureeSec()); // affichage en secondes
+				getChron().resume();
+				updatetimer();
+				setDelay(getDelay() + 1);
+			}
+		
+		}else {
+		//	if(b){
+				getChron().gamepause();	
+			//	b=false;
+		//	}
+			
 		}
 	}
 
@@ -404,6 +418,22 @@ public class Field extends JPanel implements ActionListener{
 
 	public void setChrono(double chrono) {
 		this.chrono = chrono;
+	}
+
+	public Chrono getChron() {
+		return chron;
+	}
+
+	public void setChron(Chrono chron) {
+		this.chron = chron;
+	}
+
+	public int getDelay() {
+		return delay;
+	}
+
+	public void setDelay(int delay) {
+		this.delay = delay;
 	}
 
 }

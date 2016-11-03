@@ -1,5 +1,6 @@
 package model;
 
+import java.awt.Point;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -57,7 +58,7 @@ public class Model {
 
 
 public void createstring () {
-	String fichier="texte/lvl1.txt";
+	String fichier="texte/lvl2.txt";
 	map.setTab(new char[map.getHauteur()][map.getLongueur()]);
 	map.setBol(new boolean[map.getHauteur()][map.getLongueur()]);
 	int count = 0 ;
@@ -73,16 +74,17 @@ public void createstring () {
 				while (sc.hasNextLine()) {
 					for (char c : sc.next().toCharArray()) {
 						map.getTab()[i][j] = c;
-						if(c=='0'){
+						if(c=='1'){
+							map.getBol()[i][j] = false;
+						}
+						else {
 							count++;
 							map.getBol()[i][j] = true;
 						}
-						else {
-							map.getBol()[i][j] = false;
-						}
+						 
 						
 						if(c=='2'){
-							
+							this.map.setSpawn(new Point(i,j));
 						}
 						j++;
 					}
@@ -104,7 +106,7 @@ map.setCounter(count);
 public void lecture () {
 	int longueur1 = 0;
     int hauteur1 = 0;
-	String fichier="texte/lvl1.txt";
+	String fichier="texte/lvl2.txt";
 			try{
 				File ips = new File(fichier);
 				FileReader ipsr = new FileReader(ips);

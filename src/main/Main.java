@@ -24,6 +24,7 @@ public class Main {
 		frame.setContentPane(field);
 		frame.setVisible(true);
 		
+		
 		 
 		
 	}

@@ -11,9 +11,8 @@ import java.io.IOException;
 import javax.swing.JOptionPane;
 
 import View.Field;
-import main.Main;
+import model.Ghost;
 import model.Model;
-import model.Map;
 
 public class Controller implements KeyListener {
 
@@ -104,10 +103,18 @@ public class Controller implements KeyListener {
 					setClassementhtml("<html>" + "Fin du niveau en "+this.view.getChrono()+"s<br>Total "+this.model.getPacman().getPacmanScore()+"<br><br><br><br>");
 					savescore();
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
+					// TODO onAuto-generated catch block
 					e1.printStackTrace();
 				}
 			}
+		}else if(source==KeyEvent.VK_SPACE){
+			for (Ghost g : this.model.getAlGhost()){
+				g.setOnPause(!g.isOnPause());
+			}
+			this.model.getPacman().setOnPause(!this.model.getPacman().isOnPause());
+			view.getChron().setOnPause(!view.getChron().isOnPause());
+			view.setDelay(0);
+			//this.model.getAlGhost().onPause = !this.model.getAlGhost().onPause;
 		}
 		this.getView().setModel(this.getModel());
 		this.getView().repaint();

@@ -8,6 +8,8 @@ public class Chrono {
     private long pauseFin=0;
     private double dureed=0;
     private long duree = 0 ;
+    private boolean onPause = false;
+    private long gamePause = 0;
 
     public void start()
         {
@@ -20,7 +22,6 @@ public class Chrono {
 
     public void pause()
         {
-        //if(tempsDepart==0) {return;}
         pauseDepart=System.currentTimeMillis();
         duree += pauseDepart - tempsDepart;
         }
@@ -37,16 +38,9 @@ public class Chrono {
         //duree=0;
         }
         
-    public void stop()
-        {
-        if(tempsDepart==0) {return;}
-        tempsFin=System.currentTimeMillis();
-        duree= duree + (tempsFin-tempsDepart) - (pauseFin-pauseDepart);
-        tempsDepart=0;
-        tempsFin=0;
-        pauseDepart=0;
-        pauseFin=0;
-        }        
+    public void gamepause(){
+    	tempsDepart=System.currentTimeMillis();
+    }
 
     public double getDureeSec()
         {
@@ -84,4 +78,12 @@ public class Chrono {
         return r;
         }
 //ref timer : https://fr.jeffprod.com/blog/2015/un-chronometre-en-java.html
+
+	public boolean isOnPause() {
+		return onPause;
+	}
+
+	public void setOnPause(boolean onPause) {
+		this.onPause = onPause;
+	}
 } 

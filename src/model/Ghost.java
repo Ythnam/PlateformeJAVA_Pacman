@@ -7,7 +7,6 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
-import main.Main;
 import View.Field;
 
 public class Ghost implements Runnable {
@@ -21,6 +20,7 @@ public class Ghost implements Runnable {
 							// d'une certaine distance
 	private Field field;
 	private Random rand = new Random();
+	private boolean onPause = false;
 	
 	static{
 		try{
@@ -114,7 +114,11 @@ public class Ghost implements Runnable {
 	@Override
 	public void run(){
 		try{
+			
 			while(true){
+				while(isOnPause()){
+					Thread.sleep(500);
+				}
 				Thread.sleep(500);
 				
 				tryToMove();
@@ -179,5 +183,13 @@ public class Ghost implements Runnable {
 			}
 			break;
 		}
+	}
+
+	public boolean isOnPause() {
+		return onPause;
+	}
+
+	public void setOnPause(boolean onPause) {
+		this.onPause = onPause;
 	}
 }
