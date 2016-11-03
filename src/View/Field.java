@@ -366,6 +366,21 @@ public class Field extends JPanel implements ActionListener{
 		    this.controller.gamePause();
 		}
 		
+	}
+	
+	public void popLooseGame(){
+		int input = JOptionPane.showOptionDialog(null, "Vous n'avez plus de vie la partie est terminee", "Game Over", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
+		
+		if(input == 0)
+		{
+			try {
+				this.controller.savescore();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 		
 		//JOptionPane.showM		Dialog(newPanel, "Vous avez perdu une vie, cliquez pour continuer");
 	}

@@ -96,9 +96,9 @@ public class Pacman {
 			
 		}
 		else {
-			if(Map.getTab()[y-1][this.field.getXMAX()-1]!='1'){
-				if(Map.getBol()[y-1][this.field.getXMAX()-1] == true){ pacmanScore+=100 ;this.field.updateScoreAndLife();this.field.getModel().getMap().setCounter(this.field.getModel().getMap().getCounter() - 1);}
-				Map.getBol()[y-1][this.field.getXMAX()-1]=false;
+			if(Map.getTab()[y][this.field.getXMAX()-1]!='1'){
+				if(Map.getBol()[y][this.field.getXMAX()-1] == true){ pacmanScore+=100 ;this.field.updateScoreAndLife();this.field.getModel().getMap().setCounter(this.field.getModel().getMap().getCounter() - 1);}
+				Map.getBol()[y][this.field.getXMAX()-1]=false;
 				this.x = this.field.getXMAX()-1;
 			}
 		}

@@ -57,12 +57,8 @@ public class Controller implements KeyListener {
 				this.model.getPacman().setImageIcon(this.model.getPacman().getImageIconTop());
 				if(this.model.getMap().getCounter() == 0){
 					try {
-						name = JOptionPane.showInputDialog(view,"Entrez votre pseudo", null);
-						//setClassement(getClassement() + "Fin du niveau en "+this.view.getChrono()+"s\nTotal "+this.model.getPacman().getPacmanScore()+"points\n\n\n\n");
-						setClassementhtml("<html>" + "Fin du niveau en "+this.view.getChrono()+"s<br>Total "+this.model.getPacman().getPacmanScore()+"<br><br><br><br>");
 						savescore();
 						} catch (IOException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
@@ -73,9 +69,6 @@ public class Controller implements KeyListener {
 				this.model.getPacman().setImageIcon(this.model.getPacman().getImageIconBot());
 				if(this.model.getMap().getCounter() == 0){
 					try {
-						name = JOptionPane.showInputDialog(view,"Entrez votre pseudo", null);					
-						//setClassement(getClassement() + "Fin du niveau en "+this.view.getChrono()+"s\nTotal "+this.model.getPacman().getPacmanScore()+" points\n\n\n\n");
-						setClassementhtml("<html>" + "Fin du niveau en "+this.view.getChrono()+"s<br>Total "+this.model.getPacman().getPacmanScore()+"<br><br><br><br>");
 						savescore();
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
@@ -88,9 +81,6 @@ public class Controller implements KeyListener {
 				this.model.getPacman().setImageIcon(this.model.getPacman().getImageIconRight());
 				if(this.model.getMap().getCounter() == 0){
 					try {
-						name = JOptionPane.showInputDialog(view,"Entrez votre pseudo", null);
-						//setClassement(getClassement() + "Fin du niveau en "+this.view.getChrono()+"s\nTotal "+this.model.getPacman().getPacmanScore()+" points\n\n\n\n");
-						setClassementhtml("<html>" + "Fin du niveau en "+this.view.getChrono()+"s<br>Total "+this.model.getPacman().getPacmanScore()+"<br><br><br><br>");
 						savescore();
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
@@ -103,9 +93,6 @@ public class Controller implements KeyListener {
 				this.model.getPacman().setImageIcon(this.model.getPacman().getImageIconLeft());
 				if(this.model.getMap().getCounter() == 0){
 					try {
-						name = JOptionPane.showInputDialog(view,"Entrez votre pseudo", null);
-						//setClassement(getClassement() + "Fin du niveau en "+this.view.getChrono()+"s\nTotal "+this.model.getPacman().getPacmanScore()+" points\n\n\n\n");
-						setClassementhtml("<html>" + "Fin du niveau en "+this.view.getChrono()+"s<br>Total "+this.model.getPacman().getPacmanScore()+"<br><br><br><br>");
 						savescore();
 					} catch (IOException e1) {
 						// TODO onAuto-generated catch block
@@ -131,6 +118,10 @@ public class Controller implements KeyListener {
 	}
 
 	public void savescore() throws IOException{
+		name = JOptionPane.showInputDialog(view,"Entrez votre pseudo", null);
+		//setClassement(getClassement() + "Fin du niveau en "+this.view.getChrono()+"s\nTotal "+this.model.getPacman().getPacmanScore()+"points\n\n\n\n");
+		setClassementhtml("<html>" + "Fin du niveau en "+this.view.getChrono()+"s<br>Total "+this.model.getPacman().getPacmanScore()+"<br><br><br><br>");
+		
 		int z =1;
 		
 		data = new long[11];
@@ -240,11 +231,13 @@ public class Controller implements KeyListener {
 		int r = 0;
 		for (Ghost g:this.model.getAlGhost()){
 			if(this.model.getPacman().getX() == g.getX() && this.model.getPacman().getY() == g.getY()){
-				gamePause();
-				view.popLooseLife();
 				this.model.getPacman().setPacmanLives(this.model.getPacman().getPacmanLives()-1);
-				if(this.model.getPacman().getPacmanLives()==0){
-					gameOver();
+				view.updateScoreAndLife();
+				gamePause();
+				if(this.model.getPacman().getPacmanLives() != 0){
+				view.popLooseLife();
+				}else{
+					view.popLooseGame();
 				}
 			}
 			r++;
@@ -252,9 +245,5 @@ public class Controller implements KeyListener {
 		
 	}
 
-	private void gameOver() {
-		// TODO Auto-generated method stub
-		
-	}
 	
 }
