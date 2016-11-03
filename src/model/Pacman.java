@@ -83,8 +83,6 @@ public class Pacman {
 		this.field = field;
 		this.imageIcon = getImageIconTop(); 
 	}
-	
-
 
 
 	public void goLeft(){
@@ -193,6 +191,15 @@ public class Pacman {
 
 	public void setOnPause(boolean onPause) {
 		this.onPause = onPause;
+	}
+
+	public void setX( int x) {
+		// TODO Auto-generated method stub
+		this.x = x;	
+	}
+	
+	public void setY(int y){
+		this.y = y;
 	}
 
 

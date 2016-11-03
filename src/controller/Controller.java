@@ -49,76 +49,85 @@ public class Controller implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		
 		int source = e.getKeyCode();
-		if(source==KeyEvent.VK_UP){
-			
-			this.model.getPacman().goTop();
-			this.model.getPacman().setImageIcon(this.model.getPacman().getImageIconTop());
-			if(this.model.getMap().getCounter() == 0){
-				try {
-					name = JOptionPane.showInputDialog(view,"Entrez votre pseudo", null);
-					//setClassement(getClassement() + "Fin du niveau en "+this.view.getChrono()+"s\nTotal "+this.model.getPacman().getPacmanScore()+"points\n\n\n\n");
-					setClassementhtml("<html>" + "Fin du niveau en "+this.view.getChrono()+"s<br>Total "+this.model.getPacman().getPacmanScore()+"<br><br><br><br>");
-					savescore();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+		
+		if(this.model.getPacman().getPacmanLives()!=0){
+			if(source==KeyEvent.VK_UP){
+				this.model.getPacman().goTop();
+				loose();
+				this.model.getPacman().setImageIcon(this.model.getPacman().getImageIconTop());
+				if(this.model.getMap().getCounter() == 0){
+					try {
+						name = JOptionPane.showInputDialog(view,"Entrez votre pseudo", null);
+						//setClassement(getClassement() + "Fin du niveau en "+this.view.getChrono()+"s\nTotal "+this.model.getPacman().getPacmanScore()+"points\n\n\n\n");
+						setClassementhtml("<html>" + "Fin du niveau en "+this.view.getChrono()+"s<br>Total "+this.model.getPacman().getPacmanScore()+"<br><br><br><br>");
+						savescore();
+						} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 			}
+			else if(source==KeyEvent.VK_DOWN){
+				this.model.getPacman().goBot();
+				loose();
+				this.model.getPacman().setImageIcon(this.model.getPacman().getImageIconBot());
+				if(this.model.getMap().getCounter() == 0){
+					try {
+						name = JOptionPane.showInputDialog(view,"Entrez votre pseudo", null);					
+						//setClassement(getClassement() + "Fin du niveau en "+this.view.getChrono()+"s\nTotal "+this.model.getPacman().getPacmanScore()+" points\n\n\n\n");
+						setClassementhtml("<html>" + "Fin du niveau en "+this.view.getChrono()+"s<br>Total "+this.model.getPacman().getPacmanScore()+"<br><br><br><br>");
+						savescore();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+			}else if(source==KeyEvent.VK_RIGHT){
+				this.model.getPacman().goRight();
+				loose();
+				this.model.getPacman().setImageIcon(this.model.getPacman().getImageIconRight());
+				if(this.model.getMap().getCounter() == 0){
+					try {
+						name = JOptionPane.showInputDialog(view,"Entrez votre pseudo", null);
+						//setClassement(getClassement() + "Fin du niveau en "+this.view.getChrono()+"s\nTotal "+this.model.getPacman().getPacmanScore()+" points\n\n\n\n");
+						setClassementhtml("<html>" + "Fin du niveau en "+this.view.getChrono()+"s<br>Total "+this.model.getPacman().getPacmanScore()+"<br><br><br><br>");
+						savescore();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+			}else if(source==KeyEvent.VK_LEFT){
+				this.model.getPacman().goLeft();
+				loose();
+				this.model.getPacman().setImageIcon(this.model.getPacman().getImageIconLeft());
+				if(this.model.getMap().getCounter() == 0){
+					try {
+						name = JOptionPane.showInputDialog(view,"Entrez votre pseudo", null);
+						//setClassement(getClassement() + "Fin du niveau en "+this.view.getChrono()+"s\nTotal "+this.model.getPacman().getPacmanScore()+" points\n\n\n\n");
+						setClassementhtml("<html>" + "Fin du niveau en "+this.view.getChrono()+"s<br>Total "+this.model.getPacman().getPacmanScore()+"<br><br><br><br>");
+						savescore();
+					} catch (IOException e1) {
+						// TODO onAuto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+			}else if(source==KeyEvent.VK_SPACE){
+				gamePause();
+				//this.model.getAlGhost().onPause = !this.model.getAlGhost().onPause;
+			}
+			this.getView().setModel(this.getModel());
+			this.getView().repaint();
 		}
-		else if(source==KeyEvent.VK_DOWN){
-			this.model.getPacman().goBot();
-			this.model.getPacman().setImageIcon(this.model.getPacman().getImageIconBot());
-			if(this.model.getMap().getCounter() == 0){
-				try {
-					name = JOptionPane.showInputDialog(view,"Entrez votre pseudo", null);					
-					//setClassement(getClassement() + "Fin du niveau en "+this.view.getChrono()+"s\nTotal "+this.model.getPacman().getPacmanScore()+" points\n\n\n\n");
-					setClassementhtml("<html>" + "Fin du niveau en "+this.view.getChrono()+"s<br>Total "+this.model.getPacman().getPacmanScore()+"<br><br><br><br>");
-					savescore();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		}else if(source==KeyEvent.VK_RIGHT){
-			this.model.getPacman().goRight();
-			this.model.getPacman().setImageIcon(this.model.getPacman().getImageIconRight());
-			if(this.model.getMap().getCounter() == 0){
-				try {
-					name = JOptionPane.showInputDialog(view,"Entrez votre pseudo", null);
-					//setClassement(getClassement() + "Fin du niveau en "+this.view.getChrono()+"s\nTotal "+this.model.getPacman().getPacmanScore()+" points\n\n\n\n");
-					setClassementhtml("<html>" + "Fin du niveau en "+this.view.getChrono()+"s<br>Total "+this.model.getPacman().getPacmanScore()+"<br><br><br><br>");
-					savescore();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		}else if(source==KeyEvent.VK_LEFT){
-			this.model.getPacman().goLeft();
-			this.model.getPacman().setImageIcon(this.model.getPacman().getImageIconLeft());
-			if(this.model.getMap().getCounter() == 0){
-				try {
-					name = JOptionPane.showInputDialog(view,"Entrez votre pseudo", null);
-					//setClassement(getClassement() + "Fin du niveau en "+this.view.getChrono()+"s\nTotal "+this.model.getPacman().getPacmanScore()+" points\n\n\n\n");
-					setClassementhtml("<html>" + "Fin du niveau en "+this.view.getChrono()+"s<br>Total "+this.model.getPacman().getPacmanScore()+"<br><br><br><br>");
-					savescore();
-				} catch (IOException e1) {
-					// TODO onAuto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		}else if(source==KeyEvent.VK_SPACE){
-			for (Ghost g : this.model.getAlGhost()){
-				g.setOnPause(!g.isOnPause());
-			}
-			this.model.getPacman().setOnPause(!this.model.getPacman().isOnPause());
-			view.getChron().setOnPause(!view.getChron().isOnPause());
-			view.setDelay(0);
-			//this.model.getAlGhost().onPause = !this.model.getAlGhost().onPause;
+	}
+	
+	public void gamePause(){
+		for (Ghost g : this.model.getAlGhost()){
+			g.setOnPause(!g.isOnPause());
 		}
-		this.getView().setModel(this.getModel());
-		this.getView().repaint();
-
+		this.model.getPacman().setOnPause(!this.model.getPacman().isOnPause());
+		view.getChron().setOnPause(!view.getChron().isOnPause());
+		view.setDelay(0);
 	}
 
 	public void savescore() throws IOException{
@@ -196,7 +205,7 @@ public class Controller implements KeyListener {
 		{
 		    System.out.println ("Erreur lors de la lecture : " + exception.getMessage());
 		}
-		view.pop();	
+		view.popClassement();	
 	}
 	@Override
 	public void keyReleased(KeyEvent e) {
@@ -226,5 +235,26 @@ public class Controller implements KeyListener {
 		Controller.classementhtml = classementhtml;
 	}
 
+	
+	public void loose(){
+		int r = 0;
+		for (Ghost g:this.model.getAlGhost()){
+			if(this.model.getPacman().getX() == g.getX() && this.model.getPacman().getY() == g.getY()){
+				gamePause();
+				view.popLooseLife();
+				this.model.getPacman().setPacmanLives(this.model.getPacman().getPacmanLives()-1);
+				if(this.model.getPacman().getPacmanLives()==0){
+					gameOver();
+				}
+			}
+			r++;
+		}
+		
+	}
+
+	private void gameOver() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

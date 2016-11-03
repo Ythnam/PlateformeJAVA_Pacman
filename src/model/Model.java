@@ -31,6 +31,7 @@ public class Model {
 	public Pacman getPacman() {
 		return pacman;
 	}
+
 	
 	public void setAlGhost(ArrayList<Ghost> alGhost) {
 		this.alGhost = alGhost;

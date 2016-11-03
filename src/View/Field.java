@@ -20,6 +20,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.RootPaneContainer;
@@ -74,14 +75,14 @@ public class Field extends JPanel implements ActionListener{
 		
 		
 		scoreLabel = new JLabel("Score: " + this.model.getPacman().getPacmanScore());
-		scoreLabel.setFont(new Font("Serif", Font.PLAIN, 13));
+		scoreLabel.setFont(new Font("Serif", Font.PLAIN, 11));
 		scoreLabel.setForeground(Color.black);
 		//scoreLabel.setBackground(Color.BLACK);
 		scoreLabel.setOpaque(true);
 		Panel.add(scoreLabel);
 		
 		livesLabel = new JLabel(" " + "Lives: " + this.model.getPacman().getPacmanLives());
-		livesLabel.setFont(new Font("Serif", Font.PLAIN, 13));
+		livesLabel.setFont(new Font("Serif", Font.PLAIN, 11));
 		livesLabel.setForeground(Color.black);
 		livesLabel.setOpaque(true);
 		//livesLabel.setBackground(Color.BLACK);
@@ -90,7 +91,7 @@ public class Field extends JPanel implements ActionListener{
 		timeLabel = new JLabel("Timer: " + getChrono());
 		Dimension d = new Dimension(85,14);
 		timeLabel.setPreferredSize(d);
-		timeLabel.setFont(new Font("Serif", Font.PLAIN, 13));
+		timeLabel.setFont(new Font("Serif", Font.PLAIN, 11));
 		timeLabel.setForeground(Color.black);
 	//	timeLabel.setBackground(Color.BLACK);
 		timeLabel.setOpaque(true);
@@ -177,8 +178,7 @@ public class Field extends JPanel implements ActionListener{
 	 * @param n est le nombre de Ghost qu'on veut dans le model
 	 */
 	public void generatePacmanRandomly(){
-		boolean bool = true;
-		boolean b2 = true;
+		
 		Point p = generate();
 		
 			Pacman pacman = Pacman.getInstance(p.x, p.y, this);
@@ -355,7 +355,23 @@ public class Field extends JPanel implements ActionListener{
 		}
 	}
 
-	public void pop(){
+	public void popLooseLife(){
+		int input = JOptionPane.showOptionDialog(null, "Vous avez perdu une vie, ok pour continuer ", "Informations", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
+		
+		if(input == 0)
+		{
+			Point p = generate();
+			this.model.getPacman().setX(p.x);
+			this.model.getPacman().setY(p.y);
+		    this.controller.gamePause();
+		}
+		
+		
+		//JOptionPane.showM		Dialog(newPanel, "Vous avez perdu une vie, cliquez pour continuer");
+	}
+	
+	
+	public void popClassement(){
 		JFrame frame = new JFrame();
 		frame.setSize(300,300);
 		frame.setResizable(true);
