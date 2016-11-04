@@ -164,7 +164,7 @@ public class Field extends JPanel implements ActionListener{
 		for(int i = 0; i < n; i++){		
 			
 				 
-			Ghost ghost = new Ghost(this.model.getMap().getSpawn().y, this.model.getMap().getSpawn().x, this );
+			Ghost ghost = new Ghost(this.model.getMap().getSpawnGhost().y, this.model.getMap().getSpawnGhost().x, this );
 			
 			this.model.addToAlGhost(ghost);
 			new Thread(ghost).start();
@@ -181,7 +181,7 @@ public class Field extends JPanel implements ActionListener{
 		
 		Point p = generate();
 		
-			Pacman pacman = Pacman.getInstance(p.x, p.y, this);
+			Pacman pacman = Pacman.getInstance(this.model.getMap().getSpawnPacman().y, this.model.getMap().getSpawnPacman().x, this);
 			this.model.setPacman(pacman);
 		//new Thread(pacman).start();		
 	}
@@ -472,7 +472,7 @@ public class Field extends JPanel implements ActionListener{
 					}
 					for (int k=0;k<Map.getHauteur();k++){
 						for (int l=0;l<Map.getLongueur();l++){
-							if (Map.getTab()[k][l]=='0'||Map.getTab()[k][l]=='2'){
+							if (Map.getTab()[k][l]=='0'||Map.getTab()[k][l]=='2'||Map.getTab()[k][l]=='3'){
 								if(Map.getBol()[k][l]==true){
 								g2.drawImage(full,l*step,k*step,null);
 								}

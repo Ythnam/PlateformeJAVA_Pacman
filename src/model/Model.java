@@ -85,7 +85,10 @@ public void createstring () {
 						 
 						
 						if(c=='2'){
-							this.map.setSpawn(new Point(i,j));
+							this.map.setSpawnGhost(new Point(i,j));
+						}
+						if(c=='3'){
+							this.map.setSpawnPacman(new Point(i,j));
 						}
 						j++;
 					}

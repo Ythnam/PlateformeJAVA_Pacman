@@ -12,7 +12,8 @@ public class Map {
 	private static  boolean[][] bol;
 	private static  int counter;
 	private  long now = 0;
-	private Point spawn = new Point(0,0);
+	private Point spawnGhost = new Point(0,0);
+	private Point spawnPacman = new Point(0,0);
 	public static int getLongueur() {
 		return longueur;
 	}
@@ -55,14 +56,21 @@ public class Map {
 		this.now = now;
 	}
 
-	public Point getSpawn() {
-		return spawn;
+	public Point getSpawnGhost() {
+		return spawnGhost;
 	}
 
-	public void setSpawn(Point spawn) {
-		this.spawn = spawn;
+	public void setSpawnGhost(Point spawn) {
+		this.spawnGhost = spawn;
+	}
+	
+	public Point getSpawnPacman() {
+		return spawnPacman;
 	}
 
+	public void setSpawnPacman(Point spawn) {
+		this.spawnPacman = spawn;
+	}
 
 	
 }
