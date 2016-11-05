@@ -41,6 +41,15 @@ public class Chrono {
     public void gamepause(){
     	tempsDepart=System.currentTimeMillis();
     }
+    public void restart(){
+    	tempsDepart=System.currentTimeMillis();
+        tempsFin=0;
+        pauseDepart=0;
+        pauseFin=0;
+        duree=0;
+        dureed =0;
+        onPause = false;
+    }
 
     public double getDureeSec()
         {

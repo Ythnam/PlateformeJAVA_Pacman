@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,7 +22,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
-import javax.swing.RootPaneContainer;
 import javax.swing.Timer;
 
 import controller.Controller;
@@ -57,10 +55,13 @@ public class Field extends JPanel implements ActionListener{
 	private JLabel timeLabel;
 	private Timer timer;
 	private JLabel label;
-	private int delay = 0;
 	public Container conten = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
 	TestPanel newPanel;
-
+	JButton end;
+    JButton retry;
+    JButton nextlvl;
+    JFrame frame = new JFrame();
+	
 	public Field(){
 		
 		generatePacmanRandomly();
@@ -74,21 +75,21 @@ public class Field extends JPanel implements ActionListener{
 		JPanel Panel = new JPanel();
 		
 		
-		scoreLabel = new JLabel("Score: " + this.model.getPacman().getPacmanScore());
+		scoreLabel = new JLabel( this.model.getPacman().getPacmanScore()+"");
 		scoreLabel.setFont(new Font("Serif", Font.PLAIN, 11));
 		scoreLabel.setForeground(Color.black);
 		//scoreLabel.setBackground(Color.BLACK);
 		scoreLabel.setOpaque(true);
 		Panel.add(scoreLabel);
 		
-		livesLabel = new JLabel(" " + "Lives: " + this.model.getPacman().getPacmanLives());
+		livesLabel = new JLabel("Lives: " + this.model.getPacman().getPacmanLives());
 		livesLabel.setFont(new Font("Serif", Font.PLAIN, 11));
 		livesLabel.setForeground(Color.black);
 		livesLabel.setOpaque(true);
 		//livesLabel.setBackground(Color.BLACK);
 		Panel.add(livesLabel);
 		
-		timeLabel = new JLabel("Timer: " + getChrono());
+		timeLabel = new JLabel(getChrono()+"s");
 		Dimension d = new Dimension(85,14);
 		timeLabel.setPreferredSize(d);
 		timeLabel.setFont(new Font("Serif", Font.PLAIN, 11));
@@ -125,12 +126,10 @@ public class Field extends JPanel implements ActionListener{
     }
     
     public void updateScoreAndLife() {
- 	   scoreLabel.setText("Score: " + this.model.getPacman().getPacmanScore());
- 	   livesLabel.setText(" " + "Lives: " + this.model.getPacman().getPacmanLives() );
+ 	   scoreLabel.setText(this.model.getPacman().getPacmanScore()+"");
+ 	   livesLabel.setText("Lives: " + this.model.getPacman().getPacmanLives() );
  	}
-	
 
-	
 	public int getYMAX() {
 		return this.YMAX;
 	}
@@ -179,9 +178,7 @@ public class Field extends JPanel implements ActionListener{
 	 */
 	public void generatePacmanRandomly(){
 		
-		Point p = generate();
-		
-			Pacman pacman = Pacman.getInstance(this.model.getMap().getSpawnPacman().y, this.model.getMap().getSpawnPacman().x, this);
+Pacman pacman = Pacman.getInstance(this.model.getMap().getSpawnPacman().y, this.model.getMap().getSpawnPacman().x, this);
 			this.model.setPacman(pacman);
 		//new Thread(pacman).start();		
 	}
@@ -334,16 +331,14 @@ public class Field extends JPanel implements ActionListener{
 	
 	@Override
 	public void actionPerformed (ActionEvent e){
-		boolean b = true;
 		if(!getChron().isOnPause()){
+			
+			//maj du chrono et du label associé
 			if(this.model.getMap().getCounter()!=0){
-				//if(getDelay()!=0){
 				getChron().pause();
-				//}
 				setChrono(getChron().getDureeSec()); // affichage en secondes
 				getChron().resume();
 				updatetimer();
-				setDelay(getDelay() + 1);
 			}
 		
 		}else {
@@ -353,19 +348,69 @@ public class Field extends JPanel implements ActionListener{
 		//	}
 			
 		}
+		
+		
+	        Object  source=e.getSource();
+	        
+	        if  (source==end)
+	            end();
+	        else if (source==retry)
+	            retry();
+	        else if (source == nextlvl)
+	        	nextlvl();
+	}
+
+	private void nextlvl() {
+		System.out.println("next lvl");
+	}
+
+	private void retry() {
+		//endbool = true;
+		System.out.println("retry");
+		chrono = 0;
+		this.model.getPacman().setPacmanScore(0);
+		this.model.getPacman().setPacmanLives(3);;
+		this.model.lecture();
+		this.model.createstring();
+		this.newPanel = new TestPanel();
+		this.model.getPacman().setX(this.model.getMap().getSpawnPacman().y);
+		this.model.getPacman().setY(this.model.getMap().getSpawnPacman().x);
+		
+		for (Ghost g : this.model.getAlGhost()){
+			g.setX(this.model.getMap().getSpawnGhost().y);
+			g.setY(this.model.getMap().getSpawnGhost().x);
+		}
+		//this.model.setPacman(Pacman.getInstance(this.model.getMap().getSpawnPacman().y, this.model.getMap().getSpawnPacman().x, this));
+		updateScoreAndLife();
+		updatetimer();
+		frame.dispose();
+		frame = new JFrame();
+		this.chron.restart();
+		this.chron.setOnPause(true);
+		this.controller.gamePause();
+	}
+
+	private void end() {
+		frame.dispose();
 	}
 
 	public void popLooseLife(){
+		if(this.model.getPacman().getPacmanLives()!=0){
 		int input = JOptionPane.showOptionDialog(null, "Vous avez perdu une vie, ok pour continuer ", "Informations", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
 		
 		if(input == 0)
 		{
-			Point p = generate();
-			this.model.getPacman().setX(p.x);
-			this.model.getPacman().setY(p.y);
+			this.model.getPacman().setX(this.model.getMap().getSpawnPacman().y);
+			this.model.getPacman().setY(this.model.getMap().getSpawnPacman().x);
+			
+			for (Ghost g : this.model.getAlGhost()){
+				g.setX(this.model.getMap().getSpawnGhost().y);
+				g.setY(this.model.getMap().getSpawnGhost().x);
+			}
+			
 		    this.controller.gamePause();
 		}
-		
+		}
 	}
 	
 	public void popLooseGame(){
@@ -384,10 +429,9 @@ public class Field extends JPanel implements ActionListener{
 		
 		//JOptionPane.showM		Dialog(newPanel, "Vous avez perdu une vie, cliquez pour continuer");
 	}
-	
-	
+		
 	public void popClassement(){
-		JFrame frame = new JFrame();
+		
 		frame.setSize(300,300);
 		frame.setResizable(true);
 		frame.setLocation(300, 300);
@@ -406,19 +450,27 @@ public class Field extends JPanel implements ActionListener{
 		JPanel buttonPanel = new JPanel();
 		textPanel.add(label);
 	    buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.LINE_AXIS));
-	    buttonPanel.add(new JButton("Terminer"));
-	    buttonPanel.add(new JButton("Recommencer"));
-	    buttonPanel.add(new JButton("Niveau Suivant"));
+		
+		buttonPanel.add(end =new JButton("Terminer"));
 
+		buttonPanel.add(retry = new JButton("Recommencer"));
+	    
+		buttonPanel.add(nextlvl = new JButton("Niveau Suivant"));
+
+	    
 
 	    contenu.add(textPanel);
 	    contenu.add(buttonPanel);
 	    frame.pack();
+	    
+	    end.addActionListener(this);
+	    retry.addActionListener(this);
+	    nextlvl.addActionListener(this);
 
 	}
 	
 	private void updatetimer() {
-		timeLabel.setText("Time: " + getChrono());
+		timeLabel.setText(getChrono()+"s");
 	}
 
 	public double getChrono() {
@@ -437,13 +489,14 @@ public class Field extends JPanel implements ActionListener{
 		this.chron = chron;
 	}
 
-	public int getDelay() {
+	/*public int getDelay() {
 		return delay;
 	}
 
 	public void setDelay(int delay) {
 		this.delay = delay;
 	}
+	*/
 
 	
 	private class TestPanel extends JPanel {
@@ -495,6 +548,7 @@ public class Field extends JPanel implements ActionListener{
 			
 		}
 	}
+	
 	
 	
 }

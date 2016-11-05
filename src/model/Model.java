@@ -14,6 +14,8 @@ public class Model {
 	private Map map = new Map();
 	private ArrayList<Ghost> alGhost = new ArrayList<>();
 	private ArrayList<Items> alItems = new ArrayList<>();
+	private int lvl = 1;
+	private String fichier="texte/lvl"+ getLvl() + ".txt";
 	
 	public Model(){
 		lecture();
@@ -59,7 +61,6 @@ public class Model {
 
 
 public void createstring () {
-	String fichier="texte/lvl1.txt";
 	map.setTab(new char[map.getHauteur()][map.getLongueur()]);
 	map.setBol(new boolean[map.getHauteur()][map.getLongueur()]);
 	int count = 0 ;
@@ -110,7 +111,7 @@ map.setCounter(count);
 public void lecture () {
 	int longueur1 = 0;
     int hauteur1 = 0;
-	String fichier="texte/lvl1.txt";
+	
 			try{
 				File ips = new File(fichier);
 				FileReader ipsr = new FileReader(ips);
@@ -138,6 +139,14 @@ public void lecture () {
 			this.map.setHauteur(hauteur1);
 			//System.out.println(longueur1);
 			this.map.setLongueur(longueur1);		
+}
+
+public int getLvl() {
+	return lvl;
+}
+
+public void setLvl(int lvl) {
+	this.lvl = lvl;
 }
 
 	
