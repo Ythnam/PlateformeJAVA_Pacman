@@ -67,9 +67,9 @@ public class Field extends JPanel implements ActionListener{
 		generatePacmanRandomly();
 		generateGhostRandomly(3);
 		//generateItemsRandomly(10, 5, 4, 3, 5, 1, 1, 1); // en test random pour les valeurs
-		this.controller = defautController(this.model);
-		this.controller.setView(this);
-		this.addKeyListener(this.controller);
+		this.setController(defautController(this.model));
+		this.getController().setView(this);
+		this.addKeyListener(this.getController());
 		
 		
 		JPanel Panel = new JPanel();
@@ -178,9 +178,9 @@ public class Field extends JPanel implements ActionListener{
 	 */
 	public void generatePacmanRandomly(){
 		
-Pacman pacman = Pacman.getInstance(this.model.getMap().getSpawnPacman().y, this.model.getMap().getSpawnPacman().x, this);
+Pacman pacman = new Pacman(this.model.getMap().getSpawnPacman().y, this.model.getMap().getSpawnPacman().x, this);
 			this.model.setPacman(pacman);
-		//new Thread(pacman).start();		
+		new Thread(pacman).start();		
 	}
 
 	public Point generate(){
@@ -325,7 +325,7 @@ Pacman pacman = Pacman.getInstance(this.model.getMap().getSpawnPacman().y, this.
 	
 	public void setModel(Model model) {
 		this.model = model;
-		this.controller.setModel(model);
+		this.getController().setModel(model);
 		
 	}
 	
@@ -387,7 +387,7 @@ Pacman pacman = Pacman.getInstance(this.model.getMap().getSpawnPacman().y, this.
 		frame = new JFrame();
 		this.chron.restart();
 		this.chron.setOnPause(true);
-		this.controller.gamePause();
+		this.getController().gamePause();
 	}
 
 	private void end() {
@@ -408,7 +408,7 @@ Pacman pacman = Pacman.getInstance(this.model.getMap().getSpawnPacman().y, this.
 				g.setY(this.model.getMap().getSpawnGhost().x);
 			}
 			
-		    this.controller.gamePause();
+		    this.getController().gamePause();
 		}
 		}
 	}
@@ -419,7 +419,7 @@ Pacman pacman = Pacman.getInstance(this.model.getMap().getSpawnPacman().y, this.
 		if(input == 0)
 		{
 			try {
-				this.controller.savescore();
+				this.getController().savescore();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -440,7 +440,7 @@ Pacman pacman = Pacman.getInstance(this.model.getMap().getSpawnPacman().y, this.
 		Container contenu = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
 		
 		
-		label = new JLabel(controller.getClassementhtml());
+		label = new JLabel(getController().getClassementhtml());
 		label.setFont(new Font("Serif", Font.PLAIN, 18));
 		label.setForeground(Color.BLACK);
 		label.setOpaque(true);
@@ -499,6 +499,14 @@ Pacman pacman = Pacman.getInstance(this.model.getMap().getSpawnPacman().y, this.
 	*/
 
 	
+	public Controller getController() {
+		return controller;
+	}
+
+	public void setController(Controller controller) {
+		this.controller = controller;
+	}
+
 	private class TestPanel extends JPanel {
 		
 		public TestPanel(){

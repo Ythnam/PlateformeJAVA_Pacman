@@ -52,8 +52,11 @@ public class Controller implements KeyListener {
 		
 		if(this.model.getPacman().getPacmanLives()>0){
 			if(source==KeyEvent.VK_UP){
-				this.model.getPacman().goTop();
-				loose();
+				this.model.getPacman().setTop(true);
+				this.model.getPacman().setDown(false);
+				this.model.getPacman().setRight(false);
+				this.model.getPacman().setLeft(false);
+				//loose();
 				this.model.getPacman().setImageIcon(this.model.getPacman().getImageIconTop());
 				if(this.model.getMap().getCounter() == 0){
 					try {
@@ -64,8 +67,11 @@ public class Controller implements KeyListener {
 				}
 			}
 			else if(source==KeyEvent.VK_DOWN){
-				this.model.getPacman().goBot();
-				loose();
+				this.model.getPacman().setTop(false);
+				this.model.getPacman().setDown(true);
+				this.model.getPacman().setRight(false);
+				this.model.getPacman().setLeft(false);
+				//loose();
 				this.model.getPacman().setImageIcon(this.model.getPacman().getImageIconBot());
 				if(this.model.getMap().getCounter() == 0){
 					try {
@@ -76,8 +82,11 @@ public class Controller implements KeyListener {
 					}
 				}
 			}else if(source==KeyEvent.VK_RIGHT){
-				this.model.getPacman().goRight();
-				loose();
+				this.model.getPacman().setTop(false);
+				this.model.getPacman().setDown(false);
+				this.model.getPacman().setRight(true);
+				this.model.getPacman().setLeft(false);
+				
 				this.model.getPacman().setImageIcon(this.model.getPacman().getImageIconRight());
 				if(this.model.getMap().getCounter() == 0){
 					try {
@@ -88,8 +97,11 @@ public class Controller implements KeyListener {
 					}
 				}
 			}else if(source==KeyEvent.VK_LEFT){
-				this.model.getPacman().goLeft();
-				loose();
+				this.model.getPacman().setTop(false);
+				this.model.getPacman().setDown(false);
+				this.model.getPacman().setRight(false);
+				this.model.getPacman().setLeft(true);
+				//loose();
 				this.model.getPacman().setImageIcon(this.model.getPacman().getImageIconLeft());
 				if(this.model.getMap().getCounter() == 0){
 					try {
