@@ -158,7 +158,7 @@ public class Ghost implements Runnable {
 					//System.out.println(wall);
 					if(wall == '0' || wall == '2' || wall == '3'){ //wall =1 -> wall est un mur
 						alI.add(count); // je récupère le numéro des cases ou les ghosts peuvent passer (1=top, 2=bot, 3=droite, 4=gauche);
-						System.out.println(alI);
+						//System.out.println(alI);
 					}
 					count++;
 				}
@@ -174,8 +174,8 @@ public class Ghost implements Runnable {
 					break;
 				case 2 :
 					int position2 = alI.get(rand.nextInt(alI.size()));
-					System.out.println("Position :"+position2);
-					System.out.println("cache :"+this.cache);
+					//System.out.println("Position :"+position2);
+					//System.out.println("cache :"+this.cache);
 					/*while(position2 != this.cache){
 						position2 = alI.get(this.rand.nextInt(alI.size()));
 						//System.out.println("p2 :"+position2);
