@@ -103,26 +103,6 @@ public class Ghost implements Runnable {
 			}
 			
 			public void mySwitch(int i){
-				/*switch(i){
-				case 0:
-					//this.cache = 0;
-					this.x = this.x+1;
-					break;
-				case 1 :
-					//this.cache = 1;
-					this.x = this.x-1;
-					break;
-				case 2 :
-					//this.cache = 2;
-					this.y = this.y+1;
-					break;
-				case 3 :
-					//this.cache = 3;
-					this.y = this.y-1;
-					break;
-				default :
-					System.err.println("error");
-				}*/
 				switch(i){
 				case 0 : 
 					if(this.x<this.field.getXMAX()-1){
