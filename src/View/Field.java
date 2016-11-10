@@ -350,11 +350,7 @@ Pacman pacman = new Pacman(this.model.getMap().getSpawnPacman().y, this.model.ge
 			}
 		
 		}else {
-		//	if(b){
 				getChron().gamepause();	
-			//	b=false;
-		//	}
-			
 		}
 		
 		
@@ -395,6 +391,13 @@ Pacman pacman = new Pacman(this.model.getMap().getSpawnPacman().y, this.model.ge
 			g.setX(this.model.getMap().getSpawnGhost().y);
 			g.setY(this.model.getMap().getSpawnGhost().x);
 		}
+		
+		frame.dispose();
+		 this.model.getPacman().setPacmanLives(3);
+		frame = new JFrame();
+		this.chron.restart();
+		this.chron.setOnPause(true);
+		this.getController().gamePause();
 		
 		
 		//this.model.setPacman(Pacman.getInstance(this.model.getMap().getSpawnPacman().y, this.model.getMap().getSpawnPacman().x, this));

@@ -242,6 +242,10 @@ public class Controller implements KeyListener {
 				this.model.getPacman().setPacmanLives(this.model.getPacman().getPacmanLives()-1);
 				view.updateScoreAndLife();
 				gamePause();
+				this.model.getPacman().setRight(false);
+				this.model.getPacman().setLeft(false);
+				this.model.getPacman().setTop(false);
+				this.model.getPacman().setDown(false);
 				if(this.model.getPacman().getPacmanLives() != 0){
 					view.popLooseLife();
 				}else{
