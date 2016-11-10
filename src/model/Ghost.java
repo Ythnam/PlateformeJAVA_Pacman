@@ -3,6 +3,8 @@ package model;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
@@ -35,42 +37,170 @@ public class Ghost implements Runnable {
 	}
 	
 	//test pour l'IA des ghost   
-	private int cache;
-	private int aroundGhost[] = new int[4];
-	
-	public int getCache() {
-		return cache;
-	}
-	
-	public void setCache(int cache) {
-		this.cache = cache;
-	}      
-	
-	public void setAroundGhost(){
-		this.aroundGhost[0] = x++;
-		this.aroundGhost[1] = x--;
-		this.aroundGhost[2] = y++;
-		this.aroundGhost[3] = y--;
-	}
-	
-	public void ghostIA(){
-		int choice = rand.nextInt(4);
-		while(this.cache == choice){
-			choice = rand.nextInt(4);
-			// Permet d'éviter au fantome de se retourner
-		}
-		boolean[][] cacheWallMap = this.field.getModel().getMap().getBol();
-		for(int i : aroundGhost){
-			if(cacheWallMap[aroundGhost[i]][y]){
-				//a faire
+			private int cache = -10;
+			/*private int aroundGhostX[] = new int[2];
+			private int aroundGhostY[] = new int[2];
+			private int LastX;
+			private int LastY;
+			
+			public int getCache() {
+				return cache;
+			}
+			
+			public void setCache(int cache) {
+				this.cache = cache;
+			}      
+			
+			public void setAroundGhostX(){
+				this.aroundGhostX[0] = x++;
+				this.aroundGhostX[1] = x--;
+			}
+			
+			public void setAroundGhostY(){
+				this.aroundGhostY[0] = y++;
+				this.aroundGhostY[1] = y--;
+			}
+			
+			public void setAroundGhost(){
+				this.setAroundGhostX();
+				this.setAroundGhostY();
+			}*/
+			
+	/**
+	 * Cette fonction permet de savoir ce qui se trouve autour du ghost
+	 * @return un tableau de 4 éléments permettant de savoir s'il y a un mur ou non autour de lui
+	 */
+			public char[] getWallAroundGhost(){
+				char[][] cacheWallMap = this.field.getModel().getMap().getTab(); // récupère le tableau des chemins et murs
+				/*for(int i=0;i<=9;i++){
+						System.out.println(cacheWallMap[i][0]+""+cacheWallMap[i][1]+""+cacheWallMap[i][2]+""+cacheWallMap[i][3]+""+cacheWallMap[i][4]+""+cacheWallMap[i][5]+""+cacheWallMap[i][6]+""+cacheWallMap[i][7]+""+cacheWallMap[i][8]+""+cacheWallMap[i][9]);
+					
+				}*/
+				char[] aroundAvailable = new char[4];
+				if(this.x == this.field.getXMAX()-1){
+					aroundAvailable[0] = cacheWallMap[this.y][0]; // droite
+				}else{
+					aroundAvailable[0] = cacheWallMap[this.y][this.x+1]; //droite
+				}
+				if(this.x == 0){
+					aroundAvailable[1] = cacheWallMap[this.y][this.field.getXMAX()-1]; //gauche
+				}else{
+					aroundAvailable[1] = cacheWallMap[this.y][this.x-1]; //gauche
+				}
+				if(this.y == this.field.getYMAX()-1){
+					aroundAvailable[2] = cacheWallMap[0][this.x]; //bas
+				}else{
+					aroundAvailable[2] = cacheWallMap[this.y+1][this.x]; //bas
+				}
+				if(this.y == 0){
+					aroundAvailable[3] = cacheWallMap[this.field.getYMAX()-1][this.x]; //haut
+				}else{
+					aroundAvailable[3] = cacheWallMap[this.y-1][this.x]; //haut
+				}
 				
+				//System.out.println("position"+this.x+" "+this.y+"droite:"+aroundAvailable[0]+" gauche:"+aroundAvailable[1]+" bas:"+aroundAvailable[2]+" haut"+aroundAvailable[3]);
+				return aroundAvailable;
+			}
+			
+			public void mySwitch(int i){
+				switch(i){
+				case 0 : 
+					if(this.x<this.field.getXMAX()-1){
+						if(Map.getTab()[y][x+1]!='1'){this.x++;}
+					}
+					else {
+						if(Map.getTab()[y][0]!='1'){
+							this.x=0;
+						}
+					}
+					break;
+				case 1 :
+					if(this.x>0){
+						if(Map.getTab()[y][x-1]!='1'){this.x--;}
+					}
+					else {
+						if(Map.getTab()[y][this.field.getXMAX()-1]!='1'){
+							this.x = this.field.getXMAX()-1;
+						}
+					}
+					break;
+				case 2 :
+					if(this.y < this.field.getYMAX()-1){
+						if(Map.getTab()[y+1][x]!='1'){
+							this.y++;
+						}
+					}
+					else {
+						if(Map.getTab()[0][x]!='1'){
+							this.y=0;
+						}
+					}
+					break;
+				case 3 :
+					if(this.y> 0){
+						if(Map.getTab()[y-1][x]!='1') this.y--;
+					}
+					else {
+						if(Map.getTab()[(this.field.getYMAX()-1)][x]!='1'){
+						this.y = this.field.getYMAX()-1;
+						}
+					}
+					break;
+				}
+			}
+
+			public void ghostIA(){
+
+				char[] wallAround = this.getWallAroundGhost();
+				ArrayList<Integer> alI = new ArrayList();
+				int count = 0;		
+				for(char wall : wallAround){
+					//System.out.println(wall);
+					if(wall == '0' || wall == '2' || wall == '3'){ //wall =1 -> wall est un mur
+						alI.add(count); // je récupère le numéro des cases ou les ghosts peuvent passer (1=top, 2=bot, 3=droite, 4=gauche);
+						//System.out.println(alI);
+					}
+					count++;
+				}
+				
+				Iterator itI = alI.iterator();
+				
+				switch(alI.size()){
+				case 1 :
+					int position1 = (int) itI.next();
+					//System.out.println("position 1 : "+position1);
+					mySwitch(position1);
+					//tryToMove(position1);
+					break;
+				case 2 :
+					int position2 = alI.get(rand.nextInt(alI.size()));
+					//System.out.println("Position :"+position2);
+					//System.out.println("cache :"+this.cache);
+					/*while(position2 != this.cache){
+						position2 = alI.get(this.rand.nextInt(alI.size()));
+						//System.out.println("p2 :"+position2);
+					}*/
+					//System.out.println("position 2 : "+position2);
+					mySwitch(position2);
+					//tryToMove(position2);
+					break;
+				case 3 :
+					int position3 = alI.get(rand.nextInt(alI.size()));
+					//while(position3 != this.cache) position3 = alI.get(rand.nextInt(alI.size()));
+					//System.out.println("position 3 : "+position3);
+					mySwitch(position3);
+					//tryToMove(position3);
+					break;
+				case 4 :
+					int position4 = alI.get(rand.nextInt(alI.size()));
+					//while(position4 != this.cache) position4 = alI.get(rand.nextInt(alI.size()));
+					mySwitch(position4);
+					break;
+				}
 				
 			}
-		}
-		
-	}
-	
-	// Fin test IA
+			
+			// Fin test IA
 	
 	public Ghost(int x, int y, Field field){
 		this.x = x;
@@ -121,7 +251,8 @@ public class Ghost implements Runnable {
 				}
 				Thread.sleep(500);
 				
-				tryToMove();
+				//tryToMove();
+				ghostIA();
 				
 				field.repaint();
 				if(this.field.getModel().getMap().getCounter()==0){
