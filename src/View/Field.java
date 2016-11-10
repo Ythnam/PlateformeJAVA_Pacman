@@ -25,6 +25,7 @@ import javax.swing.JSplitPane;
 import javax.swing.Timer;
 
 import controller.Controller;
+import main.Main;
 import model.Apple;
 import model.Bell;
 import model.Cherry;
@@ -61,9 +62,11 @@ public class Field extends JPanel implements ActionListener{
     JButton retry;
     JButton nextlvl;
     JFrame frame = new JFrame();
+    JFrame test = new JFrame();
+  
 	
-	public Field(){
-		
+	public Field(JFrame fram){
+		this.test = fram;
 		generatePacmanRandomly();
 		generateGhostRandomly(3);
 		//generateItemsRandomly(10, 5, 4, 3, 5, 1, 1, 1); // en test random pour les valeurs
@@ -118,6 +121,11 @@ public class Field extends JPanel implements ActionListener{
 	
 	public  Model getModel() {
 		return model;
+	}
+	
+	public void updatevalues(){
+		  XMAX = this.model.getMap().getLongueur();
+		 YMAX = this.model.getMap().getHauteur(); 
 	}
 
     public void addNotify() {
@@ -360,8 +368,43 @@ Pacman pacman = new Pacman(this.model.getMap().getSpawnPacman().y, this.model.ge
 	        	nextlvl();
 	}
 
-	private void nextlvl() {
+	@SuppressWarnings("deprecation")
+	public void nextlvl() {
 		System.out.println("next lvl");
+		chrono = 0;
+		this.model.getPacman().setPacmanScore(0);
+		if(this.model.getLvl() == 1) this.model.setLvl(this.model.getLvl()+1);
+		else  this.model.setLvl(this.model.getLvl()-1);
+		
+		this.model.updatefichier();
+		System.out.println(this.model.getFichier());
+		this.model.lecture();
+		this.model.createstring();
+		updatevalues();
+		System.out.println(XMAX+""+ YMAX);
+		//(Field)this = new Field();
+		//JFrame f = new JFrame();
+		//this.newPanel = new TestPanel();
+		Dimension preferredSize = new Dimension(XMAX*step,YMAX*step);
+		this.newPanel.setPreferredSize(preferredSize );
+		test.pack();
+		this.model.getPacman().setX(this.model.getMap().getSpawnPacman().y);
+		this.model.getPacman().setY(this.model.getMap().getSpawnPacman().x);
+		
+		for (Ghost g : this.model.getAlGhost()){
+			g.setX(this.model.getMap().getSpawnGhost().y);
+			g.setY(this.model.getMap().getSpawnGhost().x);
+		}
+		
+		
+		//this.model.setPacman(Pacman.getInstance(this.model.getMap().getSpawnPacman().y, this.model.getMap().getSpawnPacman().x, this));
+		/*updateScoreAndLife();
+		updatetimer()
+		frame.dispose();
+		frame = new JFrame();
+		this.chron.restart();
+		this.chron.setOnPause(true);
+		this.getController().gamePause();*/
 	}
 
 	private void retry() {
@@ -372,7 +415,6 @@ Pacman pacman = new Pacman(this.model.getMap().getSpawnPacman().y, this.model.ge
 		this.model.getPacman().setPacmanLives(3);;
 		this.model.lecture();
 		this.model.createstring();
-		this.newPanel = new TestPanel();
 		this.model.getPacman().setX(this.model.getMap().getSpawnPacman().y);
 		this.model.getPacman().setY(this.model.getMap().getSpawnPacman().x);
 		
@@ -392,6 +434,7 @@ Pacman pacman = new Pacman(this.model.getMap().getSpawnPacman().y, this.model.ge
 
 	private void end() {
 		frame.dispose();
+		frame = new JFrame();
 	}
 
 	public void popLooseLife(){

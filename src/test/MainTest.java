@@ -1,5 +1,7 @@
 package test;
 
+import javax.swing.JFrame;
+
 import View.Field;
 import model.Ghost;
 import model.Model;
@@ -8,7 +10,8 @@ import model.Orange;
 public class MainTest {
 
 	public static void main(String[] args) {
-		Field field = new Field();
+		JFrame f = new JFrame();
+		Field field = new Field(f);
 		Orange o = new Orange(1,2, field);
 		Model model = new Model();
 		

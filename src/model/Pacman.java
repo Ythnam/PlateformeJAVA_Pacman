@@ -1,6 +1,7 @@
 package model;
 
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
@@ -95,6 +96,13 @@ public class Pacman implements Runnable{
 				Map.getBol()[y][x-1]=false;
 				this.x--;
 				this.field.getController().loose();
+				if(this.field.getModel().getMap().getCounter() == 0){
+					try {
+						this.field.getController().savescore();
+						} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+				}
 			}
 			
 		}
@@ -104,6 +112,13 @@ public class Pacman implements Runnable{
 				Map.getBol()[y][this.field.getXMAX()-1]=false;
 				this.x = this.field.getXMAX()-1;
 				this.field.getController().loose();
+				if(this.field.getModel().getMap().getCounter() == 0){
+					try {
+						this.field.getController().savescore();
+						} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+				}
 			}
 		}
 		}
@@ -111,6 +126,7 @@ public class Pacman implements Runnable{
 	
 
 	public void goRight(){
+		//this.field.nextlvl();
 		if(!isOnPause()){
 		if(this.x<this.field.getXMAX()-1){
 			
@@ -119,6 +135,13 @@ public class Pacman implements Runnable{
 				Map.getBol()[y][x+1]=false;
 				this.x++;
 				this.field.getController().loose();
+				if(this.field.getModel().getMap().getCounter() == 0){
+					try {
+						this.field.getController().savescore();
+						} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+				}
 			}
 		}
 		else {
@@ -127,6 +150,13 @@ public class Pacman implements Runnable{
 				Map.getBol()[y][0]=false;
 				this.x=0;
 				this.field.getController().loose();
+				if(this.field.getModel().getMap().getCounter() == 0){
+					try {
+						this.field.getController().savescore();
+						} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+				}
 			}
 		}
 		}
@@ -141,6 +171,13 @@ public class Pacman implements Runnable{
 				
 				this.y++;
 				this.field.getController().loose();
+				if(this.field.getModel().getMap().getCounter() == 0){
+					try {
+						this.field.getController().savescore();
+						} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+				}
 			}
 		}
 		else {
@@ -149,6 +186,13 @@ public class Pacman implements Runnable{
 				Map.getBol()[0][x]=false;
 				this.y=0;
 				this.field.getController().loose();
+				if(this.field.getModel().getMap().getCounter() == 0){
+					try {
+						this.field.getController().savescore();
+						} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+				}
 			}
 		}
 		}
@@ -162,6 +206,13 @@ public class Pacman implements Runnable{
 				Map.getBol()[y-1][x]=false;
 				this.y--;
 				this.field.getController().loose();
+				if(this.field.getModel().getMap().getCounter() == 0){
+					try {
+						this.field.getController().savescore();
+						} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+				}
 			}
 		}
 		else {
@@ -170,6 +221,13 @@ public class Pacman implements Runnable{
 				Map.getBol()[this.field.getYMAX()-1][x]=false;
 			this.y = this.field.getYMAX()-1;
 			this.field.getController().loose();
+			if(this.field.getModel().getMap().getCounter() == 0){
+				try {
+					this.field.getController().savescore();
+					} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
 			}
 		}
 		}

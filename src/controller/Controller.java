@@ -47,6 +47,7 @@ public class Controller implements KeyListener {
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
+	
 		
 		int source = e.getKeyCode();
 		
@@ -58,13 +59,7 @@ public class Controller implements KeyListener {
 				this.model.getPacman().setLeft(false);
 				//loose();
 				this.model.getPacman().setImageIcon(this.model.getPacman().getImageIconTop());
-				if(this.model.getMap().getCounter() == 0){
-					try {
-						savescore();
-						} catch (IOException e1) {
-						e1.printStackTrace();
-					}
-				}
+				
 			}
 			else if(source==KeyEvent.VK_DOWN){
 				this.model.getPacman().setTop(false);
@@ -73,14 +68,8 @@ public class Controller implements KeyListener {
 				this.model.getPacman().setLeft(false);
 				//loose();
 				this.model.getPacman().setImageIcon(this.model.getPacman().getImageIconBot());
-				if(this.model.getMap().getCounter() == 0){
-					try {
-						savescore();
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-				}
+				
+				
 			}else if(source==KeyEvent.VK_RIGHT){
 				this.model.getPacman().setTop(false);
 				this.model.getPacman().setDown(false);
@@ -88,14 +77,6 @@ public class Controller implements KeyListener {
 				this.model.getPacman().setLeft(false);
 				
 				this.model.getPacman().setImageIcon(this.model.getPacman().getImageIconRight());
-				if(this.model.getMap().getCounter() == 0){
-					try {
-						savescore();
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-				}
 			}else if(source==KeyEvent.VK_LEFT){
 				this.model.getPacman().setTop(false);
 				this.model.getPacman().setDown(false);
@@ -103,14 +84,7 @@ public class Controller implements KeyListener {
 				this.model.getPacman().setLeft(true);
 				//loose();
 				this.model.getPacman().setImageIcon(this.model.getPacman().getImageIconLeft());
-				if(this.model.getMap().getCounter() == 0){
-					try {
-						savescore();
-					} catch (IOException e1) {
-						// TODO onAuto-generated catch block
-						e1.printStackTrace();
-					}
-				}
+
 			}else if(source==KeyEvent.VK_SPACE){
 				gamePause();
 				//this.model.getAlGhost().onPause = !this.model.getAlGhost().onPause;

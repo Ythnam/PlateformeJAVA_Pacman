@@ -22,6 +22,10 @@ public class Model {
 		createstring();
 	}
 	
+	public void updatefichier(){
+		this.fichier = "texte/lvl"+ getLvl() + ".txt";
+	}
+	
 	public ArrayList<Ghost> getAlGhost() {
 		return alGhost;
 	}
@@ -67,12 +71,12 @@ public void createstring () {
 	int i =0;
 	int j = 0 ;
 			try{
-				File ips = new File(fichier);
+				File ips = new File(getFichier());
 				FileReader ipsr = new FileReader(ips);
 				BufferedReader br=new BufferedReader(ipsr);
 				Scanner sc = null;
 				try {
-					sc = new Scanner(new File(fichier));
+					sc = new Scanner(new File(getFichier()));
 				while (sc.hasNextLine()) {
 					for (char c : sc.next().toCharArray()) {
 						map.getTab()[i][j] = c;
@@ -113,12 +117,12 @@ public void lecture () {
     int hauteur1 = 0;
 	
 			try{
-				File ips = new File(fichier);
+				File ips = new File(getFichier());
 				FileReader ipsr = new FileReader(ips);
 				BufferedReader br=new BufferedReader(ipsr);
 				Scanner sc = null;
 				try {
-					sc = new Scanner(new File(fichier));
+					sc = new Scanner(new File(getFichier()));
 				while (sc.hasNextLine()) {
 					for (char c : sc.next().toCharArray()) {
 						longueur1 += 1;
@@ -135,9 +139,9 @@ public void lecture () {
 			}
 			
 			longueur1 = longueur1/hauteur1;
-			//System.out.println(hauteur1); 
+			System.out.println(hauteur1); 
 			this.map.setHauteur(hauteur1);
-			//System.out.println(longueur1);
+			System.out.println(longueur1);
 			this.map.setLongueur(longueur1);		
 }
 
@@ -147,6 +151,14 @@ public int getLvl() {
 
 public void setLvl(int lvl) {
 	this.lvl = lvl;
+}
+
+public String getFichier() {
+	return fichier;
+}
+
+public void setFichier(String fichier) {
+	this.fichier = fichier;
 }
 
 	
