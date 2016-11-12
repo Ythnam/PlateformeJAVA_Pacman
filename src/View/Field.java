@@ -639,9 +639,25 @@ public class Field extends JPanel implements ActionListener{
 					break;
 				case "cherry" :
 					g2.drawImage(Cherry.getImg(), model.getItem().getX()*step, model.getItem().getY()*step, null);
-					//System.out.println("lololol");
 					break;
-
+				case "galboss" :
+					g2.drawImage(Galboss.getImg(), model.getItem().getX()*step, model.getItem().getY()*step, null);
+					break;
+				case "key" :
+					g2.drawImage(Key.getImg(), model.getItem().getX()*step, model.getItem().getY()*step, null);
+					break;
+				case "melon" :
+					g2.drawImage(Melon.getImg(), model.getItem().getX()*step, model.getItem().getY()*step, null);
+					break;
+				case "orange" :
+					g2.drawImage(Orange.getImg(), model.getItem().getX()*step, model.getItem().getY()*step, null);
+					break;
+				case "strawberry" :
+					g2.drawImage(Cherry.getImg(), model.getItem().getX()*step, model.getItem().getY()*step, null);
+					break;
+				default :
+					System.out.println("error");
+					break;
 				}
 			}
 			
