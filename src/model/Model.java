@@ -13,7 +13,9 @@ public class Model {
 	private Pacman pacman;
 	private Map map = new Map();
 	private ArrayList<Ghost> alGhost = new ArrayList<>();
-	private ArrayList<Items> alItems = new ArrayList<>();
+	//private ArrayList<Items> alItems = new ArrayList<>();
+	private RandomItemPop randomPop;
+	private Items item = null;
 	private int lvl = 1;
 	private String fichier="texte/lvl"+ getLvl() + ".txt";
 	
@@ -30,12 +32,28 @@ public class Model {
 		return alGhost;
 	}
 	
-	public ArrayList<Items> getAlItems() {
+	/*public ArrayList<Items> getAlItems() {
 		return alItems;
-	}
+	}*/
 	
 	public Pacman getPacman() {
 		return pacman;
+	}
+	
+	public RandomItemPop getRandomPop() {
+		return randomPop;
+	}
+	
+	public Items getItem() {
+		return item;
+	}
+	
+	public void setItem(Items item) {
+		this.item = item;
+	}
+	
+	public void setRandomPop(RandomItemPop randomPop) {
+		this.randomPop = randomPop;
 	}
 
 	
@@ -43,9 +61,9 @@ public class Model {
 		this.alGhost = alGhost;
 	}
 	
-	public void setAlItems(ArrayList<Items> alItems) {
+	/*public void setAlItems(ArrayList<Items> alItems) {
 		this.alItems = alItems;
-	}
+	}*/
 	
 	public void setPacman(Pacman pacman) {
 		this.pacman = pacman;
@@ -55,9 +73,9 @@ public class Model {
 		this.alGhost.add(g);
 	}
 	
-	public void addToAlItems(Items i){
+	/*public void addToAlItems(Items i){
 		this.alItems.add(i);
-	}
+	}*/
 
 	public Map getMap() {
 		return map;

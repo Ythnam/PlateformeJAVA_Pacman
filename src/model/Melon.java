@@ -21,7 +21,7 @@ public class Melon extends Items{
 	
 	static{
 		try{
-			img = ImageIO.read(new File("path"));
+			img = ImageIO.read(new File("image/melon20x20.png"));
 		} catch (IOException e){
 			e.printStackTrace();
 		}
@@ -44,6 +44,10 @@ public class Melon extends Items{
 	
 	public List<Integer> getLevel(){
 		return this.level;
+	}
+	
+	public static BufferedImage getImg() {
+		return img;
 	}
 	
 	/*

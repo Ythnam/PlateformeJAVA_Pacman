@@ -26,10 +26,10 @@ public class Ghost implements Runnable {
 	
 	static{
 		try{
-			ghostRED = ImageIO.read(new File(/*"image/ghost_red.png"*/"image/red20x20.png"));
-			ghostBLUE = ImageIO.read(new File(/*"image/ghost_blue.png"*/"image/blue20x20.png"));
-			ghostGREEN = ImageIO.read(new File(/*"image/ghost_green.png"*/"image/green20x20.png"));
-			ghostORANGE = ImageIO.read(new File(/*"image/ghost_orange.png"*/"image/orange20x20.png"));
+			ghostRED = ImageIO.read(new File("image/ghost_red20x20.png"));
+			ghostBLUE = ImageIO.read(new File("image/ghost_blue20x20.png"));
+			ghostGREEN = ImageIO.read(new File("image/ghost_green20x20.png"));
+			ghostORANGE = ImageIO.read(new File("image/ghost_orange20x20.png"));
 
 		} catch (IOException e){
 			e.printStackTrace();
@@ -38,33 +38,6 @@ public class Ghost implements Runnable {
 	
 	//test pour l'IA des ghost   
 			private int cache = -10;
-			/*private int aroundGhostX[] = new int[2];
-			private int aroundGhostY[] = new int[2];
-			private int LastX;
-			private int LastY;
-			
-			public int getCache() {
-				return cache;
-			}
-			
-			public void setCache(int cache) {
-				this.cache = cache;
-			}      
-			
-			public void setAroundGhostX(){
-				this.aroundGhostX[0] = x++;
-				this.aroundGhostX[1] = x--;
-			}
-			
-			public void setAroundGhostY(){
-				this.aroundGhostY[0] = y++;
-				this.aroundGhostY[1] = y--;
-			}
-			
-			public void setAroundGhost(){
-				this.setAroundGhostX();
-				this.setAroundGhostY();
-			}*/
 			
 	/**
 	 * Cette fonction permet de savoir ce qui se trouve autour du ghost
