@@ -8,10 +8,12 @@ import View.Field;
 
 public class RandomItemPop implements Runnable{
 
+	ArrayList<Point> alP = new ArrayList<Point>();
+	
 	private Field field;
 	private int x;
 	private int y;
-	private boolean bool = true;
+	
 	
 	public RandomItemPop(Field field){
 		this.field = field;
@@ -36,13 +38,23 @@ public class RandomItemPop implements Runnable{
 	public void run() {
 		try{
 			Thread.sleep(10000);
-			while(bool){		
+			while(true){		
 				this.typeOfItemsSelected();
+				/*for (Items it : this.field.getModel().getAlItems()){
+					creaPoint();
+					it.setXY(this.x,this.y);
+				}*/
+				
+				//this.typeOfItemsSelected();
 				this.field.repaint();
-				Thread.sleep(15000);
-				this.field.getModel().setItem(null);
+				Thread.sleep(5000);
+				
+				for (int k=0;k<this.field.getModel().getAlItems().size();k++){
+					this.field.getModel().getAlItems().set(k, null);
+				}
+				//this.field.getModel().setItem(null);
 				this.field.repaint();
-				Thread.sleep(15000);
+				Thread.sleep(5000);
 				
 			}
 		} catch (InterruptedException e){
@@ -51,13 +63,10 @@ public class RandomItemPop implements Runnable{
 
 	}
 
-	public void starStop(){
-		bool = !bool;
-	}
 
 	private void pointItemPop(){
 		char[][] WallMap = this.field.getModel().getMap().getTab(); // récupère le tableau des chemins et murs
-		ArrayList<Point> alP = new ArrayList<Point>();
+		
 
 		for(int i = 0; i < this.field.getXMAX(); i++){
 			for(int j = 0; j < this.field.getYMAX(); j++){
@@ -68,6 +77,12 @@ public class RandomItemPop implements Runnable{
 		}
 		// J'ai récupéré les points où les Items peuvent pop
 
+		
+		
+
+	}
+	
+	public void creaPoint(){
 		Random rand = new Random();
 		int randomIntPop = rand.nextInt(alP.size());
 
@@ -80,19 +95,40 @@ public class RandomItemPop implements Runnable{
 		Items items = new Apple(0,0,this.field);
 
 		this.pointItemPop();
+		this.creaPoint();
 		
 		switch(level){
 		case 1 :
 			items = new Cherry(this.x, this.y, this.field);
+			this.field.getModel().addToAlItems(items);
 			break;
 		case 2 :
+			items = new Cherry(this.x, this.y, this.field);
+			this.field.getModel().addToAlItems(items);
+			this.creaPoint();
 			items = new Strawberry(this.x, this.y, this.field);
+			this.field.getModel().addToAlItems(items);
 			break;
 		case 3 :
+			items = new Cherry(this.x, this.y, this.field);
+			this.field.getModel().addToAlItems(items);
+			this.creaPoint();
+			items = new Strawberry(this.x, this.y, this.field);
+			this.field.getModel().addToAlItems(items);
+			this.creaPoint();
 			items = new Orange(this.x, this.y, this.field);
+			this.field.getModel().addToAlItems(items);
 			break;
 		case 4 :
+			items = new Cherry(this.x, this.y, this.field);
+			this.field.getModel().addToAlItems(items);
+			this.creaPoint();
+			items = new Strawberry(this.x, this.y, this.field);
+			this.field.getModel().addToAlItems(items);
+			this.creaPoint();
 			items = new Orange(this.x, this.y, this.field);
+			this.field.getModel().addToAlItems(items);
+			this.creaPoint();
 			break;
 		case 5 :
 			items = new Apple(this.x, this.y, this.field);
@@ -123,7 +159,7 @@ public class RandomItemPop implements Runnable{
 			break;
 
 		}
-		this.field.getModel().setItem(items);
+		//this.field.getModel().setItem(items);
 	}
 
 	public void setX(int i) {

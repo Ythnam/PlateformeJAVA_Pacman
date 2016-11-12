@@ -32,6 +32,7 @@ import model.Cherry;
 import model.Chrono;
 import model.Galboss;
 import model.Ghost;
+import model.Items;
 import model.Key;
 import model.Melon;
 import model.Model;
@@ -107,7 +108,7 @@ public class Field extends JPanel implements ActionListener{
 
 
 		this.newPanel = new TestPanel();
-		Dimension preferredSize = new Dimension(YMAX*step,XMAX*step);
+		Dimension preferredSize = new Dimension(XMAX*step,YMAX*step);
 		newPanel.setPreferredSize(preferredSize );
 		conten.add(newPanel);
 
@@ -408,8 +409,9 @@ public class Field extends JPanel implements ActionListener{
 		this.model.getPacman().setPacmanLives(3);
 		frame = new JFrame();
 		this.chron.restart();
-		this.chron.setOnPause(true);
+		
 		this.getController().gamePause();
+		this.chron.setOnPause(true);
 
 
 		//this.model.setPacman(Pacman.getInstance(this.model.getMap().getSpawnPacman().y, this.model.getMap().getSpawnPacman().x, this));
@@ -466,7 +468,7 @@ public class Field extends JPanel implements ActionListener{
 					g.setY(this.model.getMap().getSpawnGhost().x);
 				}
 
-				this.getController().gamePause();
+			// 	this.getController().gamePause();
 			}
 		}
 	}
@@ -489,7 +491,7 @@ public class Field extends JPanel implements ActionListener{
 	}
 
 	public void popClassement(){
-
+		
 		frame.setSize(300,300);
 		frame.setResizable(true);
 		frame.setLocation(300, 300);
@@ -629,39 +631,40 @@ public class Field extends JPanel implements ActionListener{
 			model.getPacman().getImageIcon().paintIcon(newPanel, g2, model.getPacman().getX()*step, model.getPacman().getY()*step);
 			//g2.drawImage(Cherry.getImg(), model.getItem().getX()*step, model.getItem().getY()*step, null);
 
-			if(model.getItem() != null){
-				switch(model.getItem().getName()){
-				case "apple" :
-					g2.drawImage(Apple.getImg(), model.getItem().getX()*step, model.getItem().getY()*step, null);
-					break;
-				case "bell" :
-					g2.drawImage(Bell.getImg(), model.getItem().getX()*step, model.getItem().getY()*step, null);
-					break;
-				case "cherry" :
-					g2.drawImage(Cherry.getImg(), model.getItem().getX()*step, model.getItem().getY()*step, null);
-					break;
-				case "galboss" :
-					g2.drawImage(Galboss.getImg(), model.getItem().getX()*step, model.getItem().getY()*step, null);
-					break;
-				case "key" :
-					g2.drawImage(Key.getImg(), model.getItem().getX()*step, model.getItem().getY()*step, null);
-					break;
-				case "melon" :
-					g2.drawImage(Melon.getImg(), model.getItem().getX()*step, model.getItem().getY()*step, null);
-					break;
-				case "orange" :
-					g2.drawImage(Orange.getImg(), model.getItem().getX()*step, model.getItem().getY()*step, null);
-					break;
-				case "strawberry" :
-					g2.drawImage(Strawberry.getImg(), model.getItem().getX()*step, model.getItem().getY()*step, null);
-					break;
-				default :
-					System.out.println("error");
-					break;
+			for (Items it : model.getAlItems()){
+				if(it != null){
+					switch(it.getName()){
+					case "apple" :
+						g2.drawImage(Apple.getImg(), it.getX()*step, it.getY()*step, null);
+						break;
+					case "bell" :
+						g2.drawImage(Bell.getImg(),it.getX()*step, it.getY()*step, null);
+						break;
+					case "cherry" :
+						g2.drawImage(Cherry.getImg(), it.getX()*step, it.getY()*step, null);
+						break;
+					case "galboss" :
+						g2.drawImage(Galboss.getImg(), it.getX()*step, it.getY()*step, null);
+						break;
+					case "key" :
+						g2.drawImage(Key.getImg(), it.getX()*step, it.getY()*step, null);
+						break;
+					case "melon" :
+						g2.drawImage(Melon.getImg(), it.getX()*step, it.getY()*step, null);
+						break;
+					case "orange" :
+						g2.drawImage(Orange.getImg(), it.getX()*step, it.getY()*step, null);
+						break;
+					case "strawberry" :
+						g2.drawImage(Strawberry.getImg(), it.getX()*step, it.getY()*step, null);
+						break;
+					default :
+						System.out.println("error");
+						break;
+					}
 				}
-			}
 			
-
+			}
 		}
 	}
 
