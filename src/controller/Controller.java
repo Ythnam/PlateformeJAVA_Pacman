@@ -44,6 +44,18 @@ public class Controller implements KeyListener {
 		return this.model;
 	}
 	
+	public void testitem(){
+		if(this.model.getItem()!=null){
+			if(this.model.getPacman().getX() == this.model.getRandomPop().getX() && this.model.getPacman().getY() == this.model.getRandomPop().getY() ){
+				//this.model.getRandomPop().starStop();
+				//this.model.getRandomPop().setX(-1);
+				System.out.println("eat eat eat");
+				//this.view.repaint();
+				this.model.getPacman().setPacmanScore(this.model.getPacman().getPacmanScore()+this.model.getItem().getScore());
+				this.model.setItem(null);
+			}
+		}
+	}
 	
 	@Override
 	public void keyPressed(KeyEvent e) {

@@ -12,6 +12,7 @@ public abstract class Items {
 	protected int x, y;
 	protected boolean isTaken = false; //permet de savoir si le PACMAN l'a mangé ou non
 	protected Field field;
+	protected int SCORE;
 
 
 	public void setXY(int x, int y){

@@ -11,6 +11,7 @@ public class RandomItemPop implements Runnable{
 	private Field field;
 	private int x;
 	private int y;
+	private boolean bool = true;
 	
 	public RandomItemPop(Field field){
 		this.field = field;
@@ -34,11 +35,15 @@ public class RandomItemPop implements Runnable{
 	@Override
 	public void run() {
 		try{
-			while(true){
-				Thread.sleep(10000);
-				
+			Thread.sleep(10000);
+			while(bool){		
 				this.typeOfItemsSelected();
 				this.field.repaint();
+				Thread.sleep(15000);
+				this.field.getModel().setItem(null);
+				this.field.repaint();
+				Thread.sleep(15000);
+				
 			}
 		} catch (InterruptedException e){
 			e.printStackTrace();
@@ -46,6 +51,9 @@ public class RandomItemPop implements Runnable{
 
 	}
 
+	public void starStop(){
+		bool = !bool;
+	}
 
 	private void pointItemPop(){
 		char[][] WallMap = this.field.getModel().getMap().getTab(); // récupère le tableau des chemins et murs
@@ -116,6 +124,11 @@ public class RandomItemPop implements Runnable{
 
 		}
 		this.field.getModel().setItem(items);
+	}
+
+	public void setX(int i) {
+		// TODO Auto-generated method stub
+		this.x = i;
 	}
 
 

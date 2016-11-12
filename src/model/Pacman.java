@@ -86,7 +86,7 @@ public class Pacman implements Runnable{
 		this.field = field;
 		this.imageIcon = getImageIconTop(); 
 	}
-
+	
 
 	public void goLeft(){
 		if(!isOnPause()){
@@ -282,15 +282,19 @@ public class Pacman implements Runnable{
 				
 				if(right){
 				goRight();
+				this.field.getController().testitem();
 				}
 				else if (left){
 					goLeft();
+					this.field.getController().testitem();
 				}
 				else if (top){
 					goTop();
+					this.field.getController().testitem();
 				}
 				else if (down){
 					goBot();
+					this.field.getController().testitem();
 				}
 				field.repaint();
 				if(this.field.getModel().getMap().getCounter()==0){
