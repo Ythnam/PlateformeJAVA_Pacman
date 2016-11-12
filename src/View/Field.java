@@ -9,6 +9,7 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -25,7 +26,6 @@ import javax.swing.JSplitPane;
 import javax.swing.Timer;
 
 import controller.Controller;
-import main.Main;
 import model.Apple;
 import model.Bell;
 import model.Cherry;
@@ -58,6 +58,9 @@ public class Field extends JPanel implements ActionListener{
 	private JLabel label;
 	public Container conten = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
 	TestPanel newPanel;
+	private JButton pause;
+	JButton restart;
+	
 	JButton end;
     JButton retry;
     JButton nextlvl;
@@ -77,6 +80,7 @@ public class Field extends JPanel implements ActionListener{
 		
 		JPanel Panel = new JPanel();
 		
+		//pannel suppérieur contenant toutes les information (vie points et score)
 		
 		scoreLabel = new JLabel( this.model.getPacman().getPacmanScore()+"");
 		scoreLabel.setFont(new Font("Serif", Font.PLAIN, 11));
@@ -102,14 +106,27 @@ public class Field extends JPanel implements ActionListener{
 		Panel.add(timeLabel);
 		
 		conten.add(Panel);
-		
-
+		/// fin panel supp
+		 
+		// pannel central : on dessine la map
 		this.newPanel = new TestPanel();
 		Dimension preferredSize = new Dimension(YMAX*step,XMAX*step);
 		newPanel.setPreferredSize(preferredSize );
 		conten.add(newPanel);
+		// fin du panel 
 		
-		add(conten);
+		JPanel PanelButton = new JPanel();
+		setPause(new JButton("Pause"));
+		restart = new JButton("Retry");
+		getPause().addActionListener(this);
+	    restart.addActionListener(this);
+		PanelButton.add(getPause());
+		PanelButton.add(restart);
+		
+		JSplitPane sp2 = new JSplitPane(JSplitPane.VERTICAL_SPLIT, conten, PanelButton);
+
+		//conten.add(PanelButton);
+		add(sp2);
 		
 		timer = new Timer(1, this);
 		timer.start();
@@ -362,7 +379,28 @@ Pacman pacman = new Pacman(this.model.getMap().getSpawnPacman().y, this.model.ge
 	            retry();
 	        else if (source == nextlvl)
 	        	nextlvl();
+	        else if (source == restart)
+	        	retry();
+	        else if (source == getPause())
+	        	pause();
 	}
+
+	private void pause() {
+		// TODO Auto-generated method stub
+		if(getPause().getText().equals("Pause")){
+			this.controller.gamePause();
+			getPause().setText("Reprendre");
+		}
+		else {
+			this.controller.gamePause();
+			getPause().setText("Pause");
+			
+		}
+			
+		
+	}
+
+
 
 	@SuppressWarnings("deprecation")
 	public void nextlvl() {
@@ -551,6 +589,14 @@ Pacman pacman = new Pacman(this.model.getMap().getSpawnPacman().y, this.model.ge
 
 	public void setController(Controller controller) {
 		this.controller = controller;
+	}
+
+	public JButton getPause() {
+		return pause;
+	}
+
+	public void setPause(JButton pause) {
+		this.pause = pause;
 	}
 
 	private class TestPanel extends JPanel {

@@ -86,7 +86,8 @@ public class Controller implements KeyListener {
 				this.model.getPacman().setImageIcon(this.model.getPacman().getImageIconLeft());
 
 			}else if(source==KeyEvent.VK_SPACE){
-				gamePause();
+					gamePause();
+							
 				//this.model.getAlGhost().onPause = !this.model.getAlGhost().onPause;
 			}
 			else if(source==KeyEvent.VK_ENTER){
