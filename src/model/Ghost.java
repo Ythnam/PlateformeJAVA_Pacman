@@ -38,33 +38,6 @@ public class Ghost implements Runnable {
 	
 	//test pour l'IA des ghost   
 			private int cache = -10;
-			/*private int aroundGhostX[] = new int[2];
-			private int aroundGhostY[] = new int[2];
-			private int LastX;
-			private int LastY;
-			
-			public int getCache() {
-				return cache;
-			}
-			
-			public void setCache(int cache) {
-				this.cache = cache;
-			}      
-			
-			public void setAroundGhostX(){
-				this.aroundGhostX[0] = x++;
-				this.aroundGhostX[1] = x--;
-			}
-			
-			public void setAroundGhostY(){
-				this.aroundGhostY[0] = y++;
-				this.aroundGhostY[1] = y--;
-			}
-			
-			public void setAroundGhost(){
-				this.setAroundGhostX();
-				this.setAroundGhostY();
-			}*/
 			
 	/**
 	 * Cette fonction permet de savoir ce qui se trouve autour du ghost

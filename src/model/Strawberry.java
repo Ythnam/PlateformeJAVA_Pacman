@@ -46,6 +46,10 @@ public class Strawberry extends Items{
 		return this.level;
 	}
 	
+	public static BufferedImage getImg() {
+		return img;
+	}
+	
 	/*
 	public Items generateItems(int x, int y){
 		Strawberry s = new Strawberry(x,y);

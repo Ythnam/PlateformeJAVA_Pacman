@@ -46,6 +46,9 @@ public class Cherry extends Items{
 		return this.level;
 	}
 	
+	public static BufferedImage getImg() {
+		return img;
+	}
 	/*
 	public Items generateItems(int x, int y){
 		Cherry c = new Cherry(x,y);

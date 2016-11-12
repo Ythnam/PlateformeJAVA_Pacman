@@ -45,6 +45,10 @@ public class Galboss extends Items{
 		return this.level;
 	}
 	
+	public static BufferedImage getImg() {
+		return img;
+	}
+	
 	/*
 	public Items generateItems(int x, int y){
 		Galboss g = new Galboss(x,y);

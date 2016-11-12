@@ -45,6 +45,10 @@ public class Bell extends Items{
 		return this.level;
 	}
 	
+	public static BufferedImage getImg() {
+		return img;
+	}
+	
 	/*
 	public Items generateItems(int x, int y){
 		Bell b = new Bell(x,y);

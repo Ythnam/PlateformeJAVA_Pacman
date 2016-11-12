@@ -46,6 +46,10 @@ public class Melon extends Items{
 		return this.level;
 	}
 	
+	public static BufferedImage getImg() {
+		return img;
+	}
+	
 	/*
 	public Items generateItems(int x, int y){
 		Melon m = new Melon(x,y);

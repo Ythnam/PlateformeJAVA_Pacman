@@ -46,6 +46,10 @@ public class Apple extends Items{
 		return this.level;
 	}
 	
+	public static BufferedImage getImg() {
+		return img;
+	}
+	
 	/*
 	public Items generateItems(int x, int y){
 		Apple a = new Apple(x,y);

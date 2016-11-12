@@ -45,6 +45,10 @@ public class Key extends Items{
 		return this.level;
 	}
 	
+	public static BufferedImage getImg() {
+		return img;
+	}
+	
 	/*
 	public Items generateItems(int x, int y){
 		Key k = new Key(x,y);
