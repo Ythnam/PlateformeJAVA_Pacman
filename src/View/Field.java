@@ -653,7 +653,7 @@ public class Field extends JPanel implements ActionListener{
 					g2.drawImage(Orange.getImg(), model.getItem().getX()*step, model.getItem().getY()*step, null);
 					break;
 				case "strawberry" :
-					g2.drawImage(Cherry.getImg(), model.getItem().getX()*step, model.getItem().getY()*step, null);
+					g2.drawImage(Strawberry.getImg(), model.getItem().getX()*step, model.getItem().getY()*step, null);
 					break;
 				default :
 					System.out.println("error");
