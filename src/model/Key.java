@@ -21,7 +21,7 @@ public class Key extends Items{
 	
 	static{
 		try{
-			img = ImageIO.read(new File("path"));
+			img = ImageIO.read(new File("image/key20x20.png"));
 		} catch (IOException e){
 			e.printStackTrace();
 		}
