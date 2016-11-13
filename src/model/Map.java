@@ -8,8 +8,17 @@ import java.awt.Point;
 public class Map {
 	private static  int longueur =10;
 	private static  int hauteur =10;
-	private static  char[][] tab;
+	private static  char[][] tab; 
+	/*Desctiption de la map
+	 * 0 : emplacement libre
+	 * 1 : mur
+	 * 2 : spawn fantome
+	 * 3 : spawn pacman
+	 * 7 : void : emplacement inacessible
+	 */
 	private static  boolean[][] bol;
+	/*Indique s'il y a une piece ou non sur la case
+	 */
 	private static  int counter;
 	private  long now = 0;
 	private Point spawnGhost = new Point(0,0);

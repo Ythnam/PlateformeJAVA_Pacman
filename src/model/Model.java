@@ -98,12 +98,13 @@ public void createstring () {
 				while (sc.hasNextLine()) {
 					for (char c : sc.next().toCharArray()) {
 						map.getTab()[i][j] = c;
-						if(c=='1'){
-							map.getBol()[i][j] = false;
+						if(c=='0'){
+							map.getBol()[i][j] = true;
+							count++;
 						}
 						else {
-							count++;
-							map.getBol()[i][j] = true;
+							
+							map.getBol()[i][j] = false;
 						}
 						 
 						

@@ -592,7 +592,7 @@ public class Field extends JPanel implements ActionListener{
 			}
 			for (int k=0;k<Map.getHauteur();k++){
 				for (int l=0;l<Map.getLongueur();l++){
-					if (Map.getTab()[k][l]=='0'||Map.getTab()[k][l]=='2'||Map.getTab()[k][l]=='3'){
+					if (Map.getTab()[k][l]=='0'){
 						if(Map.getBol()[k][l]==true){
 							g2.drawImage(full,l*step,k*step,null);
 						}
@@ -600,9 +600,13 @@ public class Field extends JPanel implements ActionListener{
 							g2.drawImage(empty,l*step,k*step,null);
 						}
 					}
-					else {
+					else if(Map.getTab()[k][l]=='1'){
 						g2.drawImage(wall,l*step,k*step,null);
 					}
+					else if(Map.getTab()[k][l]=='2'||Map.getTab()[k][l]=='7'||Map.getTab()[k][l]=='3'){
+						g2.drawImage(empty,l*step,k*step,null);
+					}
+					
 				}
 			}
 
