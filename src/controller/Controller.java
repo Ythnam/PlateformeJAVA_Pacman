@@ -267,19 +267,43 @@ public class Controller implements KeyListener {
 	public void loose(){
 		for (Ghost g:this.model.getAlGhost()){
 			if(this.model.getPacman().getX() == g.getX() && this.model.getPacman().getY() == g.getY()){
-				this.model.getPacman().setPacmanLives(this.model.getPacman().getPacmanLives()-1);
-				view.updateScoreAndLife();
-				gamePause();
-				this.model.getPacman().setRight(false);
-				this.model.getPacman().setLeft(false);
-				this.model.getPacman().setTop(false);
-				this.model.getPacman().setDown(false);
-				if(this.model.getPacman().getPacmanLives() != 0){
-					view.popLooseLife();
-				}else{
-					view.popLooseGame();
+				if(!this.model.getPacman().isPowerUp()){
+					this.model.getPacman().setPacmanLives(this.model.getPacman().getPacmanLives()-1);
+					view.updateScoreAndLife();
+					gamePause();
+					this.model.getPacman().setRight(false);
+					this.model.getPacman().setLeft(false);
+					this.model.getPacman().setTop(false);
+					this.model.getPacman().setDown(false);
+					if(this.model.getPacman().getPacmanLives() != 0){
+						view.popLooseLife();
+					}else{
+						view.popLooseGame();
+					}
 				}
+				else{
+					g.eat();
+					if(this.model.getPacman().getGhosteaten() == 0){
+						this.model.getPacman().setPacmanScore(this.model.getPacman().getPacmanScore()+200);
+						this.model.getPacman().setGhosteaten(this.model.getPacman().getGhosteaten()+1);
+					}
+					else if(this.model.getPacman().getGhosteaten() == 1){
+						this.model.getPacman().setPacmanScore(this.model.getPacman().getPacmanScore()+400);
+						this.model.getPacman().setGhosteaten(this.model.getPacman().getGhosteaten()+1);
+					}
+					else if(this.model.getPacman().getGhosteaten() == 2){
+						this.model.getPacman().setPacmanScore(this.model.getPacman().getPacmanScore()+800);
+						this.model.getPacman().setGhosteaten(this.model.getPacman().getGhosteaten()+1);
+					}
+					else {
+						this.model.getPacman().setPacmanScore(this.model.getPacman().getPacmanScore()+1600);
+						this.model.getPacman().setGhosteaten(this.model.getPacman().getGhosteaten()+1);
+					}
+					
+				}
+				
 			}
+			
 		}
 		
 	}

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
+import javax.swing.Timer;
 
 import View.Field;
 
@@ -23,9 +24,15 @@ public class Pacman implements Runnable{
 	private static ImageIcon imageIconLeft = new ImageIcon("image/pacman_gauche.gif");
 	private static ImageIcon imageIconRight = new ImageIcon("image/pacman_droit.gif");
 	private boolean onPause = false;
-	 private long pacmanScore = 0;
-	 private int pacmanLives = 3;
-	 private boolean right =false, left=false,top = false,down = false;
+	private long pacmanScore = 0;
+	private int pacmanLives = 3;
+	private int ghosteaten = 0;
+	private boolean right =false, left=false,top = false,down = false;
+	
+	private ImageIcon memory;
+	private Timer timer;
+	private double chrono = 0;
+	private Chrono chron = new Chrono();
 
 	 public void setImageIcon(ImageIcon imageIcon){
 		 this.imageIcon = imageIcon;
@@ -85,6 +92,8 @@ public class Pacman implements Runnable{
 		this.y = y;
 		this.field = field;
 		this.imageIcon = getImageIconTop(); 
+		//timer = new Timer(1, this);
+		//timer.start();
 	}
 	
 
@@ -103,6 +112,12 @@ public class Pacman implements Runnable{
 						e1.printStackTrace();
 					}
 				}
+				else if(Map.getTab()[y][x]=='5'){
+					this.setPowerUp(true);
+					chron.start();
+					System.out.println("super mode on");
+					this.field.getModel().getMap().tab[y][x]='0';
+				}
 			}
 			
 		}
@@ -118,6 +133,12 @@ public class Pacman implements Runnable{
 						} catch (IOException e1) {
 						e1.printStackTrace();
 					}
+				}
+				else if(Map.getTab()[y][x]=='5'){
+					this.setPowerUp(true);
+					chron.start();
+					this.field.getModel().getMap().tab[y][x]='0';
+					System.out.println("super mode on");
 				}
 			}
 		}
@@ -142,6 +163,12 @@ public class Pacman implements Runnable{
 						e1.printStackTrace();
 					}
 				}
+				else if(Map.getTab()[y][x]=='5'){
+					this.setPowerUp(true);
+					chron.start();
+					this.field.getModel().getMap().tab[y][x]='0';
+					System.out.println("super mode on");
+				}
 			}
 		}
 		else {
@@ -157,6 +184,12 @@ public class Pacman implements Runnable{
 						e1.printStackTrace();
 					}
 				}
+				else if(Map.getTab()[y][x]=='5'){
+					this.setPowerUp(true);
+					chron.start();
+					this.field.getModel().getMap().tab[y][x]='0';
+					System.out.println("super mode on");
+				}
 			}
 		}
 		}
@@ -165,7 +198,7 @@ public class Pacman implements Runnable{
 	public void goBot(){
 		if(!isOnPause()){
 		if(this.y < this.field.getYMAX()-1){
-			if(Map.getTab()[y+1][x]!='1'){
+			if(Map.getTab()[y+1][x]!='1' ){
 				if(Map.getBol()[y+1][x] == true) { pacmanScore+=1000 ;this.field.updateScoreAndLife();this.field.getModel().getMap().setCounter(this.field.getModel().getMap().getCounter() - 1);}
 				Map.getBol()[y+1][x]= false;
 				
@@ -178,7 +211,14 @@ public class Pacman implements Runnable{
 						e1.printStackTrace();
 					}
 				}
+				else if(Map.getTab()[y][x]=='5'){
+					this.setPowerUp(true);
+					chron.start();
+					this.field.getModel().getMap().tab[y][x]='0';
+					System.out.println("super mode on");
+				}
 			}
+			
 		}
 		else {
 			if(Map.getTab()[0][x]!='1'){
@@ -191,10 +231,16 @@ public class Pacman implements Runnable{
 						this.field.getController().savescore();
 						} catch (IOException e1) {
 						e1.printStackTrace();
+						}
 					}
+				else if(Map.getTab()[y][x]=='5'){
+					this.setPowerUp(true);
+					chron.start();
+					this.field.getModel().getMap().tab[y][x]='0';
+					System.out.println("super mode on");
+				}
 				}
 			}
-		}
 		}
 	}
 	
@@ -213,23 +259,35 @@ public class Pacman implements Runnable{
 						e1.printStackTrace();
 					}
 				}
+				else if(Map.getTab()[y][x]=='5'){
+					this.setPowerUp(true);
+					chron.start();
+					this.field.getModel().getMap().tab[y][x]='0';
+					System.out.println("super mode on");
+				}
 			}
 		}
 		else {
 			if(Map.getTab()[(this.field.getYMAX())-1][x]!='1'){
 				if(Map.getBol()[this.field.getYMAX()-1][x] == true) { pacmanScore+=1000 ;this.field.updateScoreAndLife();this.field.getModel().getMap().setCounter(this.field.getModel().getMap().getCounter() - 1);}
-				Map.getBol()[this.field.getYMAX()-1][x]=false;
-			this.y = this.field.getYMAX()-1;
-			this.field.getController().loose();
-			if(this.field.getModel().getMap().getCounter() == 0){
-				try {
-					this.field.getController().savescore();
-					} catch (IOException e1) {
-					e1.printStackTrace();
+					Map.getBol()[this.field.getYMAX()-1][x]=false;
+					this.y = this.field.getYMAX()-1;
+					this.field.getController().loose();
+					if(this.field.getModel().getMap().getCounter() == 0){
+						try {
+							this.field.getController().savescore();
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
+					}
+					else if(Map.getTab()[y][x]=='5'){
+						this.setPowerUp(true);
+						chron.start();
+						this.field.getModel().getMap().tab[y][x]='0';
+						System.out.println("super mode on");
+					}
 				}
 			}
-			}
-		}
 		}
 	}
 	
@@ -300,6 +358,29 @@ public class Pacman implements Runnable{
 				if(this.field.getModel().getMap().getCounter()==0){
 					Thread.sleep(10);
 				}
+				
+				
+				// on gere le superMode 
+				if(this.isPowerUp()){
+					 ImageIcon imageIconn = new ImageIcon("image/pacman.gif");
+					if(getImageIcon() !=imageIconn){
+						memory = getImageIcon();
+						setImageIcon(imageIconn);
+					}
+					else setImageIcon(memory);
+					
+					
+					this.chron.pause();
+					chrono = chron.getDureeSec();
+					this.chron.resume();
+					if(chrono>10){
+						this.setPowerUp(false);
+						setGhosteaten(0);
+						chrono = -1;
+						setImageIcon(memory);
+					}
+				}
+				
 			}
 		}  catch (InterruptedException e){
 			e.printStackTrace();
@@ -337,6 +418,30 @@ public class Pacman implements Runnable{
 
 	public void setLeft(boolean left) {
 		this.left = left;
+	}
+
+	public double getChronoP() {
+		return chrono;
+	}
+
+	public void setChronop(double chrono) {
+		this.chrono = chrono;
+	}
+
+	public boolean isPowerUp() {
+		return isPowerUp;
+	}
+
+	public void setPowerUp(boolean isPowerUp) {
+		this.isPowerUp = isPowerUp;
+	}
+
+	public int getGhosteaten() {
+		return ghosteaten;
+	}
+
+	public void setGhosteaten(int ghosteaten) {
+		this.ghosteaten = ghosteaten;
 	}
 
 

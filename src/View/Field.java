@@ -582,10 +582,12 @@ public class Field extends JPanel implements ActionListener{
 			BufferedImage wall= null;
 			BufferedImage full= null;
 			BufferedImage empty= null;
+			BufferedImage superP= null;
 			try {
 				wall = ImageIO.read(new File("image/brique.png"));
 				full = ImageIO.read(new File("image/mapFull.png"));
 				empty = ImageIO.read(new File("image/map.png"));
+				superP = ImageIO.read(new File("image/superPacman.png"));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -605,6 +607,9 @@ public class Field extends JPanel implements ActionListener{
 					}
 					else if(Map.getTab()[k][l]=='2'||Map.getTab()[k][l]=='7'||Map.getTab()[k][l]=='3'){
 						g2.drawImage(empty,l*step,k*step,null);
+					}
+					else if(Map.getTab()[k][l]=='5'){
+						g2.drawImage(superP,l*step,k*step,null);
 					}
 					
 				}

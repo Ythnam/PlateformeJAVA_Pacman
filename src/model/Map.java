@@ -8,12 +8,13 @@ import java.awt.Point;
 public class Map {
 	private static  int longueur =10;
 	private static  int hauteur =10;
-	private static  char[][] tab; 
+	protected static  char[][] tab; 
 	/*Desctiption de la map
 	 * 0 : emplacement libre
 	 * 1 : mur
 	 * 2 : spawn fantome
 	 * 3 : spawn pacman
+	 * 5 : superPacman
 	 * 7 : void : emplacement inacessible
 	 */
 	private static  boolean[][] bol;

@@ -129,7 +129,7 @@ public class Ghost implements Runnable {
 				int count = 0;		
 				for(char wall : wallAround){
 					//System.out.println(wall);
-					if(wall == '0' || wall == '2' || wall == '3'){ //wall =1 -> wall est un mur
+					if(wall !='1'){ //wall =1 -> wall est un mur
 						alI.add(count); // je récupère le numéro des cases ou les ghosts peuvent passer (1=top, 2=bot, 3=droite, 4=gauche);
 						//System.out.println(alI);
 					}
@@ -222,10 +222,11 @@ public class Ghost implements Runnable {
 				while(isOnPause()){
 					Thread.sleep(500);
 				}
-				Thread.sleep(500);
+				Thread.sleep(300);
 				
 				//tryToMove();
 				ghostIA();
+				//this.field.getController().loose();
 				
 				field.repaint();
 				if(this.field.getModel().getMap().getCounter()==0){
@@ -294,5 +295,12 @@ public class Ghost implements Runnable {
 
 	public void setOnPause(boolean onPause) {
 		this.onPause = onPause;
+	}
+
+	public void eat() {
+		// TODO Auto-generated method stub
+		this.x = this.field.getModel().getMap().getSpawnGhost().x;
+		this.y = this.field.getModel().getMap().getSpawnGhost().y;
+		
 	}
 }
