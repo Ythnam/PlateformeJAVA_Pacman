@@ -59,12 +59,12 @@ public class Field extends JPanel implements ActionListener{
 	private Timer timer;
 	private JLabel label;
 	public Container conten = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
-	TestPanel newPanel;
-	JButton end;
-	JButton retry;
-	JButton nextlvl;
-	JFrame frame = new JFrame();
-	JFrame test = new JFrame();
+	private TestPanel newPanel;
+	private JButton end;
+	private JButton retry;
+	private JButton nextlvl;
+	private JFrame frame = new JFrame();
+	private JFrame test = new JFrame();
 
 
 	public Field(JFrame fram){
@@ -84,7 +84,6 @@ public class Field extends JPanel implements ActionListener{
 		scoreLabel = new JLabel( this.model.getPacman().getPacmanScore()+"");
 		scoreLabel.setFont(new Font("Serif", Font.PLAIN, 11));
 		scoreLabel.setForeground(Color.black);
-		//scoreLabel.setBackground(Color.BLACK);
 		scoreLabel.setOpaque(true);
 		Panel.add(scoreLabel);
 
@@ -414,8 +413,11 @@ public class Field extends JPanel implements ActionListener{
 		this.model.getPacman().setPacmanLives(3);
 		frame = new JFrame();
 		this.chron.restart();
-		
-		this.getController().gamePause();
+		this.model.getPacman().setRight(false);
+		this.model.getPacman().setLeft(false);
+		this.model.getPacman().setTop(false);
+		this.model.getPacman().setDown(false);
+		//this.getController().gamePause();
 		this.chron.setOnPause(true);
 
 
@@ -459,7 +461,11 @@ public class Field extends JPanel implements ActionListener{
 		frame = new JFrame();
 		this.chron.restart();
 		this.chron.setOnPause(true);
-		this.getController().gamePause();
+		this.model.getPacman().setRight(false);
+		this.model.getPacman().setLeft(false);
+		this.model.getPacman().setTop(false);
+		this.model.getPacman().setDown(false);
+		//this.getController().gamePause();
 	}
 
 	/**

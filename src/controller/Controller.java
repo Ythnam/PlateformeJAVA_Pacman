@@ -285,7 +285,7 @@ public class Controller implements KeyListener {
 	 */
 	public void loose(){
 		for (Ghost g:this.model.getAlGhost()){
-			if(this.model.getPacman().getX() == g.getX() && this.model.getPacman().getY() == g.getY()){
+			if(this.model.getPacman().getX() == g.getX() && this.model.getPacman().getY() == g.getY()){// si collision pacman -> fantome
 				if(!this.model.getPacman().isPowerUp()){
 					this.model.getPacman().setPacmanLives(this.model.getPacman().getPacmanLives()-1);
 					view.updateScoreAndLife();
