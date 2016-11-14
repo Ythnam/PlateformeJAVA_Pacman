@@ -16,13 +16,19 @@ public class Pacman implements Runnable{
 	public static BufferedImage img;
 	private int x, y;
 	private Field field;
-	private boolean isPowerUp = false; // booleen pour le faire entrer ne état ou il bas les fantomes
+	private static boolean isPowerUp = false; // booleen pour le faire entrer ne état ou il bas les fantomes
 	private Random rand = new Random(); // Sert juste pour les test tant qu'on n'a pas le clavier
 	private ImageIcon imageIcon;
 	private static ImageIcon imageIconTop = new ImageIcon("image/pacman-haut.gif");
 	private static ImageIcon imageIconBot = new ImageIcon("image/pacman_bas.gif");
 	private static ImageIcon imageIconLeft = new ImageIcon("image/pacman_gauche.gif");
 	private static ImageIcon imageIconRight = new ImageIcon("image/pacman_droit.gif");
+	
+	private static ImageIcon imageIconTopSP = new ImageIcon("image/superpacman_haut.gif");
+	private static ImageIcon imageIconBotSP = new ImageIcon("image/superpacman_bas.gif");
+	private static ImageIcon imageIconLeftSP = new ImageIcon("image/superpacman_gauche.gif");
+	private static ImageIcon imageIconRightSP = new ImageIcon("image/superpacman_droit.gif");
+	
 	private boolean onPause = false;
 	private long pacmanScore = 0;
 	private int pacmanLives = 3;
@@ -39,23 +45,39 @@ public class Pacman implements Runnable{
 	 }
 	
 	public ImageIcon getImageIcon() {
-		return imageIcon;
+		if(right){
+			return getImageIconRight();
+		}
+		else if(left){
+			return getImageIconLeft();
+		}
+		else if(top){
+			return getImageIconTop();
+		}
+		else if(down){
+			return getImageIconBot();
+		}
+		else return imageIcon;
 	}
 	
 	public static ImageIcon getImageIconTop() {
-		return imageIconTop;
+		if(!isPowerUp) return imageIconTop;
+		return imageIconTopSP;
 	}
 	
 	public static ImageIcon getImageIconBot() {
-		return imageIconBot;
+		if(!isPowerUp) return imageIconBot;
+		return imageIconBotSP;
 	}
 	
 	public static ImageIcon getImageIconLeft() {
-		return imageIconLeft;
+		if(!isPowerUp) return imageIconLeft;
+		return imageIconLeftSP;
 	}
 	
 	public static ImageIcon getImageIconRight() {
-		return imageIconRight;
+		if(!isPowerUp) return imageIconRight;
+		return imageIconRightSP;
 	}
 	
 	public int getX() {
@@ -115,8 +137,8 @@ public class Pacman implements Runnable{
 				else if(Map.getTab()[y][x]=='5'){
 					this.setPowerUp(true);
 					chron.start();
-					System.out.println("super mode on");
 					this.field.getModel().getMap().tab[y][x]='0';
+					setImageIcon(getImageIcon());
 				}
 			}
 			
@@ -138,7 +160,7 @@ public class Pacman implements Runnable{
 					this.setPowerUp(true);
 					chron.start();
 					this.field.getModel().getMap().tab[y][x]='0';
-					System.out.println("super mode on");
+					setImageIcon(getImageIcon());
 				}
 			}
 		}
@@ -167,7 +189,7 @@ public class Pacman implements Runnable{
 					this.setPowerUp(true);
 					chron.start();
 					this.field.getModel().getMap().tab[y][x]='0';
-					System.out.println("super mode on");
+					setImageIcon(getImageIcon());
 				}
 			}
 		}
@@ -188,7 +210,7 @@ public class Pacman implements Runnable{
 					this.setPowerUp(true);
 					chron.start();
 					this.field.getModel().getMap().tab[y][x]='0';
-					System.out.println("super mode on");
+					setImageIcon(getImageIcon());
 				}
 			}
 		}
@@ -215,7 +237,7 @@ public class Pacman implements Runnable{
 					this.setPowerUp(true);
 					chron.start();
 					this.field.getModel().getMap().tab[y][x]='0';
-					System.out.println("super mode on");
+					setImageIcon(getImageIcon());
 				}
 			}
 			
@@ -237,7 +259,7 @@ public class Pacman implements Runnable{
 					this.setPowerUp(true);
 					chron.start();
 					this.field.getModel().getMap().tab[y][x]='0';
-					System.out.println("super mode on");
+					setImageIcon(getImageIcon());
 				}
 				}
 			}
@@ -263,7 +285,9 @@ public class Pacman implements Runnable{
 					this.setPowerUp(true);
 					chron.start();
 					this.field.getModel().getMap().tab[y][x]='0';
-					System.out.println("super mode on");
+					setImageIcon(getImageIcon());
+					this.field.repaint();
+					
 				}
 			}
 		}
@@ -284,7 +308,7 @@ public class Pacman implements Runnable{
 						this.setPowerUp(true);
 						chron.start();
 						this.field.getModel().getMap().tab[y][x]='0';
-						System.out.println("super mode on");
+						setImageIcon(getImageIcon());
 					}
 				}
 			}
@@ -362,12 +386,12 @@ public class Pacman implements Runnable{
 				
 				// on gere le superMode 
 				if(this.isPowerUp()){
-					 ImageIcon imageIconn = new ImageIcon("image/pacman.gif");
+					/* ImageIcon imageIconn = new ImageIcon("image/pacman.gif");
 					if(getImageIcon() !=imageIconn){
 						memory = getImageIcon();
 						setImageIcon(imageIconn);
 					}
-					else setImageIcon(memory);
+					else setImageIcon(memory);*/
 					
 					
 					this.chron.pause();
@@ -377,7 +401,7 @@ public class Pacman implements Runnable{
 						this.setPowerUp(false);
 						setGhosteaten(0);
 						chrono = -1;
-						setImageIcon(memory);
+						
 					}
 				}
 				
