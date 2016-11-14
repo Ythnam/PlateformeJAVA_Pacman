@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
-import javax.swing.Timer;
-
 import View.Field;
 
 public class Pacman implements Runnable{
@@ -35,14 +33,14 @@ public class Pacman implements Runnable{
 	private int ghosteaten = 0;
 	private boolean right =false, left=false,top = false,down = false;
 	
-	private ImageIcon memory;
-	private Timer timer;
+	//chrono mode PowerUp
 	private double chrono = 0;
 	private Chrono chron = new Chrono();
 
 	 public void setImageIcon(ImageIcon imageIcon){
 		 this.imageIcon = imageIcon;
 	 }
+	
 	
 	public ImageIcon getImageIcon() {
 		if(right){
@@ -114,11 +112,41 @@ public class Pacman implements Runnable{
 		this.y = y;
 		this.field = field;
 		this.imageIcon = getImageIconTop(); 
-		//timer = new Timer(1, this);
-		//timer.start();
+
 	}
 	
-
+	/**
+	 * gestion du mode PowerUp
+	 * changement boolean 
+	 * changement du tableau pour dire si item mangé ou non
+	 * maj de l'icon du pacman
+	 * @param _x position x de la case ou se trouver l'item qui rends puissant
+	 * @param _y position x de la case ou se trouver l'item qui rends puissant
+	 */
+	public void power(int _x, int _y){
+		this.setPowerUp(true);
+		chron.start();
+		this.field.getModel().getMap().tab[_y][_x]='0';
+		setImageIcon(getImageIcon());
+	}
+	
+	
+	/**
+	 * tester la colision du pacman
+	 * si plus de vie, lancemement de savescore
+	 */
+	public void saver(){
+		this.field.getController().loose();
+		if(this.field.getModel().getMap().getCounter() == 0){
+			try {
+				this.field.getController().savescore();
+				} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		}
+	}
+	
+	
 	public void goLeft(){
 		if(!isOnPause()){
 		if(this.x>0){
@@ -126,19 +154,9 @@ public class Pacman implements Runnable{
 				if(Map.getBol()[y][x-1] == true){ pacmanScore+=1000 ;this.field.updateScoreAndLife();this.field.getModel().getMap().setCounter(this.field.getModel().getMap().getCounter() - 1);}
 				Map.getBol()[y][x-1]=false;
 				this.x--;
-				this.field.getController().loose();
-				if(this.field.getModel().getMap().getCounter() == 0){
-					try {
-						this.field.getController().savescore();
-						} catch (IOException e1) {
-						e1.printStackTrace();
-					}
-				}
-				else if(Map.getTab()[y][x]=='5'){
-					this.setPowerUp(true);
-					chron.start();
-					this.field.getModel().getMap().tab[y][x]='0';
-					setImageIcon(getImageIcon());
+				saver();
+				if(Map.getTab()[y][x]=='5'){
+					power(x,y);
 				}
 			}
 			
@@ -148,19 +166,9 @@ public class Pacman implements Runnable{
 				if(Map.getBol()[y][this.field.getXMAX()-1] == true){ pacmanScore+=1000 ;this.field.updateScoreAndLife();this.field.getModel().getMap().setCounter(this.field.getModel().getMap().getCounter() - 1);}
 				Map.getBol()[y][this.field.getXMAX()-1]=false;
 				this.x = this.field.getXMAX()-1;
-				this.field.getController().loose();
-				if(this.field.getModel().getMap().getCounter() == 0){
-					try {
-						this.field.getController().savescore();
-						} catch (IOException e1) {
-						e1.printStackTrace();
-					}
-				}
-				else if(Map.getTab()[y][x]=='5'){
-					this.setPowerUp(true);
-					chron.start();
-					this.field.getModel().getMap().tab[y][x]='0';
-					setImageIcon(getImageIcon());
+				saver();
+				if(Map.getTab()[y][x]=='5'){
+					power(x,y);
 				}
 			}
 		}
@@ -169,7 +177,6 @@ public class Pacman implements Runnable{
 	
 
 	public void goRight(){
-		//this.field.nextlvl();
 		if(!isOnPause()){
 		if(this.x<this.field.getXMAX()-1){
 			
@@ -177,19 +184,9 @@ public class Pacman implements Runnable{
 				if(Map.getBol()[y][x+1] == true){ pacmanScore+=1000 ;this.field.updateScoreAndLife();this.field.getModel().getMap().setCounter(this.field.getModel().getMap().getCounter() - 1);}
 				Map.getBol()[y][x+1]=false;
 				this.x++;
-				this.field.getController().loose();
-				if(this.field.getModel().getMap().getCounter() == 0){
-					try {
-						this.field.getController().savescore();
-						} catch (IOException e1) {
-						e1.printStackTrace();
-					}
-				}
-				else if(Map.getTab()[y][x]=='5'){
-					this.setPowerUp(true);
-					chron.start();
-					this.field.getModel().getMap().tab[y][x]='0';
-					setImageIcon(getImageIcon());
+				saver();
+				if(Map.getTab()[y][x]=='5'){
+					power(x,y);
 				}
 			}
 		}
@@ -198,19 +195,9 @@ public class Pacman implements Runnable{
 				if(Map.getBol()[y][0] == true){ pacmanScore+=1000 ;this.field.updateScoreAndLife();this.field.getModel().getMap().setCounter(this.field.getModel().getMap().getCounter() - 1);}
 				Map.getBol()[y][0]=false;
 				this.x=0;
-				this.field.getController().loose();
-				if(this.field.getModel().getMap().getCounter() == 0){
-					try {
-						this.field.getController().savescore();
-						} catch (IOException e1) {
-						e1.printStackTrace();
-					}
-				}
-				else if(Map.getTab()[y][x]=='5'){
-					this.setPowerUp(true);
-					chron.start();
-					this.field.getModel().getMap().tab[y][x]='0';
-					setImageIcon(getImageIcon());
+				saver();
+				if(Map.getTab()[y][x]=='5'){
+					power(x,y);
 				}
 			}
 		}
@@ -223,21 +210,10 @@ public class Pacman implements Runnable{
 			if(Map.getTab()[y+1][x]!='1' ){
 				if(Map.getBol()[y+1][x] == true) { pacmanScore+=1000 ;this.field.updateScoreAndLife();this.field.getModel().getMap().setCounter(this.field.getModel().getMap().getCounter() - 1);}
 				Map.getBol()[y+1][x]= false;
-				
 				this.y++;
-				this.field.getController().loose();
-				if(this.field.getModel().getMap().getCounter() == 0){
-					try {
-						this.field.getController().savescore();
-						} catch (IOException e1) {
-						e1.printStackTrace();
-					}
-				}
-				else if(Map.getTab()[y][x]=='5'){
-					this.setPowerUp(true);
-					chron.start();
-					this.field.getModel().getMap().tab[y][x]='0';
-					setImageIcon(getImageIcon());
+				saver();
+				if(Map.getTab()[y][x]=='5'){
+					power(x,y);
 				}
 			}
 			
@@ -245,22 +221,12 @@ public class Pacman implements Runnable{
 		else {
 			if(Map.getTab()[0][x]!='1'){
 				if(Map.getBol()[0][x] == true) { pacmanScore+=1000 ;this.field.updateScoreAndLife();this.field.getModel().getMap().setCounter(this.field.getModel().getMap().getCounter() - 1);}
-				Map.getBol()[0][x]=false;
-				this.y=0;
-				this.field.getController().loose();
-				if(this.field.getModel().getMap().getCounter() == 0){
-					try {
-						this.field.getController().savescore();
-						} catch (IOException e1) {
-						e1.printStackTrace();
-						}
+					Map.getBol()[0][x]=false;
+					this.y=0;
+					saver();
+					if(Map.getTab()[y][x]=='5'){
+						power(x,y);
 					}
-				else if(Map.getTab()[y][x]=='5'){
-					this.setPowerUp(true);
-					chron.start();
-					this.field.getModel().getMap().tab[y][x]='0';
-					setImageIcon(getImageIcon());
-				}
 				}
 			}
 		}
@@ -273,42 +239,20 @@ public class Pacman implements Runnable{
 				if(Map.getBol()[y-1][x] == true){ pacmanScore+=1000 ;this.field.updateScoreAndLife();this.field.getModel().getMap().setCounter(this.field.getModel().getMap().getCounter() - 1);}
 				Map.getBol()[y-1][x]=false;
 				this.y--;
-				this.field.getController().loose();
-				if(this.field.getModel().getMap().getCounter() == 0){
-					try {
-						this.field.getController().savescore();
-						} catch (IOException e1) {
-						e1.printStackTrace();
-					}
-				}
-				else if(Map.getTab()[y][x]=='5'){
-					this.setPowerUp(true);
-					chron.start();
-					this.field.getModel().getMap().tab[y][x]='0';
-					setImageIcon(getImageIcon());
-					this.field.repaint();
-					
+				saver();
+				if(Map.getTab()[y][x]=='5'){
+					power(x,y);
 				}
 			}
 		}
-		else {
+			else {
 			if(Map.getTab()[(this.field.getYMAX())-1][x]!='1'){
 				if(Map.getBol()[this.field.getYMAX()-1][x] == true) { pacmanScore+=1000 ;this.field.updateScoreAndLife();this.field.getModel().getMap().setCounter(this.field.getModel().getMap().getCounter() - 1);}
 					Map.getBol()[this.field.getYMAX()-1][x]=false;
 					this.y = this.field.getYMAX()-1;
-					this.field.getController().loose();
-					if(this.field.getModel().getMap().getCounter() == 0){
-						try {
-							this.field.getController().savescore();
-						} catch (IOException e1) {
-							e1.printStackTrace();
-						}
-					}
-					else if(Map.getTab()[y][x]=='5'){
-						this.setPowerUp(true);
-						chron.start();
-						this.field.getModel().getMap().tab[y][x]='0';
-						setImageIcon(getImageIcon());
+					saver();
+					 if(Map.getTab()[y][x]=='5'){
+						power(x,y);
 					}
 				}
 			}

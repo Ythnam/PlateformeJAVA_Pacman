@@ -42,19 +42,13 @@ public class RandomItemPop implements Runnable{
 			
 			while(true){		
 				this.typeOfItemsSelected();
-				/*for (Items it : this.field.getModel().getAlItems()){
-					creaPoint();
-					it.setXY(this.x,this.y);
-				}*/
 				
-				//this.typeOfItemsSelected();
 				this.field.repaint();
 				Thread.sleep(5000);
 				
 				for (int k=0;k<this.field.getModel().getAlItems().size();k++){
 					this.field.getModel().getAlItems().set(k, null);
 				}
-				//this.field.getModel().setItem(null);
 				this.field.repaint();
 				Thread.sleep(5000);
 				

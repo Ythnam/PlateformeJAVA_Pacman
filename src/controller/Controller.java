@@ -72,6 +72,8 @@ public class Controller implements KeyListener {
 		}*/
 	}
 	
+	
+	
 	@Override
 	public void keyPressed(KeyEvent e) {
 	
@@ -129,7 +131,8 @@ public class Controller implements KeyListener {
 	}
 	
 	
-	/*met les thread fantome en pause 
+	/**
+	 * met les thread fantome en pause 
 	 * met le pacman en pause
 	 */
 	public void gamePause(){
@@ -142,6 +145,14 @@ public class Controller implements KeyListener {
 		//view.setDelay(0);
 	}
 
+	
+	/**
+	 * calcul du score 
+	 * ajout du score dans le fichier
+	 * lecture du fichier
+	 * lancement de la popUp
+	 * @throws IOException
+	 */
 	public void savescore() throws IOException{
 		
 		//maj du score en fonction du nombre de vie et du temps 
@@ -261,9 +272,16 @@ public class Controller implements KeyListener {
 		Controller.classementhtml = classementhtml;
 	}
 
-	/* décremente counter pacman life 
-	 * mets le jeu en pause
-	 * appartition de pop up "perte de vie " ou "game over "
+	/**
+	 * detection du mode powerUp de Pacman
+	 * detection des fantome
+	 * si mode normal :
+	 *  * décremente counter pacman life 
+	 * 	* mets le jeu en pause
+	 * 	* appartition de pop up "perte de vie " ou "game over "
+	 * 
+	 * sinon 
+	 * fantome au spawn et sleep time
 	 */
 	public void loose(){
 		for (Ghost g:this.model.getAlGhost()){

@@ -11,8 +11,6 @@ public class Main{
 		Map wall = new Map();
 		 frame = new JFrame();
 		Field field = new Field(frame);
-		//frame.setSize(wall.longueur*21-(int)(wall.longueur/2),(wall.hauteur+1)*22);
-		//frame.setSize((wall.getLongueur()+1)*field.getStep()-5,(wall.getHauteur()+3)*field.getStep()-1);
 		frame.setResizable(true);
 		frame.setLocation(100, 100);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

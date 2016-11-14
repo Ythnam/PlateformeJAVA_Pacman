@@ -92,7 +92,6 @@ public class Field extends JPanel implements ActionListener{
 		livesLabel.setFont(new Font("Serif", Font.PLAIN, 11));
 		livesLabel.setForeground(Color.black);
 		livesLabel.setOpaque(true);
-		//livesLabel.setBackground(Color.BLACK);
 		Panel.add(livesLabel);
 
 		timeLabel = new JLabel(getChrono()+"s");
@@ -100,7 +99,6 @@ public class Field extends JPanel implements ActionListener{
 		timeLabel.setPreferredSize(d);
 		timeLabel.setFont(new Font("Serif", Font.PLAIN, 11));
 		timeLabel.setForeground(Color.black);
-		//	timeLabel.setBackground(Color.BLACK);
 		timeLabel.setOpaque(true);
 		Panel.add(timeLabel);
 
@@ -118,14 +116,15 @@ public class Field extends JPanel implements ActionListener{
 		timer.start();
 		getChron().start();
 
-
-		//((RootPaneContainer)this).setContentPane(newPanel);
 	}
 
 	public  Model getModel() {
 		return model;
 	}
-
+	
+	/**
+	 * modifie la valeur de XMAX et YMAX pour la création d'un nouveau niveau
+	 */
 	public void updatevalues(){
 		XMAX = this.model.getMap().getLongueur();
 		YMAX = this.model.getMap().getHauteur(); 
@@ -136,6 +135,9 @@ public class Field extends JPanel implements ActionListener{
 		requestFocus();
 	}
 
+	/**
+	 * maj de label score et nombre de vie
+	 */
 	public void updateScoreAndLife() {
 		scoreLabel.setText(this.model.getPacman().getPacmanScore()+"");
 		livesLabel.setText("Lives: " + this.model.getPacman().getPacmanLives() );
@@ -204,7 +206,7 @@ public class Field extends JPanel implements ActionListener{
 
 	}
 
-	public Point generate(){
+	/*public Point generate(){
 		boolean bo= true;
 		int a = 0;
 		int b = 0;
@@ -223,7 +225,7 @@ public class Field extends JPanel implements ActionListener{
 
 		return false;
 
-	}
+	}*/
 
 	//	/**
 	//	 * MÉTHODE PERMETTANT D'INSTANCIER TOUS LES ITEMS EN MÊME TEMPS
@@ -377,23 +379,26 @@ public class Field extends JPanel implements ActionListener{
 			nextlvl();
 	}
 
+	/**
+	 * Cette fonction permet de créer un nouveau niveau 
+	 * remise du score à 0
+	 * remise du nombre de vie a 3
+	 * changement du lvl dans le model pour aller chercher le fichier
+	 * création du nouveau tableau et de la nouvelle map
+	 * placement des fantomes et du pacman dans leur spawn
+	 * 
+	 */
 	@SuppressWarnings("deprecation")
 	public void nextlvl() {
-		System.out.println("next lvl");
 		chrono = 0;
 		this.model.getPacman().setPacmanScore(0);
 		if(this.model.getLvl() == 1) this.model.setLvl(this.model.getLvl()+1);
 		else  this.model.setLvl(this.model.getLvl()-1);
 
 		this.model.updatefichier();
-		System.out.println(this.model.getFichier());
 		this.model.lecture();
 		this.model.createstring();
 		updatevalues();
-		System.out.println(XMAX+""+ YMAX);
-		//(Field)this = new Field();
-		//JFrame f = new JFrame();
-		//this.newPanel = new TestPanel();
 		Dimension preferredSize = new Dimension(XMAX*step,YMAX*step);
 		this.newPanel.setPreferredSize(preferredSize );
 		test.pack();
@@ -424,6 +429,14 @@ public class Field extends JPanel implements ActionListener{
 		this.getController().gamePause();*/
 	}
 
+	
+	/**
+	 * Cette fonction permet de relancer le niveau en cours 
+	 * vie = 0 
+	 * point =0 
+	 * replacement des fantomes et du pacman
+	 * 
+	 */
 	private void retry() {
 		//endbool = true;
 		System.out.println("retry");
@@ -449,11 +462,19 @@ public class Field extends JPanel implements ActionListener{
 		this.getController().gamePause();
 	}
 
+	/**
+	 * ferme la popup
+	 */
 	private void end() {
 		frame.dispose();
 		frame = new JFrame();
 	}
 
+	
+	/**
+	 * créer une nouvelle popUp pour informer que le joueur a perdu une vie
+	 * 
+	 */
 	public void popLooseLife(){
 		if(this.model.getPacman().getPacmanLives()!=0){
 			int input = JOptionPane.showOptionDialog(null, "Vous avez perdu une vie, ok pour continuer ", "Informations", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
@@ -473,6 +494,10 @@ public class Field extends JPanel implements ActionListener{
 		}
 	}
 
+	/**
+	 * créer une nouvelle popUp pour informer que le joueur a perdu la partie (plus de vie)
+	 * lancement de la fonction savescore 
+	 */
 	public void popLooseGame(){
 		int input = JOptionPane.showOptionDialog(null, "Vous n'avez plus de vie la partie est terminee", "Game Over", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
 
@@ -490,6 +515,11 @@ public class Field extends JPanel implements ActionListener{
 		//JOptionPane.showM		Dialog(newPanel, "Vous avez perdu une vie, cliquez pour continuer");
 	}
 
+	
+	/**
+	 * création de la PopUp pour affichage des scores
+	 * fenetre avec 3 boutons : recommencer, fermer la fenetre et niveau suivant
+	 */
 	public void popClassement(){
 		
 		frame.setSize(300,300);
@@ -549,14 +579,6 @@ public class Field extends JPanel implements ActionListener{
 		this.chron = chron;
 	}
 
-	/*public int getDelay() {
-		return delay;
-	}
-	public void setDelay(int delay) {
-		this.delay = delay;
-	}
-	 */
-
 
 	public Controller getController() {
 		return controller;
@@ -566,6 +588,12 @@ public class Field extends JPanel implements ActionListener{
 		this.controller = controller;
 	}
 
+	
+	/**
+	 * classe interne pour dessiner la map
+	 * @author tifred
+	 *
+	 */
 	private class TestPanel extends JPanel {
 
 		public TestPanel(){
