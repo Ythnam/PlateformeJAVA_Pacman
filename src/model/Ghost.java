@@ -38,6 +38,7 @@ public class Ghost implements Runnable {
 	
 	//test pour l'IA des ghost   
 			private int cache = -10;
+			private boolean eat = false;
 			
 	/**
 	 * Cette fonction permet de savoir ce qui se trouve autour du ghost
@@ -220,7 +221,14 @@ public class Ghost implements Runnable {
 			
 			while(true){
 				while(isOnPause()){
+					
 					Thread.sleep(500);
+				}
+				if(isEat()){
+					this.x = this.field.getModel().getMap().getSpawnGhost().y;
+					this.y = this.field.getModel().getMap().getSpawnGhost().x;
+					Thread.sleep(8500);
+					setEat(false);
 				}
 				Thread.sleep(300);
 				
@@ -232,6 +240,7 @@ public class Ghost implements Runnable {
 				if(this.field.getModel().getMap().getCounter()==0){
 					Thread.sleep(10);
 				}
+				
 			}
 		}  catch (InterruptedException e){
 			e.printStackTrace();
@@ -297,10 +306,13 @@ public class Ghost implements Runnable {
 		this.onPause = onPause;
 	}
 
-	public void eat() {
-		// TODO Auto-generated method stub
-		this.x = this.field.getModel().getMap().getSpawnGhost().x;
-		this.y = this.field.getModel().getMap().getSpawnGhost().y;
-		
+	public boolean isEat() {
+		return eat;
 	}
+
+	public void setEat(boolean eat) {
+		this.eat = eat;
+	}
+
+	
 }

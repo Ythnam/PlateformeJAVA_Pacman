@@ -13,6 +13,7 @@ public class RandomItemPop implements Runnable{
 	private Field field;
 	private int x;
 	private int y;
+	private boolean onPause = false;
 	
 	
 	public RandomItemPop(Field field){
@@ -38,6 +39,7 @@ public class RandomItemPop implements Runnable{
 	public void run() {
 		try{
 			Thread.sleep(10000);
+			
 			while(true){		
 				this.typeOfItemsSelected();
 				/*for (Items it : this.field.getModel().getAlItems()){
@@ -165,6 +167,14 @@ public class RandomItemPop implements Runnable{
 	public void setX(int i) {
 		// TODO Auto-generated method stub
 		this.x = i;
+	}
+
+	public boolean isOnPause() {
+		return onPause;
+	}
+
+	public void setOnPause(boolean onPause) {
+		this.onPause = onPause;
 	}
 
 

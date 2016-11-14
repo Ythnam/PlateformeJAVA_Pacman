@@ -138,6 +138,7 @@ public class Controller implements KeyListener {
 		}
 		this.model.getPacman().setOnPause(!this.model.getPacman().isOnPause());
 		view.getChron().setOnPause(!view.getChron().isOnPause());
+		this.model.getRandomPop().setOnPause(!this.model.getRandomPop().isOnPause());
 		//view.setDelay(0);
 	}
 
@@ -282,7 +283,7 @@ public class Controller implements KeyListener {
 					}
 				}
 				else{
-					g.eat();
+					g.setEat(true);
 					if(this.model.getPacman().getGhosteaten() == 0){
 						this.model.getPacman().setPacmanScore(this.model.getPacman().getPacmanScore()+200);
 						this.model.getPacman().setGhosteaten(this.model.getPacman().getGhosteaten()+1);
