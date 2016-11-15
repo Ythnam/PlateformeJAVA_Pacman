@@ -17,6 +17,7 @@ public class Ghost implements Runnable {
 	public static BufferedImage ghostBLUE;
 	public static BufferedImage ghostGREEN;
 	public static BufferedImage ghostORANGE;
+	public static BufferedImage ghostSCARED;
 	private int x, y;
 	private double distance; // donnera sa distance par rapport au Pacman et permettra de le faire "chasser" à partir
 							// d'une certaine distance
@@ -30,6 +31,7 @@ public class Ghost implements Runnable {
 			ghostBLUE = ImageIO.read(new File("image/ghost_blue20x20.png"));
 			ghostGREEN = ImageIO.read(new File("image/ghost_green20x20.png"));
 			ghostORANGE = ImageIO.read(new File("image/ghost_orange20x20.png"));
+			ghostSCARED = ImageIO.read(new File("image/ghost_scared_converted.png"));
 
 		} catch (IOException e){
 			e.printStackTrace();
@@ -203,6 +205,10 @@ public class Ghost implements Runnable {
 	
 	public static BufferedImage getGhostRED() {
 		return ghostRED;
+	}
+	
+	public static BufferedImage getGhostSCARED() {
+		return ghostSCARED;
 	}
 	
 	

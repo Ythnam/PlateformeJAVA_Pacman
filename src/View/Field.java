@@ -534,7 +534,7 @@ public class Field extends JPanel implements ActionListener{
 				}
 			}
 
-
+			if(!model.getPacman().isPowerUp()){
 			switch(model.getAlGhost().size()){
 			case 1 :
 				g2.drawImage(Ghost.getGhostORANGE(), model.getAlGhost().get(0).getX()*step, model.getAlGhost().get(0).getY()*step, null);
@@ -554,6 +554,28 @@ public class Field extends JPanel implements ActionListener{
 				g2.drawImage(Ghost.getGhostGREEN(), model.getAlGhost().get(2).getX()*step, model.getAlGhost().get(2).getY()*step, null);
 				g2.drawImage(Ghost.getGhostBLUE(), model.getAlGhost().get(3).getX()*step, model.getAlGhost().get(3).getY()*step, null);
 				break;
+			}
+			}else{
+				switch(model.getAlGhost().size()){
+				case 1 :
+					g2.drawImage(Ghost.getGhostSCARED(), model.getAlGhost().get(0).getX()*step, model.getAlGhost().get(0).getY()*step, null);
+					break;
+				case 2 :
+					g2.drawImage(Ghost.getGhostSCARED(), model.getAlGhost().get(0).getX()*step, model.getAlGhost().get(0).getY()*step, null);
+					g2.drawImage(Ghost.getGhostSCARED(), model.getAlGhost().get(1).getX()*step, model.getAlGhost().get(1).getY()*step, null);
+					break;
+				case 3 :
+					g2.drawImage(Ghost.getGhostSCARED(), model.getAlGhost().get(0).getX()*step, model.getAlGhost().get(0).getY()*step, null);
+					g2.drawImage(Ghost.getGhostSCARED(), model.getAlGhost().get(1).getX()*step, model.getAlGhost().get(1).getY()*step, null);
+					g2.drawImage(Ghost.getGhostSCARED(), model.getAlGhost().get(2).getX()*step, model.getAlGhost().get(2).getY()*step, null);
+					break;
+				case 4 :
+					g2.drawImage(Ghost.getGhostSCARED(), model.getAlGhost().get(0).getX()*step, model.getAlGhost().get(0).getY()*step, null);
+					g2.drawImage(Ghost.getGhostSCARED(), model.getAlGhost().get(1).getX()*step, model.getAlGhost().get(1).getY()*step, null);
+					g2.drawImage(Ghost.getGhostSCARED(), model.getAlGhost().get(2).getX()*step, model.getAlGhost().get(2).getY()*step, null);
+					g2.drawImage(Ghost.getGhostSCARED(), model.getAlGhost().get(3).getX()*step, model.getAlGhost().get(3).getY()*step, null);
+					break;
+			}
 			}
 
 			model.getPacman().getImageIcon().paintIcon(newPanel, g2, model.getPacman().getX()*step, model.getPacman().getY()*step);
