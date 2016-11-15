@@ -59,12 +59,12 @@ public class Field extends JPanel implements ActionListener{
 	private Timer timer;
 	private JLabel label;
 	public Container conten = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
-	TestPanel newPanel;
-	JButton end;
-	JButton retry;
-	JButton nextlvl;
-	JFrame frame = new JFrame();
-	JFrame test = new JFrame();
+	private TestPanel newPanel;
+	private JButton end;
+	private JButton retry;
+	private JButton nextlvl;
+	private JFrame frame = new JFrame();
+	private JFrame test = new JFrame();
 
 
 	public Field(JFrame fram){
@@ -84,7 +84,6 @@ public class Field extends JPanel implements ActionListener{
 		scoreLabel = new JLabel( this.model.getPacman().getPacmanScore()+"");
 		scoreLabel.setFont(new Font("Serif", Font.PLAIN, 11));
 		scoreLabel.setForeground(Color.black);
-		//scoreLabel.setBackground(Color.BLACK);
 		scoreLabel.setOpaque(true);
 		Panel.add(scoreLabel);
 
@@ -226,122 +225,7 @@ public class Field extends JPanel implements ActionListener{
 		return false;
 
 	}*/
-
-	//	/**
-	//	 * MÉTHODE PERMETTANT D'INSTANCIER TOUS LES ITEMS EN MÊME TEMPS
-	//	 * @PARAM APPLE : LE NOMBRE D'APPLE QU'IL Y AURA
-	//	 * @PARAM BELL : LE NOMBRE DE BELL QU'IL Y AURA
-	//	 * @PARAM CHERRY : LE NOMBRE DE CHERRY QU'IL Y AURA
-	//	 * @PARAM GALBOSS : LE NOMBRE GALBOSS QU'IL Y AURA
-	//	 * @PARAM KEY : LE NOMBRE DE KEY QU'IL Y AURA
-	//	 * @PARAM MELON : LE NOMBRE DE MELON QU'IL Y AURA
-	//	 * @PARAM ORANGE : LE NOMBRE D'ORANGE QU'IL Y AURA
-	//	 * @PARAM STRAWBERRY : LE NOMBRE DE STRAWBERRY QU'IL Y AURA
-	//	 */
-	//	PUBLIC VOID GENERATEITEMSRANDOMLY(INT APPLE, INT BELL, INT CHERRY, INT GALBOSS, INT KEY, INT MELON, INT ORANGE, INT STRAWBERRY){
-	//		GENERATEAPPLERANDOMLY(APPLE);
-	//		GENERATEBELLRANDOMLY(BELL);
-	//		GENERATECHERRYRANDOMLY(CHERRY);
-	//		GENERATEGALBOSSRANDOMLY(GALBOSS);
-	//		GENERATEKEYRANDOMLY(KEY);
-	//		GENERATEMELONRANDOMLY(MELON);
-	//		GENERATEORANGERANDOMLY(ORANGE);
-	//		GENERATESTRAWBERRYRANDOMLY(STRAWBERRY);
-	//	}
-	//
-	//	/**
-	//	 * MÉTHODE PERMETTANT D'INSTANCIER LE NOMBRE D'APPLE QU'ON VEUT DANS LE NIVEAU
-	//	 * @PARAM N : LE NOMBRE D'APPLE VOULU
-	//	 */
-	//	PUBLIC VOID GENERATEAPPLERANDOMLY(INT N){
-	//		FOR(INT I = 0; I < N; I++){
-	//			APPLE APPLE = NEW APPLE(RANDOM.NEXTINT(XMAX), RANDOM.NEXTINT(YMAX), THIS);
-	//			MODEL.ADDTOALITEMS(APPLE);	
-	//		}
-	//	}
-	//
-	//	/**
-	//	 * MÉTHODE PERMETTANT D'INSTANCIER LE NOMBRE DE BELL QU'ON VEUT DANS LE NIVEAU
-	//	 * @PARAM N : LE NOMBRE DE BELL VOULU
-	//	 */
-	//	PUBLIC VOID GENERATEBELLRANDOMLY(INT N){
-	//		FOR(INT I = 0; I < N; I++){
-	//			BELL BELL = NEW BELL(RANDOM.NEXTINT(XMAX), RANDOM.NEXTINT(YMAX), THIS);
-	//			MODEL.ADDTOALITEMS(BELL);	
-	//		}
-	//	}
-	//
-	//	
-	//	/**
-	//	 * MÉTHODE PERMETTANT D'INSTANCIER LE NOMBRE DE CHERRY QU'ON VEUT DANS LE NIVEAU
-	//	 * @PARAM N : LE NOMBRE DE CHERRY VOULU
-	//	 */
-	//	PUBLIC VOID GENERATECHERRYRANDOMLY(INT N){
-	//		FOR(INT I = 0; I < N; I++){
-	//			CHERRY CHERRY = NEW CHERRY(RANDOM.NEXTINT(XMAX), RANDOM.NEXTINT(YMAX), THIS);
-	//			MODEL.ADDTOALITEMS(CHERRY);	
-	//		}	
-	//	}
-	//
-	//	
-	//	/**
-	//	 * MÉTHODE PERMETTANT D'INSTANCIER LE NOMBRE DE GALBOSS QU'ON VEUT DANS LE NIVEAU
-	//	 * @PARAM N : LE NOMBRE DE GALBOSS VOULU
-	//	 */
-	//	PUBLIC VOID GENERATEGALBOSSRANDOMLY(INT N){
-	//		FOR(INT I = 0; I < N; I++){
-	//			GALBOSS GALBOSS = NEW GALBOSS(RANDOM.NEXTINT(XMAX), RANDOM.NEXTINT(YMAX), THIS);
-	//			MODEL.ADDTOALITEMS(GALBOSS);	
-	//		}
-	//	}
-	//
-	//	/**
-	//	 * MÉTHODE PERMETTANT D'INSTANCIER LE NOMBRE DE KEY QU'ON VEUT DANS LE NIVEAU
-	//	 * @PARAM N : LE NOMBRE DE KEY VOULU
-	//	 */
-	//	PUBLIC VOID GENERATEKEYRANDOMLY(INT N){
-	//		FOR(INT I = 0; I < N; I++){
-	//			KEY KEY = NEW KEY(RANDOM.NEXTINT(XMAX), RANDOM.NEXTINT(YMAX), THIS);
-	//			MODEL.ADDTOALITEMS(KEY);	
-	//		}
-	//	}
-	//
-	//	
-	//	/**
-	//	 * MÉTHODE PERMETTANT D'INSTANCIER LE NOMBRE DE MELON QU'ON VEUT DANS LE NIVEAU
-	//	 * @PARAM N : LE NOMBRE DE MELON VOULU
-	//	 */
-	//	PUBLIC VOID GENERATEMELONRANDOMLY(INT N){
-	//		FOR(INT I = 0; I < N; I++){
-	//			MELON MELON = NEW MELON(RANDOM.NEXTINT(XMAX), RANDOM.NEXTINT(YMAX), THIS);
-	//			MODEL.ADDTOALITEMS(MELON);	
-	//		}
-	//	}
-	//
-	//	
-	//	/**
-	//	 * MÉTHODE PERMETTANT D'INSTANCIER LE NOMBRE D'ORANGE QU'ON VEUT DANS LE NIVEAU
-	//	 * @PARAM N : LE NOMBRE D'ORANGE VOULU
-	//	 */
-	//	PUBLIC VOID GENERATEORANGERANDOMLY(INT N){
-	//		FOR(INT I = 0; I < N; I++){
-	//			ORANGE ORANGE = NEW ORANGE(RANDOM.NEXTINT(XMAX), RANDOM.NEXTINT(YMAX), THIS);
-	//			MODEL.ADDTOALITEMS(ORANGE);
-	//		}
-	//	}
-	//
-	//	
-	//	/**
-	//	 * MÉTHODE PERMETTANT D'INSTANCIER LE NOMBRE DE STRAWBERRY QU'ON VEUT DANS LE NIVEAU
-	//	 * @PARAM N : LE NOMBRE DE STRAWBERRY VOULU
-	//	 */
-	//	PUBLIC VOID GENERATESTRAWBERRYRANDOMLY(INT N){
-	//		FOR(INT I = 0; I < N; I++){
-	//			STRAWBERRY STRAWBERRY = NEW STRAWBERRY(RANDOM.NEXTINT(XMAX), RANDOM.NEXTINT(YMAX), THIS);
-	//			MODEL.ADDTOALITEMS(STRAWBERRY);
-	//		}
-	//	}
-
+	
 	public Controller defautController(Model model){
 		return new Controller(model);
 	}
@@ -414,8 +298,11 @@ public class Field extends JPanel implements ActionListener{
 		this.model.getPacman().setPacmanLives(3);
 		frame = new JFrame();
 		this.chron.restart();
-		
-		this.getController().gamePause();
+		this.model.getPacman().setRight(false);
+		this.model.getPacman().setLeft(false);
+		this.model.getPacman().setTop(false);
+		this.model.getPacman().setDown(false);
+		//this.getController().gamePause();
 		this.chron.setOnPause(true);
 
 
@@ -459,7 +346,11 @@ public class Field extends JPanel implements ActionListener{
 		frame = new JFrame();
 		this.chron.restart();
 		this.chron.setOnPause(true);
-		this.getController().gamePause();
+		this.model.getPacman().setRight(false);
+		this.model.getPacman().setLeft(false);
+		this.model.getPacman().setTop(false);
+		this.model.getPacman().setDown(false);
+		//this.getController().gamePause();
 	}
 
 	/**

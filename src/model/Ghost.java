@@ -44,7 +44,7 @@ public class Ghost implements Runnable {
 	 * Cette fonction permet de savoir ce qui se trouve autour du ghost
 	 * @return un tableau de 4 éléments permettant de savoir s'il y a un mur ou non autour de lui
 	 */
-			public char[] getWallAroundGhost(){
+			public synchronized char[] getWallAroundGhost(){
 				char[][] cacheWallMap = this.field.getModel().getMap().getTab(); // récupère le tableau des chemins et murs
 				/*for(int i=0;i<=9;i++){
 						System.out.println(cacheWallMap[i][0]+""+cacheWallMap[i][1]+""+cacheWallMap[i][2]+""+cacheWallMap[i][3]+""+cacheWallMap[i][4]+""+cacheWallMap[i][5]+""+cacheWallMap[i][6]+""+cacheWallMap[i][7]+""+cacheWallMap[i][8]+""+cacheWallMap[i][9]);
@@ -76,7 +76,7 @@ public class Ghost implements Runnable {
 				return aroundAvailable;
 			}
 			
-			public void mySwitch(int i){
+			public synchronized void mySwitch(int i){
 				switch(i){
 				case 0 :
 					this.cache = 1;
@@ -127,7 +127,7 @@ public class Ghost implements Runnable {
 				}
 			}
 
-			public void ghostIA(){
+			public synchronized void ghostIA(){
 
 				char[] wallAround = this.getWallAroundGhost();
 				ArrayList<Integer> alI = new ArrayList();
@@ -225,6 +225,7 @@ public class Ghost implements Runnable {
 				
 				//tryToMove();
 				ghostIA();
+				loose();
 				//this.field.getController().loose();
 				
 				field.repaint();
@@ -238,10 +239,50 @@ public class Ghost implements Runnable {
 		}
 	}
 	
+	public synchronized void loose(){
+			if(this.x == this.field.getModel().getPacman().getX() && this.y == this.field.getModel().getPacman().getY()){// si collision pacman -> fantome
+				if(!this.field.getModel().getPacman().isPowerUp()){
+					this.field.getModel().getPacman().setPacmanLives(this.field.getModel().getPacman().getPacmanLives()-1);
+					this.field.updateScoreAndLife();
+					this.field.getController().gamePause();
+					this.field.getModel().getPacman().setRight(false);
+					this.field.getModel().getPacman().setLeft(false);
+					this.field.getModel().getPacman().setTop(false);
+					this.field.getModel().getPacman().setDown(false);
+					if(this.field.getModel().getPacman().getPacmanLives() != 0){
+						this.field.popLooseLife();
+					}else{
+						this.field.popLooseGame();
+					}
+				}
+				else{
+					this.setEat(true);
+					if(this.field.getModel().getPacman().getGhosteaten() == 0){
+						this.field.getModel().getPacman().setPacmanScore(this.field.getModel().getPacman().getPacmanScore()+200);
+						this.field.getModel().getPacman().setGhosteaten(this.field.getModel().getPacman().getGhosteaten()+1);
+					}
+					else if(this.field.getModel().getPacman().getGhosteaten() == 1){
+						this.field.getModel().getPacman().setPacmanScore(this.field.getModel().getPacman().getPacmanScore()+400);
+						this.field.getModel().getPacman().setGhosteaten(this.field.getModel().getPacman().getGhosteaten()+1);
+					}
+					else if(this.field.getModel().getPacman().getGhosteaten() == 2){
+						this.field.getModel().getPacman().setPacmanScore(this.field.getModel().getPacman().getPacmanScore()+800);
+						this.field.getModel().getPacman().setGhosteaten(this.field.getModel().getPacman().getGhosteaten()+1);
+					}
+					else {
+						this.field.getModel().getPacman().setPacmanScore(this.field.getModel().getPacman().getPacmanScore()+1600);
+						this.field.getModel().getPacman().setGhosteaten(this.field.getModel().getPacman().getGhosteaten()+1);
+					}
+					
+				}
+				
+			}		
+	}
+	
 	/**
 	 * Cette méthode permet de faire avancer les fantomes en aléatoire
 	 */
-	private void tryToMove(){
+	private synchronized void tryToMove(){
 		int choice = rand.nextInt(4);
 		switch(choice){
 		case 0 : 

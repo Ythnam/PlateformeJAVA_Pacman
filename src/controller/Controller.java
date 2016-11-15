@@ -135,7 +135,7 @@ public class Controller implements KeyListener {
 	 * met les thread fantome en pause 
 	 * met le pacman en pause
 	 */
-	public void gamePause(){
+	public synchronized void gamePause(){
 		for (Ghost g : this.model.getAlGhost()){
 			g.setOnPause(!g.isOnPause());
 		}
@@ -283,9 +283,9 @@ public class Controller implements KeyListener {
 	 * sinon 
 	 * fantome au spawn et sleep time
 	 */
-	public void loose(){
+	public synchronized void loose(){
 		for (Ghost g:this.model.getAlGhost()){
-			if(this.model.getPacman().getX() == g.getX() && this.model.getPacman().getY() == g.getY()){
+			if(this.model.getPacman().getX() == g.getX() && this.model.getPacman().getY() == g.getY()){// si collision pacman -> fantome
 				if(!this.model.getPacman().isPowerUp()){
 					this.model.getPacman().setPacmanLives(this.model.getPacman().getPacmanLives()-1);
 					view.updateScoreAndLife();

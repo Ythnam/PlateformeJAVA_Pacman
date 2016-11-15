@@ -138,6 +138,7 @@ public class Pacman implements Runnable{
 	public void saver(){
 		this.field.getController().loose();
 		if(this.field.getModel().getMap().getCounter() == 0){
+			this.field.getController().gamePause();
 			try {
 				this.field.getController().savescore();
 				} catch (IOException e1) {
@@ -147,10 +148,10 @@ public class Pacman implements Runnable{
 	}
 	
 	
-	public void goLeft(){
+	public synchronized void goLeft(){
 		if(!isOnPause()){
 		if(this.x>0){
-			if(Map.getTab()[y][x-1]!='1'){
+			if(Map.getTab()[y][x-1]!='1' && Map.getTab()[y][x-1]!='7'){ //pas un mur ni le spawn 
 				if(Map.getBol()[y][x-1] == true){ pacmanScore+=1000 ;this.field.updateScoreAndLife();this.field.getModel().getMap().setCounter(this.field.getModel().getMap().getCounter() - 1);}
 				Map.getBol()[y][x-1]=false;
 				this.x--;
@@ -162,7 +163,7 @@ public class Pacman implements Runnable{
 			
 		}
 		else {
-			if(Map.getTab()[y][this.field.getXMAX()-1]!='1'){
+			if(Map.getTab()[y][this.field.getXMAX()-1]!='1' && Map.getTab()[y][this.field.getXMAX()-1]!='7'){
 				if(Map.getBol()[y][this.field.getXMAX()-1] == true){ pacmanScore+=1000 ;this.field.updateScoreAndLife();this.field.getModel().getMap().setCounter(this.field.getModel().getMap().getCounter() - 1);}
 				Map.getBol()[y][this.field.getXMAX()-1]=false;
 				this.x = this.field.getXMAX()-1;
@@ -176,11 +177,10 @@ public class Pacman implements Runnable{
 	}
 	
 
-	public void goRight(){
+	public synchronized void goRight(){
 		if(!isOnPause()){
 		if(this.x<this.field.getXMAX()-1){
-			
-			if(Map.getTab()[y][x+1]!='1'){
+			if(Map.getTab()[y][x+1]!='1' && Map.getTab()[y][x+1]!='7' ){
 				if(Map.getBol()[y][x+1] == true){ pacmanScore+=1000 ;this.field.updateScoreAndLife();this.field.getModel().getMap().setCounter(this.field.getModel().getMap().getCounter() - 1);}
 				Map.getBol()[y][x+1]=false;
 				this.x++;
@@ -191,7 +191,7 @@ public class Pacman implements Runnable{
 			}
 		}
 		else {
-			if(Map.getTab()[y][0]!='1'){
+			if(Map.getTab()[y][0]!='1' && Map.getTab()[y][0]!='7'){
 				if(Map.getBol()[y][0] == true){ pacmanScore+=1000 ;this.field.updateScoreAndLife();this.field.getModel().getMap().setCounter(this.field.getModel().getMap().getCounter() - 1);}
 				Map.getBol()[y][0]=false;
 				this.x=0;
@@ -204,10 +204,10 @@ public class Pacman implements Runnable{
 		}
 	}
 	
-	public void goBot(){
+	public synchronized void goBot(){
 		if(!isOnPause()){
 		if(this.y < this.field.getYMAX()-1){
-			if(Map.getTab()[y+1][x]!='1' ){
+			if(Map.getTab()[y+1][x]!='1' && Map.getTab()[y+1][x]!='7' ){
 				if(Map.getBol()[y+1][x] == true) { pacmanScore+=1000 ;this.field.updateScoreAndLife();this.field.getModel().getMap().setCounter(this.field.getModel().getMap().getCounter() - 1);}
 				Map.getBol()[y+1][x]= false;
 				this.y++;
@@ -219,7 +219,7 @@ public class Pacman implements Runnable{
 			
 		}
 		else {
-			if(Map.getTab()[0][x]!='1'){
+			if(Map.getTab()[0][x]!='1' && Map.getTab()[0][x]!='7'){
 				if(Map.getBol()[0][x] == true) { pacmanScore+=1000 ;this.field.updateScoreAndLife();this.field.getModel().getMap().setCounter(this.field.getModel().getMap().getCounter() - 1);}
 					Map.getBol()[0][x]=false;
 					this.y=0;
@@ -232,10 +232,10 @@ public class Pacman implements Runnable{
 		}
 	}
 	
-	public void goTop(){
+	public synchronized void goTop(){
 		if(!isOnPause()){
 		if(this.y> 0){
-			if(Map.getTab()[y-1][x]!='1'){
+			if(Map.getTab()[y-1][x]!='1' && Map.getTab()[y-1][x]!='7'){
 				if(Map.getBol()[y-1][x] == true){ pacmanScore+=1000 ;this.field.updateScoreAndLife();this.field.getModel().getMap().setCounter(this.field.getModel().getMap().getCounter() - 1);}
 				Map.getBol()[y-1][x]=false;
 				this.y--;
@@ -246,7 +246,7 @@ public class Pacman implements Runnable{
 			}
 		}
 			else {
-			if(Map.getTab()[(this.field.getYMAX())-1][x]!='1'){
+			if(Map.getTab()[(this.field.getYMAX())-1][x]!='1' && Map.getTab()[(this.field.getYMAX())-1][x+1]!='7'){
 				if(Map.getBol()[this.field.getYMAX()-1][x] == true) { pacmanScore+=1000 ;this.field.updateScoreAndLife();this.field.getModel().getMap().setCounter(this.field.getModel().getMap().getCounter() - 1);}
 					Map.getBol()[this.field.getYMAX()-1][x]=false;
 					this.y = this.field.getYMAX()-1;
@@ -304,7 +304,7 @@ public class Pacman implements Runnable{
 				while(isOnPause()){
 					Thread.sleep(500);
 				}
-				Thread.sleep(100);
+				Thread.sleep(200);
 				
 				if(right){
 				goRight();
@@ -330,14 +330,7 @@ public class Pacman implements Runnable{
 				
 				// on gere le superMode 
 				if(this.isPowerUp()){
-					/* ImageIcon imageIconn = new ImageIcon("image/pacman.gif");
-					if(getImageIcon() !=imageIconn){
-						memory = getImageIcon();
-						setImageIcon(imageIconn);
-					}
-					else setImageIcon(memory);*/
-					
-					
+						
 					this.chron.pause();
 					chrono = chron.getDureeSec();
 					this.chron.resume();
