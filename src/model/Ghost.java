@@ -27,6 +27,7 @@ public class Ghost implements Runnable {
 	private boolean onPause = false;
 	private int cache = -10; // pour que les fantomes ne soient pas influencé dès le départ
 	private boolean eat = false;
+	private int timeSleeping = 500;
 	
 	static{
 		try{
@@ -102,7 +103,8 @@ public class Ghost implements Runnable {
 					Thread.sleep(8500);
 					setEat(false);
 				}
-				Thread.sleep(300);
+				
+				Thread.sleep(this.timeSleeping);
 				
 				//tryToMove();
 				
@@ -192,7 +194,7 @@ public class Ghost implements Runnable {
 		this.eat = eat;
 	}
 	
-	// IA des ghost   
+	// IA random des ghost   
 	
 		/**
 		 * Cette fonction permet de savoir ce qui se trouve autour du ghost
@@ -331,9 +333,14 @@ public class Ghost implements Runnable {
 					
 				}
 				
-				//  fin IA des ghost
+				//  fin IA random des ghost
 				
 				// chasing IA ghost
+				
+				/**
+				 * Cette fonction permet de savoir s'il y a des murs entre le Ghost et le Pacman sur la composante X
+				 * @return true s'il y a des murs entre eux et false sinon
+				 */
 				public synchronized boolean isWallBetweenGhostPacmanOnX(){
 					char[][] cacheWallMap = this.field.getModel().getMap().getTab(); // récupère le tableau des chemins et murs
 					int distanceX = this.x - this.field.getModel().getPacman().getX();
@@ -383,6 +390,10 @@ public class Ghost implements Runnable {
 					return true;
 				}
 
+				/**
+				 * Cette fonction permet de savoir s'il y a des murs entre le Ghost et le Pacman sur la composante Y
+				 * @return true s'il y a des murs entre eux et false sinon
+				 */
 				public synchronized boolean isWallBetweenGhostPacmanOnY(){
 					char[][] cacheWallMap = this.field.getModel().getMap().getTab(); // récupère le tableau des chemins et murs
 					int distanceY = this.y - this.field.getModel().getPacman().getY();
@@ -429,8 +440,10 @@ public class Ghost implements Runnable {
 					return true;
 				}
 				
-				
-				public void IAGhostChasingPacman(){
+				/**
+				 * Cette fonction permet aux Ghost de se diriger vers le Pacman s'il n'y a pas de mur entre eux
+				 */
+				public synchronized void IAGhostChasingPacman(){
 					char[] around = getWallAroundGhost();	
 					if(!isWallBetweenGhostPacmanOnY()/*this.field.getModel().getPacman().getX() == this.x && this.field.getModel().getPacman().getY() != this.y*/){
 						int distance = this.y - this.field.getModel().getPacman().getY();
@@ -475,22 +488,29 @@ public class Ghost implements Runnable {
 				}
 				// fin chasing IA Ghost
 				
-				public void IAGhost(){
+				/**
+				 * IA des Ghost qui permet soit d'avoir un fantome de se déplacer normalement ou d'aller chasser le pacman s'il a la vision
+				 * sur lui (pas de mur entre eux)
+				 */
+				public synchronized void IAGhost(){
 					if(!this.field.getModel().getPacman().isPowerUp()){
 						if(this.isWallBetweenGhostPacmanOnX() == false || this.isWallBetweenGhostPacmanOnY() == false){
-						IAGhostChasingPacman();
-						System.out.println("IA chasing");
+							IAGhostChasingPacman();
+							//System.out.println("IA chasing");
+							this.timeSleeping = 250;
 						} 
 						else{
 							IAGhostRandomMoove();
-							System.out.println("IA nm");
+							//System.out.println("IA nm");
+							this.timeSleeping = 500;
 						}
 					} else{
 						IAGhostRandomMoove();
-						System.out.println("IA nm !");
+						//System.out.println("IA nm !");
+						this.timeSleeping = 500;
 
 					}
-					
+
 				}
 				
 				/**
