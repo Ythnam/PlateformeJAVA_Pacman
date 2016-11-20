@@ -81,7 +81,9 @@ public class Model {
 		return map;
 	}
 
-
+public void reset(){
+	this.alItems = new ArrayList<Items>();
+}
 public void createstring () {
 	map.setTab(new char[map.getHauteur()][map.getLongueur()]);
 	map.setBol(new boolean[map.getHauteur()][map.getLongueur()]);

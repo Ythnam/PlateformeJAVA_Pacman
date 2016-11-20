@@ -275,6 +275,7 @@ public class Field extends JPanel implements ActionListener{
 	@SuppressWarnings("deprecation")
 	public void nextlvl() {
 		chrono = 0;
+		this.model.getPacman().setPowerUp(false);
 		this.model.getPacman().setPacmanScore(0);
 		if(this.model.getLvl() == 1) this.model.setLvl(this.model.getLvl()+1);
 		else  this.model.setLvl(this.model.getLvl()-1);
