@@ -49,7 +49,7 @@ public class RandomItemPop implements Runnable{
 				System.out.println("pass1");
 				restart = true;
 				repop = false;
-				this.field.getModel().reset();
+				//this.field.getModel().reset();
 				
 				
 			}
@@ -58,7 +58,8 @@ public class RandomItemPop implements Runnable{
 				repop = true;
 				restart = false;
 				System.out.println("pass2");
-				this.typeOfItemsSelected();
+			this.typeOfItemsSelected();
+			
 			}
 			
 			
@@ -85,7 +86,7 @@ public class RandomItemPop implements Runnable{
 
 		for(int i = 0; i < this.field.getXMAX(); i++){
 			for(int j = 0; j < this.field.getYMAX(); j++){
-				if(WallMap[j][i] != '1'){
+				if(WallMap[j][i] != '1' && WallMap[j][i] !='7' && WallMap[j][i] !='2'){
 					alP.add(new Point(i, j));
 				}
 			}

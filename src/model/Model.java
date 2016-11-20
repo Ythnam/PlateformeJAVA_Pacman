@@ -16,7 +16,7 @@ public class Model {
 	private ArrayList<Items> alItems = new ArrayList<>();
 	private RandomItemPop randomPop;
 //	private Items item = null;
-	private int lvl = 1;
+	private int lvl = 3;
 	private String fichier="texte/lvl"+ getLvl() + ".txt";
 	
 	public Model(){

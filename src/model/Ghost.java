@@ -135,12 +135,7 @@ public class Ghost implements Runnable {
 		switch(choice){
 		case 0 : 
 			if(this.x<this.field.getXMAX()-1){
-				if(Map.getTab()[y][x+1]!='1'){
-					if (Map.getTab()[y][x]!='0' && Map.getTab()[y][x+1]!='7'){
-						this.x++;
-					}
-					
-				}
+				if(Map.getTab()[y][x+1]!='1'){this.x++;}
 			}
 			else {
 				if(Map.getTab()[y][0]!='1'){
@@ -150,12 +145,7 @@ public class Ghost implements Runnable {
 			break;
 		case 1 :
 			if(this.x>0){
-				if(Map.getTab()[y][x-1]!='1'){
-					if (Map.getTab()[y][x]!='0' && Map.getTab()[y][x-1]!='7'){
-						this.x--;
-					}
-					
-				}
+				if(Map.getTab()[y][x-1]!='1'){this.x--;}
 			}
 			else {
 				if(Map.getTab()[y][this.field.getXMAX()-1]!='1'){
@@ -166,10 +156,7 @@ public class Ghost implements Runnable {
 		case 2 :
 			if(this.y < this.field.getYMAX()-1){
 				if(Map.getTab()[y+1][x]!='1'){
-					if (Map.getTab()[y][x]!='0' && Map.getTab()[y+1][x]!='7'){
-						this.y++;
-					}
-					
+					this.y++;
 				}
 			}
 			else {
@@ -180,12 +167,7 @@ public class Ghost implements Runnable {
 			break;
 		case 3 :
 			if(this.y> 0){
-				if(Map.getTab()[y-1][x]!='1') {
-					if (Map.getTab()[y][x]!='0' && Map.getTab()[y-1][x]!='7'){
-						this.y--;
-					}
-					
-				}
+				if(Map.getTab()[y-1][x]!='1') this.y--;
 			}
 			else {
 				if(Map.getTab()[(this.field.getYMAX()-1)][x]!='1'){
@@ -320,7 +302,12 @@ public class Ghost implements Runnable {
 					int count = 0;		
 					for(char wall : wallAround){
 						if(wall !='1'){ //wall =1 -> wall est un mur
-							alI.add(count); // je récupère le numéro des cases ou les ghosts peuvent passer (1=top, 2=bot, 3=droite, 4=gauche);
+							if (Map.getTab()[this.y][this.x]=='0' && wall =='7'){
+								
+							}
+							else {
+								alI.add(count); // je récupère le numéro des cases ou les ghosts peuvent passer (1=top, 2=bot, 3=droite, 4=gauche);
+							}
 						}
 						count++;
 					}
