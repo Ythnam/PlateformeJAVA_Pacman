@@ -106,14 +106,7 @@ public class Ghost implements Runnable {
 				
 				//tryToMove();
 				
-				if(this.isWallBetweenGhostPacmanOnX() == false || this.isWallBetweenGhostPacmanOnY() == false){
-					IAGhostChasingPacman();
-					System.out.println("IA chasing");
-				} 
-				else{
-					ghostIA();
-					System.out.println("IA nm");
-				}
+				IAGhost();
 				
 				comparisonGhostPacman();
 
@@ -300,7 +293,7 @@ public class Ghost implements Runnable {
 				 * Cette méthode est l'algorithme de mouvement des fantomes : ils ne se cognent pas contre les murs et à chaque intersection,
 				 * ils choisiront une des entrées possible
 				 */
-				public synchronized void ghostIA(){
+				public synchronized void IAGhostRandomMoove(){
 
 					char[] wallAround = this.getWallAroundGhost();
 					ArrayList<Integer> alI = new ArrayList();
@@ -481,6 +474,24 @@ public class Ghost implements Runnable {
 					}
 				}
 				// fin chasing IA Ghost
+				
+				public void IAGhost(){
+					if(!this.field.getModel().getPacman().isPowerUp()){
+						if(this.isWallBetweenGhostPacmanOnX() == false || this.isWallBetweenGhostPacmanOnY() == false){
+						IAGhostChasingPacman();
+						System.out.println("IA chasing");
+						} 
+						else{
+							IAGhostRandomMoove();
+							System.out.println("IA nm");
+						}
+					} else{
+						IAGhostRandomMoove();
+						System.out.println("IA nm !");
+
+					}
+					
+				}
 				
 				/**
 				 * Cette fonction permet de savoir si le fantome et le pacman sont sur la même case et si  c'est le cas, lequel des deux mange
