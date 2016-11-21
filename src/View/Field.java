@@ -342,8 +342,14 @@ public class Field extends JPanel implements ActionListener{
 		this.model.getPacman().setPacmanScore(0);
 		this.model.getPacman().setPacmanLives(3);
 		this.model.setLvl(0);
+		this.model.updatefichier();
 		this.model.lecture();
 		this.model.createstring();
+		
+		updatevalues();
+		Dimension preferredSize = new Dimension(XMAX*step,YMAX*step);
+		this.newPanel.setPreferredSize(preferredSize );
+		test.pack();
 		this.model.getPacman().setX(this.model.getMap().getSpawnPacman().y);
 		this.model.getPacman().setY(this.model.getMap().getSpawnPacman().x);
 
