@@ -139,11 +139,7 @@ public class Pacman implements Runnable{
 		this.field.getController().loose();
 		if(this.field.getModel().getMap().getCounter() == 0){
 			this.field.getController().gamePause();
-			try {
-				this.field.getController().savescore();
-				} catch (IOException e1) {
-				e1.printStackTrace();
-			}
+			this.field.popClassement();
 		}
 	}
 	

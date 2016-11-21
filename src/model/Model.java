@@ -15,8 +15,9 @@ public class Model {
 	private ArrayList<Ghost> alGhost = new ArrayList<>();
 	private ArrayList<Items> alItems = new ArrayList<>();
 	private RandomItemPop randomPop;
+	private Music music;
 //	private Items item = null;
-	private int lvl = 3;
+	private int lvl = 0;
 	private String fichier="texte/lvl"+ getLvl() + ".txt";
 	
 	public Model(){
@@ -40,6 +41,10 @@ public class Model {
 		return pacman;
 	}
 	
+	public Music getMusic(){
+		return music;
+	}
+	
 	public RandomItemPop getRandomPop() {
 		return randomPop;
 	}
@@ -54,6 +59,10 @@ public class Model {
 	
 	public void setRandomPop(RandomItemPop randomPop) {
 		this.randomPop = randomPop;
+	}
+	
+	public void setMusic(Music music) {
+		this.music = music;
 	}
 
 	
