@@ -17,7 +17,7 @@ public class Model {
 	private RandomItemPop randomPop;
 	private Music music;
 //	private Items item = null;
-	private int lvl = 0;
+	private int lvl = 1;
 	private String fichier="texte/lvl"+ getLvl() + ".txt";
 	
 	public Model(){
@@ -94,6 +94,7 @@ public void reset(){
 	this.alItems = new ArrayList<Items>();
 }
 public void createstring () {
+	map = new Map();
 	map.setTab(new char[map.getHauteur()][map.getLongueur()]);
 	map.setBol(new boolean[map.getHauteur()][map.getLongueur()]);
 	int count = 0 ;
@@ -169,9 +170,7 @@ public void lecture () {
 			}
 			
 			longueur1 = longueur1/hauteur1;
-			System.out.println(hauteur1); 
 			this.map.setHauteur(hauteur1);
-			System.out.println(longueur1);
 			this.map.setLongueur(longueur1);		
 }
 

@@ -15,8 +15,6 @@ public class RandomItemPop implements Runnable{
 	private int y;
 	private boolean onPause = false;
 	
-	private double chrono = 0;
-	private Chrono chron = new Chrono();
 	
 	
 	public RandomItemPop(Field field){
@@ -46,7 +44,7 @@ public class RandomItemPop implements Runnable{
 		while(true){	
 			
 			if((this.field.getChrono()%11>=10) && (this.field.getChrono()%11<11)&& repop){
-				System.out.println("pass1");
+				
 				restart = true;
 				repop = false;
 				this.field.getModel().reset();
@@ -57,9 +55,7 @@ public class RandomItemPop implements Runnable{
 				
 				repop = true;
 				restart = false;
-				System.out.println("pass2");
 			this.typeOfItemsSelected();
-			
 			}
 			
 			
@@ -81,16 +77,21 @@ public class RandomItemPop implements Runnable{
 
 
 	private void pointItemPop(){
+		String line="";
+		alP = new ArrayList<Point>();
 		char[][] WallMap = this.field.getModel().getMap().getTab(); // récupère le tableau des chemins et murs
 		
 
 		for(int i = 0; i < this.field.getXMAX(); i++){
 			for(int j = 0; j < this.field.getYMAX(); j++){
+				line+=(WallMap[j][i]);
 				if(WallMap[j][i] != '1' && WallMap[j][i] !='7' && WallMap[j][i] !='2'){
 					alP.add(new Point(i, j));
 				}
+				
 			}
 		}
+	
 		// J'ai récupéré les points où les Items peuvent pop
 
 		
@@ -191,5 +192,8 @@ public class RandomItemPop implements Runnable{
 		this.onPause = onPause;
 	}
 
+	public void stop(){
+	
+	}
 
 }

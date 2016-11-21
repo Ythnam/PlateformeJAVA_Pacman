@@ -49,10 +49,6 @@ public class Controller implements KeyListener {
 		for (int k=0;k<this.model.getAlItems().size();k++){
 			if(this.model.getAlItems().get(k)!=null){
 				if(this.model.getPacman().getX() == this.model.getAlItems().get(k).getX() && this.model.getPacman().getY() == this.model.getAlItems().get(k).getY() ){
-					//this.model.getRandomPop().starStop();
-					//this.model.getRandomPop().setX(-1);
-					System.out.println("eat eat eat");
-					//this.view.repaint();
 					this.model.getPacman().setPacmanScore(this.model.getPacman().getPacmanScore()+this.model.getAlItems().get(k).getScore());
 					this.model.getAlItems().set(k, null);
 				}
@@ -121,11 +117,9 @@ public class Controller implements KeyListener {
 				//this.model.getAlGhost().onPause = !this.model.getAlGhost().onPause;
 			}
 			else if (source == KeyEvent.VK_M){
-				System.out.println("passed");
 				this.model.getMusic().setOnPause(!this.model.getMusic().isOnPause());
 			}
 			else if(source==KeyEvent.VK_ENTER){
-				System.out.println("k");
 			}
 			else{
 				
