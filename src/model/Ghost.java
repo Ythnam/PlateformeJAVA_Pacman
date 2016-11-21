@@ -302,7 +302,12 @@ public class Ghost implements Runnable {
 					int count = 0;		
 					for(char wall : wallAround){
 						if(wall !='1'){ //wall =1 -> wall est un mur
-							alI.add(count); // je récupère le numéro des cases ou les ghosts peuvent passer (1=top, 2=bot, 3=droite, 4=gauche);
+							if (Map.getTab()[this.y][this.x]=='0' && wall =='7'){
+								
+							}
+							else {
+								alI.add(count); // je récupère le numéro des cases ou les ghosts peuvent passer (1=top, 2=bot, 3=droite, 4=gauche);
+							}
 						}
 						count++;
 					}

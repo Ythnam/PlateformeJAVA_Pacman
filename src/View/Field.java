@@ -275,9 +275,10 @@ public class Field extends JPanel implements ActionListener{
 	@SuppressWarnings("deprecation")
 	public void nextlvl() {
 		chrono = 0;
+		this.model.getPacman().setPowerUp(false);
 		this.model.getPacman().setPacmanScore(0);
-		if(this.model.getLvl() == 1) this.model.setLvl(this.model.getLvl()+1);
-		else  this.model.setLvl(this.model.getLvl()-1);
+		if(this.model.getLvl() !=3) this.model.setLvl(this.model.getLvl()+1);
+		else  this.model.setLvl(1);
 
 		this.model.updatefichier();
 		this.model.lecture();
@@ -304,6 +305,7 @@ public class Field extends JPanel implements ActionListener{
 		this.model.getPacman().setDown(false);
 		//this.getController().gamePause();
 		this.chron.setOnPause(true);
+		repaint();
 
 
 		//this.model.setPacman(Pacman.getInstance(this.model.getMap().getSpawnPacman().y, this.model.getMap().getSpawnPacman().x, this));

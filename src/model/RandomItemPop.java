@@ -15,6 +15,9 @@ public class RandomItemPop implements Runnable{
 	private int y;
 	private boolean onPause = false;
 	
+	private double chrono = 0;
+	private Chrono chron = new Chrono();
+	
 	
 	public RandomItemPop(Field field){
 		this.field = field;
@@ -37,24 +40,41 @@ public class RandomItemPop implements Runnable{
 	
 	@Override
 	public void run() {
-		try{
-			Thread.sleep(10000);
+		
+		boolean repop = true;
+		boolean restart = true;
+		while(true){	
 			
-			while(true){		
-				this.typeOfItemsSelected();
+			if((this.field.getChrono()%11>=10) && (this.field.getChrono()%11<11)&& repop){
+				System.out.println("pass1");
+				restart = true;
+				repop = false;
+				//this.field.getModel().reset();
 				
-				this.field.repaint();
-				Thread.sleep(5000);
-				
-				for (int k=0;k<this.field.getModel().getAlItems().size();k++){
-					this.field.getModel().getAlItems().set(k, null);
-				}
-				this.field.repaint();
-				Thread.sleep(5000);
 				
 			}
-		} catch (InterruptedException e){
-			e.printStackTrace();
+			if((this.field.getChrono()%11>=5) && (this.field.getChrono()%11<8) && restart){
+				
+				repop = true;
+				restart = false;
+				System.out.println("pass2");
+			this.typeOfItemsSelected();
+			
+			}
+			
+			
+			/*
+			this.typeOfItemsSelected();
+			
+			this.field.repaint();
+			Thread.sleep(5000);
+			
+			for (int k=0;k<this.field.getModel().getAlItems().size();k++){
+				this.field.getModel().getAlItems().set(k, null);
+			}
+			this.field.repaint();
+			Thread.sleep(5000);
+			*/
 		}
 
 	}
@@ -66,7 +86,7 @@ public class RandomItemPop implements Runnable{
 
 		for(int i = 0; i < this.field.getXMAX(); i++){
 			for(int j = 0; j < this.field.getYMAX(); j++){
-				if(WallMap[j][i] != '1'){
+				if(WallMap[j][i] != '1' && WallMap[j][i] !='7' && WallMap[j][i] !='2'){
 					alP.add(new Point(i, j));
 				}
 			}
