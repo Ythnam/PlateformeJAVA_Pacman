@@ -325,6 +325,8 @@ public class Field extends JPanel implements ActionListener{
 		this.chron.restart();
 		this.chron.setOnPause(true);
 		this.getController().gamePause();*/
+		this.model.setRandomPop(new RandomItemPop(this));
+		
 	}
 
 	
@@ -336,8 +338,6 @@ public class Field extends JPanel implements ActionListener{
 	 * 
 	 */
 	private void retry() {
-		//endbool = true;
-		System.out.println("retry");
 		chrono = 0;
 		this.model.getPacman().setPacmanScore(0);
 		this.model.getPacman().setPacmanLives(3);
@@ -627,7 +627,6 @@ public class Field extends JPanel implements ActionListener{
 						g2.drawImage(Strawberry.getImg(), it.getX()*step, it.getY()*step, null);
 						break;
 					default :
-						System.out.println("error");
 						break;
 					}
 				}
