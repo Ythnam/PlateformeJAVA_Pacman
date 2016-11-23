@@ -116,8 +116,13 @@ public class Controller implements KeyListener {
 
 			}else if(source==KeyEvent.VK_SPACE){
 					gamePause();
+					
 							
 				//this.model.getAlGhost().onPause = !this.model.getAlGhost().onPause;
+			}
+			else if (source == KeyEvent.VK_M){
+				System.out.println("passed");
+				this.model.getMusic().setOnPause(!this.model.getMusic().isOnPause());
 			}
 			else if(source==KeyEvent.VK_ENTER){
 				System.out.println("k");
@@ -142,6 +147,7 @@ public class Controller implements KeyListener {
 		this.model.getPacman().setOnPause(!this.model.getPacman().isOnPause());
 		view.getChron().setOnPause(!view.getChron().isOnPause());
 		this.model.getRandomPop().setOnPause(!this.model.getRandomPop().isOnPause());
+		this.model.getMusic().setOnPause(!this.model.getMusic().isOnPause());
 		//view.setDelay(0);
 	}
 
@@ -169,7 +175,7 @@ public class Controller implements KeyListener {
 		//recuperation des scores precedant
 		data = new long[11];
 		names = new String[11];
-		File f = new File ("texte/classement"+this.model.getLvl() +".txt");
+		File f = new File ("texte/classement.txt");
 		if(f.exists()){
 		
 		try {

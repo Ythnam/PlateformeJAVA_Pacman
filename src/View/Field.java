@@ -36,6 +36,7 @@ import model.Items;
 import model.Key;
 import model.Melon;
 import model.Model;
+import model.Music;
 import model.Orange;
 import model.Pacman;
 import model.RandomItemPop;
@@ -72,6 +73,7 @@ public class Field extends JPanel implements ActionListener{
 		generatePacmanRandomly();
 		generateGhostRandomly(4);
 		generateItemsRandomly();
+		sound();
 		//generateItemsRandomly(10, 5, 4, 3, 5, 1, 1, 1); // en test random pour les valeurs
 		this.setController(defautController(this.model));
 		this.getController().setView(this);
@@ -195,6 +197,12 @@ public class Field extends JPanel implements ActionListener{
 		new Thread(pacman).start();		
 	}
 
+	
+	public void sound(){
+		Music musicPacman = new Music();
+		this.model.setMusic(musicPacman);
+		new Thread(musicPacman).start();
+	}
 
 	public void generateItemsRandomly(){
 
@@ -274,9 +282,10 @@ public class Field extends JPanel implements ActionListener{
 	 */
 	@SuppressWarnings("deprecation")
 	public void nextlvl() {
+		if (this.model.getLvl() !=3){
 		chrono = 0;
 		this.model.getPacman().setPowerUp(false);
-		this.model.getPacman().setPacmanScore(0);
+		//this.model.getPacman().setPacmanScore(0);
 		if(this.model.getLvl() !=3) this.model.setLvl(this.model.getLvl()+1);
 		else  this.model.setLvl(1);
 
@@ -296,7 +305,7 @@ public class Field extends JPanel implements ActionListener{
 		}
 
 		frame.dispose();
-		this.model.getPacman().setPacmanLives(3);
+		//this.model.getPacman().setPacmanLives(3);
 		frame = new JFrame();
 		this.chron.restart();
 		this.model.getPacman().setRight(false);
@@ -307,7 +316,7 @@ public class Field extends JPanel implements ActionListener{
 		this.chron.setOnPause(true);
 		repaint();
 
-
+		}
 		//this.model.setPacman(Pacman.getInstance(this.model.getMap().getSpawnPacman().y, this.model.getMap().getSpawnPacman().x, this));
 		/*updateScoreAndLife();
 		updatetimer()
@@ -331,9 +340,16 @@ public class Field extends JPanel implements ActionListener{
 		System.out.println("retry");
 		chrono = 0;
 		this.model.getPacman().setPacmanScore(0);
-		this.model.getPacman().setPacmanLives(3);;
+		this.model.getPacman().setPacmanLives(3);
+		this.model.setLvl(0);
+		this.model.updatefichier();
 		this.model.lecture();
 		this.model.createstring();
+		
+		updatevalues();
+		Dimension preferredSize = new Dimension(XMAX*step,YMAX*step);
+		this.newPanel.setPreferredSize(preferredSize );
+		test.pack();
 		this.model.getPacman().setX(this.model.getMap().getSpawnPacman().y);
 		this.model.getPacman().setY(this.model.getMap().getSpawnPacman().x);
 

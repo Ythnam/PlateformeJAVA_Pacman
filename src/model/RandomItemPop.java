@@ -49,7 +49,7 @@ public class RandomItemPop implements Runnable{
 				System.out.println("pass1");
 				restart = true;
 				repop = false;
-				//this.field.getModel().reset();
+				this.field.getModel().reset();
 				
 				
 			}
