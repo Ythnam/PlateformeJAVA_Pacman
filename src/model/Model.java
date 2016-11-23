@@ -16,72 +16,72 @@ public class Model {
 	private ArrayList<Items> alItems = new ArrayList<>();
 	private RandomItemPop randomPop;
 	private Music music;
-//	private Items item = null;
+	//	private Items item = null;
 	private int lvl = 1;
 	private String fichier="texte/lvl"+ getLvl() + ".txt";
-	
+
 	public Model(){
 		lecture();
 		createstring();
 	}
-	
+
 	public void updatefichier(){
 		this.fichier = "texte/lvl"+ getLvl() + ".txt";
 	}
-	
+
 	public ArrayList<Ghost> getAlGhost() {
 		return alGhost;
 	}
-	
+
 	public ArrayList<Items> getAlItems() {
 		return alItems;
 	}
-	
+
 	public Pacman getPacman() {
 		return pacman;
 	}
-	
+
 	public Music getMusic(){
 		return music;
 	}
-	
+
 	public RandomItemPop getRandomPop() {
 		return randomPop;
 	}
-	
+
 	/*public Items getItem() {
 		return item;
 	}
-	
+
 	public void setItem(Items item) {
 		this.item = item;
 	}**/
-	
+
 	public void setRandomPop(RandomItemPop randomPop) {
 		this.randomPop = randomPop;
 	}
-	
+
 	public void setMusic(Music music) {
 		this.music = music;
 	}
 
-	
+
 	public void setAlGhost(ArrayList<Ghost> alGhost) {
 		this.alGhost = alGhost;
 	}
-	
+
 	/*public void setAlItems(ArrayList<Items> alItems) {
 		this.alItems = alItems;
 	}*/
-	
+
 	public void setPacman(Pacman pacman) {
 		this.pacman = pacman;
 	}
-	
+
 	public void addToAlGhost(Ghost g){
 		this.alGhost.add(g);
 	}
-	
+
 	public void addToAlItems(Items i){
 		this.alItems.add(i);
 	}
@@ -90,36 +90,36 @@ public class Model {
 		return map;
 	}
 
-public void reset(){
-	this.alItems = new ArrayList<Items>();
-}
-public void createstring () {
-	map = new Map();
-	map.setTab(new char[map.getHauteur()][map.getLongueur()]);
-	map.setBol(new boolean[map.getHauteur()][map.getLongueur()]);
-	int count = 0 ;
-	int i =0;
-	int j = 0 ;
-			try{
-				File ips = new File(getFichier());
-				FileReader ipsr = new FileReader(ips);
-				BufferedReader br=new BufferedReader(ipsr);
-				Scanner sc = null;
-				try {
-					sc = new Scanner(new File(getFichier()));
+	public void reset(){
+		this.alItems = new ArrayList<Items>();
+	}
+	public void createstring () {
+		map = new Map();
+		map.setElementOnMap(new char[map.getHauteur()][map.getLongueur()]);
+		map.setFoodForPacman(new boolean[map.getHauteur()][map.getLongueur()]);
+		int count = 0 ;
+		int i =0;
+		int j = 0 ;
+		try{
+			File ips = new File(getFichier());
+			FileReader ipsr = new FileReader(ips);
+			BufferedReader br=new BufferedReader(ipsr);
+			Scanner sc = null;
+			try {
+				sc = new Scanner(new File(getFichier()));
 				while (sc.hasNextLine()) {
 					for (char c : sc.next().toCharArray()) {
-						map.getTab()[i][j] = c;
+						map.getElementOnMap()[i][j] = c;
 						if(c=='0'){
-							map.getBol()[i][j] = true;
+							map.getFoodForPacman()[i][j] = true;
 							count++;
 						}
 						else {
-							
-							map.getBol()[i][j] = false;
+
+							map.getFoodForPacman()[i][j] = false;
 						}
-						 
-						
+
+
 						if(c=='2'){
 							this.map.setSpawnGhost(new Point(i,j));
 						}
@@ -131,65 +131,65 @@ public void createstring () {
 					i++;
 					j=0;
 				}
-				} finally {
-					if (sc != null)
-						sc.close();
-					}
-
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
+			} finally {
+				if (sc != null)
+					sc.close();
 			}
-map.setCounter(count);
-}
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		map.setCounter(count);
+	}
 
 
-public void lecture () {
-	int longueur1 = 0;
-    int hauteur1 = 0;
-	
-			try{
-				File ips = new File(getFichier());
-				FileReader ipsr = new FileReader(ips);
-				BufferedReader br=new BufferedReader(ipsr);
-				Scanner sc = null;
-				try {
-					sc = new Scanner(new File(getFichier()));
+	public void lecture () {
+		int longueur1 = 0;
+		int hauteur1 = 0;
+
+		try{
+			File ips = new File(getFichier());
+			FileReader ipsr = new FileReader(ips);
+			BufferedReader br=new BufferedReader(ipsr);
+			Scanner sc = null;
+			try {
+				sc = new Scanner(new File(getFichier()));
 				while (sc.hasNextLine()) {
 					for (char c : sc.next().toCharArray()) {
 						longueur1 += 1;
 					}
 					hauteur1 += 1 ;
 				}
-				} finally {
-					if (sc != null)
-						sc.close();
-					}
-
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
+			} finally {
+				if (sc != null)
+					sc.close();
 			}
-			
-			longueur1 = longueur1/hauteur1;
-			this.map.setHauteur(hauteur1);
-			this.map.setLongueur(longueur1);		
-}
 
-public int getLvl() {
-	return lvl;
-}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 
-public void setLvl(int lvl) {
-	this.lvl = lvl;
-}
+		longueur1 = longueur1/hauteur1;
+		this.map.setHauteur(hauteur1);
+		this.map.setLongueur(longueur1);		
+	}
 
-public String getFichier() {
-	return fichier;
-}
+	public int getLvl() {
+		return lvl;
+	}
 
-public void setFichier(String fichier) {
-	this.fichier = fichier;
-}
+	public void setLvl(int lvl) {
+		this.lvl = lvl;
+	}
 
-	
+	public String getFichier() {
+		return fichier;
+	}
+
+	public void setFichier(String fichier) {
+		this.fichier = fichier;
+	}
+
+
 
 }

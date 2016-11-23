@@ -9,14 +9,14 @@ import View.Field;
 public class RandomItemPop implements Runnable{
 
 	ArrayList<Point> alP = new ArrayList<Point>();
-	
+
 	private Field field;
 	private int x;
 	private int y;
 	private boolean onPause = false;
-	
-	
-	
+
+
+
 	public RandomItemPop(Field field){
 		this.field = field;
 	}
@@ -30,47 +30,47 @@ public class RandomItemPop implements Runnable{
 	public int getX() {
 		return x;
 	}
-	
+
 	public int getY() {
 		return y;
 	}
-	
-	
+
+
 	@Override
 	public void run() {
-		
+
 		boolean repop = true;
 		boolean restart = true;
 		while(true){	
-			
+
 			if((this.field.getChrono()%11>=10) && (this.field.getChrono()%11<11)&& repop){
-				
+
 				restart = true;
 				repop = false;
 				this.field.getModel().reset();
-				
-				
+
+
 			}
 			if((this.field.getChrono()%11>=5) && (this.field.getChrono()%11<8) && restart){
-				
+
 				repop = true;
 				restart = false;
-			this.typeOfItemsSelected();
+				this.typeOfItemsSelected();
 			}
-			
-			
+
+
 			/*
 			this.typeOfItemsSelected();
-			
+
 			this.field.repaint();
 			Thread.sleep(5000);
-			
+
 			for (int k=0;k<this.field.getModel().getAlItems().size();k++){
 				this.field.getModel().getAlItems().set(k, null);
 			}
 			this.field.repaint();
 			Thread.sleep(5000);
-			*/
+			 */
 		}
 
 	}
@@ -79,8 +79,8 @@ public class RandomItemPop implements Runnable{
 	private void pointItemPop(){
 		String line="";
 		alP = new ArrayList<Point>();
-		char[][] WallMap = this.field.getModel().getMap().getTab(); // récupère le tableau des chemins et murs
-		
+		char[][] WallMap = this.field.getModel().getMap().getElementOnMap(); // récupère le tableau des chemins et murs
+
 
 		for(int i = 0; i < this.field.getXMAX(); i++){
 			for(int j = 0; j < this.field.getYMAX(); j++){
@@ -88,17 +88,17 @@ public class RandomItemPop implements Runnable{
 				if(WallMap[j][i] != '1' && WallMap[j][i] !='7' && WallMap[j][i] !='2'){
 					alP.add(new Point(i, j));
 				}
-				
+
 			}
 		}
-	
+
 		// J'ai récupéré les points où les Items peuvent pop
 
-		
-		
+
+
 
 	}
-	
+
 	public void creaPoint(){
 		Random rand = new Random();
 		int randomIntPop = rand.nextInt(alP.size());
@@ -113,7 +113,7 @@ public class RandomItemPop implements Runnable{
 
 		this.pointItemPop();
 		this.creaPoint();
-		
+
 		switch(level){
 		case 1 :
 			items = new Cherry(this.x, this.y, this.field);
@@ -193,7 +193,7 @@ public class RandomItemPop implements Runnable{
 	}
 
 	public void stop(){
-	
+
 	}
 
 }

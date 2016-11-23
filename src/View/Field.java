@@ -122,7 +122,7 @@ public class Field extends JPanel implements ActionListener{
 	public  Model getModel() {
 		return model;
 	}
-	
+
 	/**
 	 * modifie la valeur de XMAX et YMAX pour la création d'un nouveau niveau
 	 */
@@ -191,13 +191,13 @@ public class Field extends JPanel implements ActionListener{
 	 */
 	public void generatePacmanRandomly(){
 
-		Pacman pacman = new Pacman(this.model.getMap().getSpawnPacman().y, this.model.getMap().getSpawnPacman().x, this);
+		Pacman pacman = Pacman.getInstance(this.model.getMap().getSpawnPacman().y, this.model.getMap().getSpawnPacman().x, this);
 
 		this.model.setPacman(pacman);
 		new Thread(pacman).start();		
 	}
 
-	
+
 	public void sound(){
 		Music musicPacman = new Music();
 		this.model.setMusic(musicPacman);
@@ -233,7 +233,7 @@ public class Field extends JPanel implements ActionListener{
 		return false;
 
 	}*/
-	
+
 	public Controller defautController(Model model){
 		return new Controller(model);
 	}
@@ -283,38 +283,38 @@ public class Field extends JPanel implements ActionListener{
 	@SuppressWarnings("deprecation")
 	public void nextlvl() {
 		if (this.model.getLvl() !=3){
-		chrono = 0;
-		this.model.getPacman().setPowerUp(false);
-		//this.model.getPacman().setPacmanScore(0);
-		if(this.model.getLvl() !=3) this.model.setLvl(this.model.getLvl()+1);
-		else  this.model.setLvl(1);
+			chrono = 0;
+			this.model.getPacman().setPowerUp(false);
+			//this.model.getPacman().setPacmanScore(0);
+			if(this.model.getLvl() !=3) this.model.setLvl(this.model.getLvl()+1);
+			else  this.model.setLvl(1);
 
-		this.model.updatefichier();
-		this.model.lecture();
-		this.model.createstring();
-		updatevalues();
-		Dimension preferredSize = new Dimension(XMAX*step,YMAX*step);
-		this.newPanel.setPreferredSize(preferredSize );
-		test.pack();
-		this.model.getPacman().setX(this.model.getMap().getSpawnPacman().y);
-		this.model.getPacman().setY(this.model.getMap().getSpawnPacman().x);
+			this.model.updatefichier();
+			this.model.lecture();
+			this.model.createstring();
+			updatevalues();
+			Dimension preferredSize = new Dimension(XMAX*step,YMAX*step);
+			this.newPanel.setPreferredSize(preferredSize );
+			test.pack();
+			this.model.getPacman().setX(this.model.getMap().getSpawnPacman().y);
+			this.model.getPacman().setY(this.model.getMap().getSpawnPacman().x);
 
-		for (Ghost g : this.model.getAlGhost()){
-			g.setX(this.model.getMap().getSpawnGhost().y);
-			g.setY(this.model.getMap().getSpawnGhost().x);
-		}
+			for (Ghost g : this.model.getAlGhost()){
+				g.setX(this.model.getMap().getSpawnGhost().y);
+				g.setY(this.model.getMap().getSpawnGhost().x);
+			}
 
-		frame.dispose();
-		//this.model.getPacman().setPacmanLives(3);
-		frame = new JFrame();
-		this.chron.restart();
-		this.model.getPacman().setRight(false);
-		this.model.getPacman().setLeft(false);
-		this.model.getPacman().setTop(false);
-		this.model.getPacman().setDown(false);
-		//this.getController().gamePause();
-		this.chron.setOnPause(true);
-		repaint();
+			frame.dispose();
+			//this.model.getPacman().setPacmanLives(3);
+			frame = new JFrame();
+			this.chron.restart();
+			this.model.getPacman().setRight(false);
+			this.model.getPacman().setLeft(false);
+			this.model.getPacman().setTop(false);
+			this.model.getPacman().setDown(false);
+			//this.getController().gamePause();
+			this.chron.setOnPause(true);
+			repaint();
 
 		}
 		//this.model.setPacman(Pacman.getInstance(this.model.getMap().getSpawnPacman().y, this.model.getMap().getSpawnPacman().x, this));
@@ -326,10 +326,10 @@ public class Field extends JPanel implements ActionListener{
 		this.chron.setOnPause(true);
 		this.getController().gamePause();*/
 		this.model.setRandomPop(new RandomItemPop(this));
-		
+
 	}
 
-	
+
 	/**
 	 * Cette fonction permet de relancer le niveau en cours 
 	 * vie = 0 
@@ -345,7 +345,7 @@ public class Field extends JPanel implements ActionListener{
 		this.model.updatefichier();
 		this.model.lecture();
 		this.model.createstring();
-		
+
 		updatevalues();
 		Dimension preferredSize = new Dimension(XMAX*step,YMAX*step);
 		this.newPanel.setPreferredSize(preferredSize );
@@ -379,7 +379,7 @@ public class Field extends JPanel implements ActionListener{
 		frame = new JFrame();
 	}
 
-	
+
 	/**
 	 * créer une nouvelle popUp pour informer que le joueur a perdu une vie
 	 * 
@@ -398,7 +398,7 @@ public class Field extends JPanel implements ActionListener{
 					g.setY(this.model.getMap().getSpawnGhost().x);
 				}
 
-			// 	this.getController().gamePause();
+				// 	this.getController().gamePause();
 			}
 		}
 	}
@@ -424,13 +424,13 @@ public class Field extends JPanel implements ActionListener{
 		//JOptionPane.showM		Dialog(newPanel, "Vous avez perdu une vie, cliquez pour continuer");
 	}
 
-	
+
 	/**
 	 * création de la PopUp pour affichage des scores
 	 * fenetre avec 3 boutons : recommencer, fermer la fenetre et niveau suivant
 	 */
 	public void popClassement(){
-		
+
 		frame.setSize(300,300);
 		frame.setResizable(true);
 		frame.setLocation(300, 300);
@@ -497,7 +497,7 @@ public class Field extends JPanel implements ActionListener{
 		this.controller = controller;
 	}
 
-	
+
 	/**
 	 * classe interne pour dessiner la map
 	 * @author tifred
@@ -531,48 +531,48 @@ public class Field extends JPanel implements ActionListener{
 			}
 			for (int k=0;k<Map.getHauteur();k++){
 				for (int l=0;l<Map.getLongueur();l++){
-					if (Map.getTab()[k][l]=='0'){
-						if(Map.getBol()[k][l]==true){
+					if (Map.getElementOnMap()[k][l]=='0'){
+						if(Map.getFoodForPacman()[k][l]==true){
 							g2.drawImage(full,l*step,k*step,null);
 						}
 						else{
 							g2.drawImage(empty,l*step,k*step,null);
 						}
 					}
-					else if(Map.getTab()[k][l]=='1'){
+					else if(Map.getElementOnMap()[k][l]=='1'){
 						g2.drawImage(wall,l*step,k*step,null);
 					}
-					else if(Map.getTab()[k][l]=='2'||Map.getTab()[k][l]=='7'||Map.getTab()[k][l]=='3'){
+					else if(Map.getElementOnMap()[k][l]=='2'||Map.getElementOnMap()[k][l]=='7'||Map.getElementOnMap()[k][l]=='3'){
 						g2.drawImage(empty,l*step,k*step,null);
 					}
-					else if(Map.getTab()[k][l]=='5'){
+					else if(Map.getElementOnMap()[k][l]=='5'){
 						g2.drawImage(superP,l*step,k*step,null);
 					}
-					
+
 				}
 			}
 
 			if(!model.getPacman().isPowerUp()){
-			switch(model.getAlGhost().size()){
-			case 1 :
-				g2.drawImage(Ghost.getGhostORANGE(), model.getAlGhost().get(0).getX()*step, model.getAlGhost().get(0).getY()*step, null);
-				break;
-			case 2 :
-				g2.drawImage(Ghost.getGhostORANGE(), model.getAlGhost().get(0).getX()*step, model.getAlGhost().get(0).getY()*step, null);
-				g2.drawImage(Ghost.getGhostRED(), model.getAlGhost().get(1).getX()*step, model.getAlGhost().get(1).getY()*step, null);
-				break;
-			case 3 :
-				g2.drawImage(Ghost.getGhostORANGE(), model.getAlGhost().get(0).getX()*step, model.getAlGhost().get(0).getY()*step, null);
-				g2.drawImage(Ghost.getGhostRED(), model.getAlGhost().get(1).getX()*step, model.getAlGhost().get(1).getY()*step, null);
-				g2.drawImage(Ghost.getGhostGREEN(), model.getAlGhost().get(2).getX()*step, model.getAlGhost().get(2).getY()*step, null);
-				break;
-			case 4 :
-				g2.drawImage(Ghost.getGhostORANGE(), model.getAlGhost().get(0).getX()*step, model.getAlGhost().get(0).getY()*step, null);
-				g2.drawImage(Ghost.getGhostRED(), model.getAlGhost().get(1).getX()*step, model.getAlGhost().get(1).getY()*step, null);
-				g2.drawImage(Ghost.getGhostGREEN(), model.getAlGhost().get(2).getX()*step, model.getAlGhost().get(2).getY()*step, null);
-				g2.drawImage(Ghost.getGhostBLUE(), model.getAlGhost().get(3).getX()*step, model.getAlGhost().get(3).getY()*step, null);
-				break;
-			}
+				switch(model.getAlGhost().size()){
+				case 1 :
+					g2.drawImage(Ghost.getGhostORANGE(), model.getAlGhost().get(0).getX()*step, model.getAlGhost().get(0).getY()*step, null);
+					break;
+				case 2 :
+					g2.drawImage(Ghost.getGhostORANGE(), model.getAlGhost().get(0).getX()*step, model.getAlGhost().get(0).getY()*step, null);
+					g2.drawImage(Ghost.getGhostRED(), model.getAlGhost().get(1).getX()*step, model.getAlGhost().get(1).getY()*step, null);
+					break;
+				case 3 :
+					g2.drawImage(Ghost.getGhostORANGE(), model.getAlGhost().get(0).getX()*step, model.getAlGhost().get(0).getY()*step, null);
+					g2.drawImage(Ghost.getGhostRED(), model.getAlGhost().get(1).getX()*step, model.getAlGhost().get(1).getY()*step, null);
+					g2.drawImage(Ghost.getGhostGREEN(), model.getAlGhost().get(2).getX()*step, model.getAlGhost().get(2).getY()*step, null);
+					break;
+				case 4 :
+					g2.drawImage(Ghost.getGhostORANGE(), model.getAlGhost().get(0).getX()*step, model.getAlGhost().get(0).getY()*step, null);
+					g2.drawImage(Ghost.getGhostRED(), model.getAlGhost().get(1).getX()*step, model.getAlGhost().get(1).getY()*step, null);
+					g2.drawImage(Ghost.getGhostGREEN(), model.getAlGhost().get(2).getX()*step, model.getAlGhost().get(2).getY()*step, null);
+					g2.drawImage(Ghost.getGhostBLUE(), model.getAlGhost().get(3).getX()*step, model.getAlGhost().get(3).getY()*step, null);
+					break;
+				}
 			}else{
 				switch(model.getAlGhost().size()){
 				case 1 :
@@ -593,7 +593,7 @@ public class Field extends JPanel implements ActionListener{
 					g2.drawImage(Ghost.getGhostSCARED(), model.getAlGhost().get(2).getX()*step, model.getAlGhost().get(2).getY()*step, null);
 					g2.drawImage(Ghost.getGhostSCARED(), model.getAlGhost().get(3).getX()*step, model.getAlGhost().get(3).getY()*step, null);
 					break;
-			}
+				}
 			}
 
 			model.getPacman().getImageIcon().paintIcon(newPanel, g2, model.getPacman().getX()*step, model.getPacman().getY()*step);
@@ -630,7 +630,7 @@ public class Field extends JPanel implements ActionListener{
 						break;
 					}
 				}
-			
+
 			}
 		}
 	}
