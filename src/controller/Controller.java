@@ -24,27 +24,35 @@ public class Controller implements KeyListener {
 	String  name = "";
 	//private static String classement ="";
 	private static String classementhtml ="";
-	
+
 	public Controller(Model newModel){
 		this.model = newModel;
 	}
-	
+
 	public void setView(Field view){
 		this.view = view;
 	}
-	
+
 	final public Field getView(){
 		return this.view;
 	}
-	
+
 	public void setModel(Model model){
 		this.model = model;
 	}
-	
+
 	public Model getModel(){
 		return this.model;
 	}
-	
+
+	public static String getClassementhtml() {
+		return classementhtml;
+	}
+
+	public static void setClassementhtml(String classementhtml) {
+		Controller.classementhtml = classementhtml;
+	}
+
 	public void testitem(){
 		for (int k=0;k<this.model.getAlItems().size();k++){
 			if(this.model.getAlItems().get(k)!=null){
@@ -54,8 +62,8 @@ public class Controller implements KeyListener {
 				}
 			}
 		}
-		
-		
+
+
 		/*if(this.model.getItem()!=null){
 			if(this.model.getPacman().getX() == this.model.getRandomPop().getX() && this.model.getPacman().getY() == this.model.getRandomPop().getY() ){
 				//this.model.getRandomPop().starStop();
@@ -67,15 +75,15 @@ public class Controller implements KeyListener {
 			}
 		}*/
 	}
-	
-	
-	
+
+
+
 	@Override
 	public void keyPressed(KeyEvent e) {
-	
-		
+
+
 		int source = e.getKeyCode();
-		
+
 		if(this.model.getPacman().getPacmanLives()>0){
 			if(source==KeyEvent.VK_UP){
 				this.model.getPacman().setTop(true);
@@ -84,7 +92,7 @@ public class Controller implements KeyListener {
 				this.model.getPacman().setLeft(false);
 				//loose();
 				this.model.getPacman().setImageIcon(this.model.getPacman().getImageIconTop());
-				
+
 			}
 			else if(source==KeyEvent.VK_DOWN){
 				this.model.getPacman().setTop(false);
@@ -93,14 +101,14 @@ public class Controller implements KeyListener {
 				this.model.getPacman().setLeft(false);
 				//loose();
 				this.model.getPacman().setImageIcon(this.model.getPacman().getImageIconBot());
-				
-				
+
+
 			}else if(source==KeyEvent.VK_RIGHT){
 				this.model.getPacman().setTop(false);
 				this.model.getPacman().setDown(false);
 				this.model.getPacman().setRight(true);
 				this.model.getPacman().setLeft(false);
-				
+
 				this.model.getPacman().setImageIcon(this.model.getPacman().getImageIconRight());
 			}else if(source==KeyEvent.VK_LEFT){
 				this.model.getPacman().setTop(false);
@@ -111,9 +119,9 @@ public class Controller implements KeyListener {
 				this.model.getPacman().setImageIcon(this.model.getPacman().getImageIconLeft());
 
 			}else if(source==KeyEvent.VK_SPACE){
-					gamePause();
-					
-							
+				gamePause();
+
+
 				//this.model.getAlGhost().onPause = !this.model.getAlGhost().onPause;
 			}
 			else if (source == KeyEvent.VK_M){
@@ -126,14 +134,14 @@ public class Controller implements KeyListener {
 				view.repaint();
 			}
 			else{
-				
+
 			}
 			this.getView().setModel(this.getModel());
 			this.getView().repaint();
 		}
 	}
-	
-	
+
+
 	/**
 	 * met les thread fantome en pause 
 	 * met le pacman en pause
@@ -149,7 +157,7 @@ public class Controller implements KeyListener {
 		//view.setDelay(0);
 	}
 
-	
+
 	/**
 	 * calcul du score 
 	 * ajout du score dans le fichier
@@ -158,92 +166,92 @@ public class Controller implements KeyListener {
 	 * @throws IOException
 	 */
 	public void savescore() throws IOException{
-		
+
 		//maj du score en fonction du nombre de vie et du temps 
 		this.model.getPacman().setPacmanScore((int)(this.model.getPacman().getPacmanScore() + this.model.getPacman().getPacmanLives()*5000 - view.getChrono()*100));
-		
+
 		//recuperation du nom du joueur
 		name = JOptionPane.showInputDialog(view,"Entrez votre pseudo", null);
 		//setClassement(getClassement() + "Fin du niveau en "+this.view.getChrono()+"s\nTotal "+this.model.getPacman().getPacmanScore()+"points\n\n\n\n");
-		
+
 		//premiere ligne de la fenetre classement
 		setClassementhtml("<html>" + "Fin du niveau en "+this.view.getChrono()+"s<br>Total "+this.model.getPacman().getPacmanScore()+"<br><br><br><br>");
-		
+
 		int z =1;
 		//recuperation des scores precedant
 		data = new long[11];
 		names = new String[11];
 		File f = new File ("texte/classement.txt");
 		if(f.exists()){
-		
-		try {
-            FileReader c = new FileReader(f); 
-            BufferedReader r = new BufferedReader(c);
- 
-            String line = r.readLine();
-             
-            int i =0;
-           while (line != null) {
-                String[] decompose = line.split(";");
-             //    
 
-           String bla = decompose[0];
-           String[] mots = bla.split (" " );
-           data[i]= Integer.parseInt(mots[1]);
-           names[i]= mots[0];
-           i++;
+			try {
+				FileReader c = new FileReader(f); 
+				BufferedReader r = new BufferedReader(c);
 
-           line = r.readLine();
-            }
- 
-          r.close();
- 
-        } catch (Exception exception) {
-        	 System.out.println ("Erreur lors de la recuperation : " + exception.getMessage());
-        }
-		
+				String line = r.readLine();
+
+				int i =0;
+				while (line != null) {
+					String[] decompose = line.split(";");
+					//    
+
+					String bla = decompose[0];
+					String[] mots = bla.split (" " );
+					data[i]= Integer.parseInt(mots[1]);
+					names[i]= mots[0];
+					i++;
+
+					line = r.readLine();
+				}
+
+				r.close();
+
+			} catch (Exception exception) {
+				System.out.println ("Erreur lors de la recuperation : " + exception.getMessage());
+			}
+
 		}else{
 			FileWriter fw = new FileWriter (f);
 			fw.write ("something");
-		    fw.close();
+			fw.close();
 		}
-		
+
 		/*insertion nouveau score dans fichier texte
 		 * + cration du tableau de score dans un string a afficher
 		 */
-		 
+
 		try
 		{
-		    FileWriter fw = new FileWriter (f);
-		    boolean bool = true;
-		    int l =0;
-		    for (int i=0;i<10;i++)
-		    {
-		    	
-		    	if(this.model.getPacman().getPacmanScore()>data[l] && bool){
-		    		 fw.write (name+" " + this.model.getPacman().getPacmanScore());
-		    		// setClassement(getClassement() + z + " - "+ name+" " + this.model.getPacman().getPacmanScore() + "\n");
-		    		 setClassementhtml(getClassementhtml() + z + " - "+ name+" " + this.model.getPacman().getPacmanScore() + "<br>");
-						 z++;
-		    		 fw.write ("\r\n");
-		    		 bool = false;
-		    	}
-		    	if(data[l]!=0.0 ){
-		    		fw.write (String.valueOf(names[l]) +" " +  String.valueOf (data[l]));
-		    		//setClassement(getClassement() + z + " - "+ String.valueOf(names[l]) + " " + String.valueOf(data[l]) + "\n");
-		    		setClassementhtml(getClassementhtml() + z + " - "+ String.valueOf(names[l]) + " " + String.valueOf(data[l]) + "<br>");
-		    		z++;
-		    		fw.write ("\r\n");
-		    	}
+			FileWriter fw = new FileWriter (f);
+			boolean bool = true;
+			int l =0;
+			for (int i=0;i<10;i++)
+			{
 
-		    	l++;
-		    }
-		    setClassementhtml(getClassementhtml() + "</html>");
-		    fw.close();
+				if(this.model.getPacman().getPacmanScore()>data[l] && bool){
+					fw.write (name+" " + this.model.getPacman().getPacmanScore());
+					// setClassement(getClassement() + z + " - "+ name+" " + this.model.getPacman().getPacmanScore() + "\n");
+					setClassementhtml(getClassementhtml() + z + " - "+ name+" " + this.model.getPacman().getPacmanScore() + "<br>");
+					z++;
+					fw.write ("\r\n");
+					bool = false;
+				}
+				if(data[l]!=0.0 ){
+					fw.write (String.valueOf(names[l]) +" " +  String.valueOf (data[l]));
+					//setClassement(getClassement() + z + " - "+ String.valueOf(names[l]) + " " + String.valueOf(data[l]) + "\n");
+					setClassementhtml(getClassementhtml() + z + " - "+ String.valueOf(names[l]) + " " + String.valueOf(data[l]) + "<br>");
+					z++;
+					fw.write ("\r\n");
+				}
+
+				l++;
+			}
+			setClassementhtml(getClassementhtml() + "</html>");
+			fw.close();
 		}
 		catch (IOException exception)
 		{
-		    System.out.println ("Erreur lors de la lecture : " + exception.getMessage());
+			System.out.println ("Erreur lors de la lecture : " + exception.getMessage());
 		}
 		//lacement de la popup de classement
 		view.popClassement();	
@@ -257,23 +265,7 @@ public class Controller implements KeyListener {
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
-	}
 
-	/*public static String getClassement() {
-		return classement;
-	}
-
-	public void setClassement(String classement) {
-		this.classement = classement;
-	}
-*/
-	public static String getClassementhtml() {
-		return classementhtml;
-	}
-
-	public static void setClassementhtml(String classementhtml) {
-		Controller.classementhtml = classementhtml;
 	}
 
 	/**
@@ -322,14 +314,14 @@ public class Controller implements KeyListener {
 						this.model.getPacman().setPacmanScore(this.model.getPacman().getPacmanScore()+1600);
 						this.model.getPacman().setGhosteaten(this.model.getPacman().getGhosteaten()+1);
 					}
-					
+
 				}
-				
+
 			}
-			
+
 		}
-		
+
 	}
 
-	
+
 }

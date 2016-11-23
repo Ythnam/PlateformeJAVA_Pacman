@@ -8,7 +8,7 @@ import java.awt.Point;
 public class Map {
 	private static  int longueur =10;
 	private static  int hauteur =10;
-	protected static  char[][] tab; 
+	protected static  char[][] elementOnMap; //protected car utilisé dans la fonction power() du pacman
 	/*Desctiption de la map
 	 * 0 : emplacement libre
 	 * 1 : mur
@@ -17,7 +17,7 @@ public class Map {
 	 * 5 : superPacman
 	 * 7 : void : emplacement inacessible
 	 */
-	private static  boolean[][] bol;
+	private static  boolean[][] foodForPacman;
 	/*Indique s'il y a une piece ou non sur la case
 	 */
 	private static  int counter;
@@ -27,11 +27,11 @@ public class Map {
 	public static int getLongueur() {
 		return longueur;
 	}
-	
+
 	public Map(){
-		
+
 	}
-	
+
 	public void setLongueur(int longueur) {
 		this.longueur = longueur;
 	}
@@ -41,17 +41,17 @@ public class Map {
 	public void setHauteur(int hauteur) {
 		this.hauteur = hauteur;
 	}
-	public static char[][] getTab() {
-		return tab;
+	public static char[][] getElementOnMap() {
+		return elementOnMap;
 	}
-	public void setTab(char[][] tab) {
-		this.tab = tab;
+	public void setElementOnMap(char[][] elementOnMap) {
+		this.elementOnMap = elementOnMap;
 	}
-	public static boolean[][] getBol() {
-		return bol;
+	public static boolean[][] getFoodForPacman() {
+		return foodForPacman;
 	}
-	public void setBol(boolean[][] bol) {
-		this.bol = bol;
+	public void setFoodForPacman(boolean[][] foodForPacman) {
+		this.foodForPacman = foodForPacman;
 	}
 	public int getCounter() {
 		return counter;
@@ -73,7 +73,7 @@ public class Map {
 	public void setSpawnGhost(Point spawn) {
 		this.spawnGhost = spawn;
 	}
-	
+
 	public Point getSpawnPacman() {
 		return spawnPacman;
 	}
@@ -82,5 +82,5 @@ public class Map {
 		this.spawnPacman = spawn;
 	}
 
-	
+
 }
