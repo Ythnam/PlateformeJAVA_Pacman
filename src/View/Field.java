@@ -341,7 +341,7 @@ public class Field extends JPanel implements ActionListener{
 		chrono = 0;
 		this.model.getPacman().setPacmanScore(0);
 		this.model.getPacman().setPacmanLives(3);
-		this.model.setLvl(0);
+		this.model.setLvl(1);
 		this.model.updatefichier();
 		this.model.lecture();
 		this.model.createstring();

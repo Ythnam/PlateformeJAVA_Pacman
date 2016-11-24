@@ -128,6 +128,9 @@ public class Controller implements KeyListener {
 				this.model.getMusic().setOnPause(!this.model.getMusic().isOnPause());
 			}
 			else if(source==KeyEvent.VK_ENTER){
+				if(!this.model.getPacman().isOnPause()){
+					gamePause();
+				}
 				view.nextlvl();
 				view.getModel().reset();
 				view.repaint();
