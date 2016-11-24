@@ -1,5 +1,0 @@
-<<<<<<< HEAD
-ykgtk 221337
-=======
-sd 218132
->>>>>>> branch 'master' of https://github.com/Ythnam/PlateformeJAVA_Pacman.git
